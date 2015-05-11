@@ -1,17 +1,17 @@
 package ru.morozov.sweetApp;
 	
 import javafx.application.Application;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import ru.morozov.sweetApp.UI.MainScene;
 
-public class Main extends Application {
+public class SweetMainApp extends Application {
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			BorderPane root = new BorderPane();
-			Scene scene = new Scene(root,400,400);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			Scene scene = new MainScene(new VBox());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {
