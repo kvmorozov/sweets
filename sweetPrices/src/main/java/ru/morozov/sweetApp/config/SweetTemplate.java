@@ -49,6 +49,7 @@ public class SweetTemplate implements InitializingBean{
 					cell.setCellValue(value.getValue().toString());
 					break;
 				default:
+					cell.setCellValue(value.getValue().toString());
 					break;
 			}
 		}

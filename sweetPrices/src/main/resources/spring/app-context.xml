@@ -31,13 +31,13 @@
 			<list>
 				<bean class="ru.morozov.sweetApp.config.SweetProperty">
 					<property name="propertyName" value="Длина"/>
-					<property name="col" value="1"/>
-					<property name="row" value="9"/>
+					<property name="col" value="0"/>
+					<property name="row" value="8"/>
 				</bean>
 				<bean class="ru.morozov.sweetApp.config.SweetProperty">
 					<property name="propertyName" value="Ширина"/>
-					<property name="col" value="3"/>
-					<property name="row" value="9"/>
+					<property name="col" value="2"/>
+					<property name="row" value="8"/>
 				</bean>
 			</list>
 		</property>
@@ -66,13 +66,13 @@
 			<list>
 				<bean class="ru.morozov.sweetApp.config.SweetProperty">
 					<property name="propertyName" value="Длина"/>
-					<property name="col" value="1"/>
-					<property name="row" value="8"/>
+					<property name="col" value="0"/>
+					<property name="row" value="7"/>
 				</bean>
 				<bean class="ru.morozov.sweetApp.config.SweetProperty">
 					<property name="propertyName" value="Ширина"/>
-					<property name="col" value="3"/>
-					<property name="row" value="8"/>
+					<property name="col" value="2"/>
+					<property name="row" value="7"/>
 				</bean>
 			</list>
 		</property>

@@ -52,14 +52,13 @@ public class BaseSweetGenerator {
 				FileOutputStream out = new FileOutputStream(newFilePath.toString());
 				generatedWorkbook.write(out);
 				out.close();
-				
-				return true;
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				
+				return false;
 			}
 		}
 		
-		return false;
+		return true;
 	}
 }
