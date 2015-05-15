@@ -30,7 +30,7 @@ public class SweetTemplate implements InitializingBean{
 		if (templateFileName == null || templateFileName.isEmpty())
 			return;
 		
-		workbook = new HSSFWorkbook(getClass().getClassLoader().getResourceAsStream("xls/" + templateFileName));
+		workbook = new HSSFWorkbook(getClass().getClassLoader().getResourceAsStream("xls/templates/" + templateFileName));
 		
 		isValidConfig = true;
 	}
