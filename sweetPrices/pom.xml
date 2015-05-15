@@ -4,8 +4,28 @@
 	<groupId>sweetPrices</groupId>
 	<artifactId>sweetPrices</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	
+	<properties>
+
+		<!-- Generic properties -->
+		<java.version>1.6</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- Spring -->
+		<spring-framework.version>LATEST</spring-framework.version>
+
+		<!-- Test -->
+		<junit.version>LATEST</junit.version>
+		
+		<!-- Libs -->
+		<poi.version>3.11</poi.version>
+
+	</properties>
+	
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+		
 		<resources>
 			<resource>
 				<directory>src</directory>
@@ -14,6 +34,7 @@
 				</excludes>
 			</resource>
 		</resources>
+		
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -21,6 +42,9 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+					<excludes>
+						<exclude>**/test/**/*.java</exclude>
+					</excludes>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -31,6 +55,47 @@
 					<mainClass>ru.morozov.sweetApp.SweetMainApp</mainClass>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18.1</version>
+				<configuration>
+					<runOrder>alphabetical</runOrder>
+					<includes>
+						<include>**/test/*/*.java</include>
+					</includes>
+				</configuration>
+			</plugin>
+			
 		</plugins>
 	</build>
+	
+	<dependencies>
+		<!-- Spring and Transactions -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>
+
+		<!-- Test Artifacts -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+		    <version>${poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.9</version>
+		</dependency>
+
+	</dependencies>
 </project>

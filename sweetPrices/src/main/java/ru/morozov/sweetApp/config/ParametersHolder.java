@@ -1,0 +1,89 @@
+package ru.morozov.sweetApp.config;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.OfficeXmlFileException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class ParametersHolder {
+
+	private SweetPropertySet propertiesSet;
+	private List<List<PropertyValue>> parameters;
+
+	private Workbook workbook;
+
+	public ParametersHolder(String resourcePath, SweetPropertySet propertiesSet) {
+		this.propertiesSet = propertiesSet;
+
+		try {
+			workbook = new HSSFWorkbook(getClass().getClassLoader().getResourceAsStream(resourcePath));
+		} 
+		catch (OfficeXmlFileException ox) {
+			try {
+				workbook = new XSSFWorkbook (getClass().getClassLoader().getResourceAsStream(resourcePath));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		getParamsFromWorkbook();
+	}
+
+	private void getParamsFromWorkbook() {
+		if (workbook == null)
+			return;
+
+		parameters = new ArrayList<List<PropertyValue>>();
+
+		Sheet sheet = workbook.getSheetAt(0);
+		Iterator<Row> rowIterator = sheet.iterator();
+
+		while (rowIterator.hasNext()) {
+			Row row = rowIterator.next();
+
+			List<PropertyValue> paramsSet = new ArrayList<PropertyValue>();
+
+			Iterator<Cell> cellIterator = row.iterator();
+			int index = 0;
+
+			while (cellIterator.hasNext()) {
+				Cell cell = cellIterator.next();
+
+				SweetProperty property = propertiesSet.getProperty(index);
+				if (property == null)
+					break;
+
+				switch (cell.getCellType()) {
+					case Cell.CELL_TYPE_NUMERIC:
+						paramsSet.add(new PropertyValue(cell.getNumericCellValue(), property));
+						break;
+					case Cell.CELL_TYPE_STRING:
+						paramsSet.add(new PropertyValue(cell.getStringCellValue(), property));
+						break;
+					default:
+						break;
+				}
+				
+				index++;
+			}
+			
+			parameters.add(paramsSet);
+		}
+	}
+
+	public List<List<PropertyValue>> getParameters() {return parameters;}
+	
+}
