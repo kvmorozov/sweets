@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 import ru.morozov.sweetApp.config.ParametersHolder;
 import ru.morozov.sweetApp.config.PropertyValue;
 import ru.morozov.sweetApp.config.SweetConfig;
+import ru.morozov.sweetApp.config.SweetProduct;
 import ru.morozov.sweetApp.config.SweetTemplate;
 import ru.morozov.sweetApp.config.SystemConfigs;
 
@@ -31,16 +32,16 @@ public class Spring2 {
 	public void checkSweetMap() {
 		SweetConfig sweetConfig = ctx.getBean(SweetConfig.class);
 		Assert.notNull(sweetConfig);
-		Assert.notNull(sweetConfig.getSweetsMap());
-		Assert.notEmpty(sweetConfig.getSweetsMap());
-		Assert.isTrue(sweetConfig.getSweetsMap().size() == REAL_SWEET_MAP_SIZE);
+		Assert.notNull(sweetConfig.getSweetsList());
+		Assert.notEmpty(sweetConfig.getSweetsList());
+		Assert.isTrue(sweetConfig.getSweetsList().size() == REAL_SWEET_MAP_SIZE);
 	}
 	
 	@Test
 	public void checkTemplates() {
 		SweetConfig sweetConfig = ctx.getBean(SweetConfig.class);
-		for(String templateKey : sweetConfig.getSweetsMap().keySet()) {
-			SweetTemplate template = (SweetTemplate)ctx.getBean(templateKey);
+		for(SweetProduct product : sweetConfig.getSweetsList()) {
+			SweetTemplate template = (SweetTemplate)ctx.getBean(product.getPrefix());
 			Assert.notNull(template);
 			Assert.isTrue(template.isValidConfig());
 			Assert.notNull(template.getProperties());

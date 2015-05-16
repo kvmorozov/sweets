@@ -1,14 +1,14 @@
 package ru.morozov.sweetApp.config;
 
-import java.util.Map;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class SweetConfig {
 	
 	@Autowired
-	private Map<String, String> sweetsMap;
+	private List<SweetProduct> sweetsList;
 
-	public Map<String, String> getSweetsMap() {return sweetsMap;}
-	public void setSweetsMap(Map<String, String> sweetsMap) {this.sweetsMap = sweetsMap;}
+	public List<SweetProduct> getSweetsList() {return sweetsList;}
+	public void setSweetsList(List<SweetProduct> sweetsList) {this.sweetsList = sweetsList;}
 }

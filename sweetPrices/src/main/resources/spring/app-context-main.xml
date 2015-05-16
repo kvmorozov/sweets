@@ -6,11 +6,17 @@
 	<!-- Конфигурация -->
 	
 	<bean id="sweetConfig" class="ru.morozov.sweetApp.config.SweetConfig" autowire="byName">
-		<property name="sweetsMap">
-			<map>
-				<entry key="prokl3" value="Прокладка 3х слойная" />
-				<entry key="prokl5" value="Прокладка 5х слойная" />
-			</map>
+		<property name="sweetsList">
+			<list>
+				<bean id="prokl_3_product" class="ru.morozov.sweetApp.config.SweetProduct">
+					<property name="prefix" value="prokl3"/>
+					<property name="description" value="Прокладка 3х слойная"/>
+				</bean>
+				<bean id="prokl_5_product" class="ru.morozov.sweetApp.config.SweetProduct">
+					<property name="prefix" value="prokl5"/>
+					<property name="description" value="Прокладка 5ти слойная"/>
+				</bean>
+			</list>
 		</property>
 	</bean>
 	
