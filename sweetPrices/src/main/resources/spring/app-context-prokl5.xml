@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Прокладка 5х слойная -->
+	
+	<bean id="prokl5" class="ru.morozov.sweetApp.config.SweetTemplate">
+		<property name="templateFileName" value="010-15 Прокладка 5 слойнаая 230х330 Ассорти  ТКЗ+ЛЗК+КВЗ.xls"/>
+		<property name="properties" ref="prokl5_props"/>
+	</bean>
+	
+	<bean id="prokl5_props" class="ru.morozov.sweetApp.config.SweetPropertySet">
+		<property name="properties">
+			<list>
+				<bean class="ru.morozov.sweetApp.config.SweetProperty">
+					<property name="propertyName" value="Длина"/>
+					<property name="col" value="0"/>
+					<property name="row" value="7"/>
+				</bean>
+				<bean class="ru.morozov.sweetApp.config.SweetProperty">
+					<property name="propertyName" value="Ширина"/>
+					<property name="col" value="2"/>
+					<property name="row" value="7"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="prol5_demo_params" class="ru.morozov.sweetApp.config.ParametersHolder">
+		<constructor-arg name="resourcePath" value="xls/demo/params_2d.xlsx"/>
+		<constructor-arg name="propertiesSet" ref="prokl5_props"/>
+	</bean>
+	
+	<bean id="prol5_demo_generation" class="ru.morozov.sweetApp.generate.BaseSweetGenerator">
+		<constructor-arg name="systemConfig" ref="systemConfig_demo"/>
+		<constructor-arg name="template" ref="prokl5"/>
+		<constructor-arg name="parametersHolder" ref="prol5_demo_params"/>
+	</bean>
+
+</beans>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Конфигурация -->
+	
+	<bean id="sweetConfig" class="ru.morozov.sweetApp.config.SweetConfig" autowire="byName">
+		<property name="sweetsMap">
+			<map>
+				<entry key="prokl3" value="Прокладка 3х слойная" />
+				<entry key="prokl5" value="Прокладка 5х слойная" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="systemConfig" class="ru.morozov.sweetApp.config.SystemConfigs"/>
+	<bean id="systemConfig_demo" class="ru.morozov.sweetApp.config.SystemConfigs">
+		<property name="outputBaseDir" value="H:\Work\sweets\out"/>
+	</bean>
+	
+</beans>
