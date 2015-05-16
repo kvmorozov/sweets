@@ -1,5 +1,7 @@
 package ru.morozov.sweetApp.config;
 
+import ru.morozov.sweetApp.SweetContext;
+
 public class SweetProduct {
 	
 	private String prefix, description;
@@ -18,5 +20,12 @@ public class SweetProduct {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	@Override
+	public String toString() {return description;}
+	
+	public SweetTemplate getTemplate() {
+		return SweetContext.getTemplate(prefix);
 	}
 }

@@ -41,7 +41,7 @@ public class Spring2 {
 	public void checkTemplates() {
 		SweetConfig sweetConfig = ctx.getBean(SweetConfig.class);
 		for(SweetProduct product : sweetConfig.getSweetsList()) {
-			SweetTemplate template = (SweetTemplate)ctx.getBean(product.getPrefix());
+			SweetTemplate template = product.getTemplate();
 			Assert.notNull(template);
 			Assert.isTrue(template.isValidConfig());
 			Assert.notNull(template.getProperties());
