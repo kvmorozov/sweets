@@ -10,7 +10,7 @@ public class MainScene extends Scene {
 	
 	public MainScene(VBox root) {
 		super(root, 400, 400);
-//		getStylesheets().add(getClass().getResource("main/resources/application.css").toExternalForm());
+
 		TabPane tabPane = new TabPane();
 		Tab settingsTab = new SettingsTab();
 
