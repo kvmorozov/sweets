@@ -1,10 +1,13 @@
 package ru.morozov.sweetApp.config;
 
+import java.util.List;
+
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.InitializingBean;
 
+import ru.morozov.sweetApp.config.prices.PriceItem;
 import ru.morozov.utils.ParserUtils;
 
 public class SweetTemplate implements InitializingBean{
@@ -13,12 +16,16 @@ public class SweetTemplate implements InitializingBean{
 	private String templateFileName;
 	private HSSFWorkbook workbook;
 	private SweetPropertySet properties;
+	private List<PriceItem> amounts;
 
 	public SweetPropertySet getProperties() {return properties;}
 	public void setProperties(SweetPropertySet properties) {this.properties = properties;}
 	
 	public String getTemplateFileName() {return templateFileName;}
 	public void setTemplateFileName(String templateFileName) {this.templateFileName = templateFileName;}
+	
+	public List<PriceItem> getAmounts() {return amounts;}
+	public void setAmounts(List<PriceItem> amounts) {this.amounts = amounts;}
 	
 	public boolean isValidConfig() {return isValidConfig;}
 	public HSSFWorkbook getWorkbook() {return workbook;}

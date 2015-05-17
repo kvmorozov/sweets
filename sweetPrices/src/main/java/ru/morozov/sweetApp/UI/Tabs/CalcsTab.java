@@ -70,6 +70,17 @@ public class CalcsTab extends Tab {
 							table.getColumns().add(column);
 						}
 						
+						TableColumn<PropertyValueSet, Double> column = new TableColumn<PropertyValueSet, Double>(l12n.bundle.getString(l12n.TOTAL_KEY));
+						
+						column.setCellValueFactory(new Callback<CellDataFeatures<PropertyValueSet, Double>, ObservableValue<Double>>() {
+						     public ObservableValue<Double> call(CellDataFeatures<PropertyValueSet, Double> p) {
+						    	 return new ReadOnlyObjectWrapper<Double>(p.getValue().getTotal());
+						     }
+						  });
+						
+						table.getColumns().add(column);
+						column.setVisible(false);
+						
 						openButton.setDisable(false);
 					}
 				});
@@ -93,7 +104,7 @@ public class CalcsTab extends Tab {
                         if (file != null) {
                         	SweetContext.getSystemConfigs().setSystemProperty(SystemConfigs.PROPERTY_LAST_PARAMS_FILE, file.getParent());
                         	ParametersHolder holder = new ParametersHolder(file, productsBox.getValue());
-                        	table.setItems(FXCollections.observableArrayList(holder.getParameters()));
+                        	table.setItems(holder.getObservableParameters());
                         	table.setUserData(holder);
                         	runButton.setDisable(false);
                         }
@@ -104,7 +115,8 @@ public class CalcsTab extends Tab {
         runButton.setOnAction((e) -> {
         	BaseSweetGenerator generator = new BaseSweetGenerator(SweetContext.getSystemConfigs(), productsBox.getValue().getTemplate(),
         			(ParametersHolder)table.getUserData());
-        	if (generator.generate()) {}
+        	if (generator.generate())
+        		table.getColumns().get(table.getColumns().size() - 1).setVisible(true);
         });
         
         grid.add(runButton, 0, 2, 2, 1);

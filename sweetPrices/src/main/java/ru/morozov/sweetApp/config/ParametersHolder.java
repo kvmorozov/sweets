@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.OfficeXmlFileException;
 import org.apache.poi.ss.usermodel.Cell;
@@ -21,6 +24,7 @@ public class ParametersHolder {
 
 	private SweetPropertySet propertiesSet;
 	private List<PropertyValueSet> parameters;
+	private ObservableList<PropertyValueSet> observableParameters;
 
 	private Workbook workbook;
 	
@@ -111,5 +115,15 @@ public class ParametersHolder {
 	}
 
 	public List<PropertyValueSet> getParameters() {return parameters;}
+	public ObservableList<PropertyValueSet> getObservableParameters() {
+		return observableParameters = FXCollections.observableArrayList(parameters);
+	}
 	
+	public void invalidate() {
+		if (observableParameters != null) {
+			observableParameters.clear();
+			ObservableList<PropertyValueSet> observableParameters_ = FXCollections.observableArrayList(parameters);
+			observableParameters.addAll(observableParameters_);
+		}
+	}
 }

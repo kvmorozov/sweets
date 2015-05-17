@@ -4,7 +4,7 @@
 	<groupId>sweetPrices</groupId>
 	<artifactId>sweetPrices</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	
+
 	<properties>
 
 		<!-- Generic properties -->
@@ -17,14 +17,23 @@
 
 		<!-- Test -->
 		<junit.version>LATEST</junit.version>
-		
+
 		<!-- Libs -->
 		<poi.version>3.11</poi.version>
 
 	</properties>
-	
+
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>com.zenjava</groupId>
 				<artifactId>javafx-maven-plugin</artifactId>
@@ -44,10 +53,10 @@
 					</includes>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 	</build>
-	
+
 	<dependencies>
 		<!-- Spring and Transactions -->
 		<dependency>
@@ -63,11 +72,11 @@
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.apache.poi</groupId>
-		    <artifactId>poi</artifactId>
-		    <version>${poi.version}</version>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${poi.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.poi</groupId>

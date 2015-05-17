@@ -9,10 +9,14 @@ import java.util.Map;
 public class PropertyValueSet {
 	
 	private List<PropertyValue> valueSet = new ArrayList<PropertyValue>();
-	private Map<String, PropertyValue> internalMap = new HashMap<String, PropertyValue>();;
+	private Map<String, PropertyValue> internalMap = new HashMap<String, PropertyValue>();
+	private Double total;
 
 	public List<PropertyValue> getValueSet() {return valueSet;}
 	public void setValueSet(List<PropertyValue> valueSet) {this.valueSet = valueSet;}
+	
+	public Double getTotal() {return total;}
+	public void setTotal(Double total) {this.total = total;}
 	
 	public void add(PropertyValue value) {
 		valueSet.add(value);
