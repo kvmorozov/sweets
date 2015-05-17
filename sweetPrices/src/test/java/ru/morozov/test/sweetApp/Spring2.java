@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 
 import ru.morozov.sweetApp.config.ParametersHolder;
 import ru.morozov.sweetApp.config.PropertyValue;
+import ru.morozov.sweetApp.config.PropertyValueSet;
 import ru.morozov.sweetApp.config.SweetConfig;
 import ru.morozov.sweetApp.config.SweetProduct;
 import ru.morozov.sweetApp.config.SweetTemplate;
@@ -63,10 +64,10 @@ public class Spring2 {
 		Assert.isTrue(prokl3params.getParameters().size() == REAL_DEMO_PARAMS_ROWS_COUNT);
 		Assert.isTrue(prokl5params.getParameters().size() == REAL_DEMO_PARAMS_ROWS_COUNT);
 		
-		for(List<PropertyValue> paramSet : prokl3params.getParameters())
+		for(PropertyValueSet paramSet : prokl3params.getParameters())
 			Assert.isTrue(paramSet.size() == REAL_DEMO_PARAMS_COUNT);
 
-		for(List<PropertyValue> paramSet : prokl5params.getParameters())
+		for(PropertyValueSet paramSet : prokl5params.getParameters())
 			Assert.isTrue(paramSet.size() == REAL_DEMO_PARAMS_COUNT);
 	}
 	

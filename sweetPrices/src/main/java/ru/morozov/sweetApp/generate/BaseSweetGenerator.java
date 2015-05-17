@@ -7,12 +7,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import org.apache.poi.ss.usermodel.Workbook;
 
 import ru.morozov.sweetApp.config.ParametersHolder;
-import ru.morozov.sweetApp.config.PropertyValue;
+import ru.morozov.sweetApp.config.PropertyValueSet;
 import ru.morozov.sweetApp.config.SweetTemplate;
 import ru.morozov.sweetApp.config.SystemConfigs;
 
@@ -40,7 +39,7 @@ public class BaseSweetGenerator {
 		
 		int index = 0;
 		
-		for(List<PropertyValue> params : parametersHolder.getParameters()) {
+		for(PropertyValueSet params : parametersHolder.getParameters()) {
 			Workbook generatedWorkbook = template.applyParams(params);
 			
 			index++;

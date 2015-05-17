@@ -1,7 +1,5 @@
 package ru.morozov.sweetApp.config;
 
-import java.util.List;
-
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -35,10 +33,10 @@ public class SweetTemplate implements InitializingBean{
 		isValidConfig = true;
 	}
 	
-	public Workbook applyParams(List<PropertyValue> values) {
+	public Workbook applyParams(PropertyValueSet values) {
 		HSSFWorkbook newWorkbook = workbook;
 		
-		for(PropertyValue value : values) {
+		for(PropertyValue value : values.getValueSet()) {
 			Cell cell = workbook.getSheetAt(0).getRow(value.getProperty().getRow()).getCell(value.getProperty().getCol());
 			
 			switch (cell.getCellType()) {

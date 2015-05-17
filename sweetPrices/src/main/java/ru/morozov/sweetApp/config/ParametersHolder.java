@@ -16,7 +16,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ParametersHolder {
 
 	private SweetPropertySet propertiesSet;
-	private List<List<PropertyValue>> parameters;
+	private List<PropertyValueSet> parameters;
 
 	private Workbook workbook;
 
@@ -46,7 +46,7 @@ public class ParametersHolder {
 		if (workbook == null)
 			return;
 
-		parameters = new ArrayList<List<PropertyValue>>();
+		parameters = new ArrayList<PropertyValueSet>();
 
 		Sheet sheet = workbook.getSheetAt(0);
 		Iterator<Row> rowIterator = sheet.iterator();
@@ -54,7 +54,7 @@ public class ParametersHolder {
 		while (rowIterator.hasNext()) {
 			Row row = rowIterator.next();
 
-			List<PropertyValue> paramsSet = new ArrayList<PropertyValue>();
+			PropertyValueSet paramsSet = new PropertyValueSet();
 
 			Iterator<Cell> cellIterator = row.iterator();
 			int index = 0;
@@ -84,6 +84,6 @@ public class ParametersHolder {
 		}
 	}
 
-	public List<List<PropertyValue>> getParameters() {return parameters;}
+	public List<PropertyValueSet> getParameters() {return parameters;}
 	
 }
