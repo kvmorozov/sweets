@@ -131,9 +131,14 @@ public class CalcsTab extends Tab {
                         if (file != null) {
                         	SweetContext.getSystemConfigs().setSystemProperty(SystemConfigs.PROPERTY_LAST_PARAMS_FILE, file.getParent());
                         	ParametersHolder holder = new ParametersHolder(file, productsBox.getValue());
-                        	table.setItems(holder.getObservableParameters());
-                        	table.setUserData(holder);
-                        	runButton.setDisable(false);
+                        	if (holder.isParamsValid()) {
+	                        	table.setItems(holder.getObservableParameters());
+	                        	table.setUserData(holder);
+	                        	runButton.setDisable(false);
+                        	}
+                        	else {
+                        		// Show alert
+                        	}
                         }
                 });
         

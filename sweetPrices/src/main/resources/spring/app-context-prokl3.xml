@@ -41,15 +41,20 @@
 		</property>
 	</bean>
 	
-	<bean id="prol3_demo_params" class="ru.morozov.sweetApp.config.ParametersHolder">
+	<bean id="prokl3_demo_params" class="ru.morozov.sweetApp.config.ParametersHolder">
 		<constructor-arg name="resourcePath" value="xls/demo/params_2d.xlsx"/>
+		<constructor-arg name="propertiesSet" ref="prokl3_props"/>
+	</bean>
+	
+	<bean id="prokl3_demo_bad" class="ru.morozov.sweetApp.config.ParametersHolder">
+		<constructor-arg name="resourcePath" value="xls/demo/params_2d_bad.xlsx"/>
 		<constructor-arg name="propertiesSet" ref="prokl3_props"/>
 	</bean>
 	
 	<bean id="prol3_demo_generation" class="ru.morozov.sweetApp.generate.BaseSweetGenerator">
 		<constructor-arg name="systemConfig" ref="systemConfig_demo"/>
 		<constructor-arg name="template" ref="prokl3"/>
-		<constructor-arg name="parametersHolder" ref="prol3_demo_params"/>
+		<constructor-arg name="parametersHolder" ref="prokl3_demo_params"/>
 	</bean>
 
 </beans>

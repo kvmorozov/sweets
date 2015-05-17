@@ -25,6 +25,7 @@ public class ParametersHolder {
 	private SweetPropertySet propertiesSet;
 	private List<PropertyValueSet> parameters;
 	private ObservableList<PropertyValueSet> observableParameters;
+	private boolean isParamsValid = false;
 
 	private Workbook workbook;
 	
@@ -48,6 +49,7 @@ public class ParametersHolder {
 		}
 		
 		getParamsFromWorkbook();
+		validateParams();
 	}
 	
 	public ParametersHolder(File file, SweetProduct product) {
@@ -70,6 +72,7 @@ public class ParametersHolder {
 		}
 
 		getParamsFromWorkbook();
+		validateParams();
 	}
 
 	private void getParamsFromWorkbook() {
@@ -113,6 +116,14 @@ public class ParametersHolder {
 			parameters.add(paramsSet);
 		}
 	}
+	
+	private void validateParams() {
+		for(PropertyValueSet paramSet : parameters)
+			if (paramSet.getValueSet().size() != propertiesSet.getProperties().size())
+				return;
+		
+		isParamsValid = true;
+	}
 
 	public List<PropertyValueSet> getParameters() {return parameters;}
 	public ObservableList<PropertyValueSet> getObservableParameters() {
@@ -126,4 +137,6 @@ public class ParametersHolder {
 			observableParameters.addAll(observableParameters_);
 		}
 	}
+
+	public boolean isParamsValid() {return isParamsValid;}
 }

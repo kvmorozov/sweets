@@ -27,7 +27,7 @@
 		</property>
 	</bean>
 	
-	<bean id="prol5_demo_params" class="ru.morozov.sweetApp.config.ParametersHolder">
+	<bean id="prokl5_demo_params" class="ru.morozov.sweetApp.config.ParametersHolder">
 		<constructor-arg name="resourcePath" value="xls/demo/params_2d.xlsx"/>
 		<constructor-arg name="propertiesSet" ref="prokl5_props"/>
 	</bean>
@@ -35,7 +35,7 @@
 	<bean id="prol5_demo_generation" class="ru.morozov.sweetApp.generate.BaseSweetGenerator">
 		<constructor-arg name="systemConfig" ref="systemConfig_demo"/>
 		<constructor-arg name="template" ref="prokl5"/>
-		<constructor-arg name="parametersHolder" ref="prol5_demo_params"/>
+		<constructor-arg name="parametersHolder" ref="prokl5_demo_params"/>
 	</bean>
 
 </beans>

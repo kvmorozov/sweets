@@ -92,7 +92,7 @@ public class ParserUtils {
 
 	public static final Double getDoubleResult(Object obj) {
 		Double res = 0.0 ;
-		if (obj == null) return res ;
+		if (obj == null) return res;
 		
 		if (obj instanceof String)
 			try {res = Double.parseDouble(obj.toString());} catch (Exception ex) {}

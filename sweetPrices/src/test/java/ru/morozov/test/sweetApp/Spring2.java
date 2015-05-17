@@ -49,14 +49,21 @@ public class Spring2 {
 	
 	@Test
 	public void checkParams() {
-		ParametersHolder prokl3params = (ParametersHolder)ctx.getBean("prol3_demo_params");
-		ParametersHolder prokl5params = (ParametersHolder)ctx.getBean("prol5_demo_params");
+		ParametersHolder prokl3params = (ParametersHolder)ctx.getBean("prokl3_demo_params");
+		ParametersHolder prokl5params = (ParametersHolder)ctx.getBean("prokl5_demo_params");
+		ParametersHolder badParams = (ParametersHolder)ctx.getBean("prokl3_demo_bad");
 		
 		Assert.notNull(prokl3params);
 		Assert.notNull(prokl5params);
+		Assert.notNull(badParams);
+		
+		Assert.isTrue(!badParams.isParamsValid());
 		
 		Assert.notEmpty(prokl3params.getParameters());
 		Assert.notEmpty(prokl5params.getParameters());
+		
+		Assert.isTrue(prokl3params.isParamsValid());
+		Assert.isTrue(prokl5params.isParamsValid());
 		
 		Assert.isTrue(prokl3params.getParameters().size() == REAL_DEMO_PARAMS_ROWS_COUNT);
 		Assert.isTrue(prokl5params.getParameters().size() == REAL_DEMO_PARAMS_ROWS_COUNT);
