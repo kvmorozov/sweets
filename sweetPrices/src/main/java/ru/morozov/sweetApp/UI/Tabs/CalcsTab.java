@@ -55,7 +55,7 @@ public class CalcsTab extends Tab {
 		productsBox.valueProperty().addListener(
 				new ChangeListener<SweetProduct>() {
 					@Override
-					public void changed(ObservableValue ov, SweetProduct oldValue, SweetProduct newValue) {
+					public void changed(@SuppressWarnings("rawtypes") ObservableValue ov, SweetProduct oldValue, SweetProduct newValue) {
 						table.getColumns().clear();
 						
 						SweetTemplate template = newValue.getTemplate();
