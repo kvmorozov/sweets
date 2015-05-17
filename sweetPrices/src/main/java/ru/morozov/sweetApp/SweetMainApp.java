@@ -11,7 +11,7 @@ public class SweetMainApp extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Scene scene = new MainScene(new VBox());
+			Scene scene = new MainScene(primaryStage, new VBox());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch(Exception e) {

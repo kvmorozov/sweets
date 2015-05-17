@@ -12,4 +12,5 @@ public interface l12n {
 	public static final String SETTINGS_KEY = "settings";
 	public static final String CALCS_KEY = "calcs";
 	public static final String PRODUCTS_KEY = "products";
+	public static final String SELECT_PARAMS_KEY = "select-params";
 }
