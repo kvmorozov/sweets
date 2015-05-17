@@ -1,6 +1,10 @@
 package ru.morozov.sweetApp.config;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -13,22 +17,46 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import ru.morozov.utils.ParserUtils;
+
 public class ParametersHolder {
 
 	private SweetPropertySet propertiesSet;
 	private List<PropertyValueSet> parameters;
 
 	private Workbook workbook;
-
+	
 	public ParametersHolder(String resourcePath, SweetPropertySet propertiesSet) {
 		this.propertiesSet = propertiesSet;
-
+		
 		try {
 			workbook = new HSSFWorkbook(getClass().getClassLoader().getResourceAsStream(resourcePath));
 		} 
 		catch (OfficeXmlFileException ox) {
 			try {
 				workbook = new XSSFWorkbook (getClass().getClassLoader().getResourceAsStream(resourcePath));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		getParamsFromWorkbook();
+	}
+	
+	public ParametersHolder(File file, SweetProduct product) {
+		this.propertiesSet = product.getTemplate().getProperties();
+		
+		try {
+			workbook = new HSSFWorkbook(new FileInputStream(file));
+		} 
+		catch (OfficeXmlFileException ox) {
+			try {
+				workbook = new XSSFWorkbook (new FileInputStream(file));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -71,7 +99,7 @@ public class ParametersHolder {
 						paramsSet.add(new PropertyValue(cell.getNumericCellValue(), property));
 						break;
 					case Cell.CELL_TYPE_STRING:
-						paramsSet.add(new PropertyValue(cell.getStringCellValue(), property));
+						paramsSet.add(new PropertyValue(ParserUtils.getDoubleResult(cell.getStringCellValue()), property));
 						break;
 					default:
 						break;
