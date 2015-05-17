@@ -13,4 +13,6 @@ public interface l12n {
 	public static final String CALCS_KEY = "calcs";
 	public static final String PRODUCTS_KEY = "products";
 	public static final String SELECT_PARAMS_KEY = "select-params";
+	public static final String RUN_KEY = "run";
+	public static final String EXIT_KEY = "exit";
 }

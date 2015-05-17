@@ -37,14 +37,10 @@ public class BaseSweetGenerator {
 		String outputSubDirName = subDirDateFormat.format(new Date());
 		Path outputPath = systemConfig.createSubdirectory(outputSubDirName);
 		
-		int index = 0;
-		
 		for(PropertyValueSet params : parametersHolder.getParameters()) {
 			Workbook generatedWorkbook = template.applyParams(params);
 			
-			index++;
-			
-			Path newPath = Paths.get(outputPath.toString(), String.valueOf(index) + ".xls");
+			Path newPath = Paths.get(outputPath.toString(), params.getShortDesc() + ".xls");
 			
 			try {
 				Path newFilePath = Files.createFile(newPath);

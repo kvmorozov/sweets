@@ -6,8 +6,6 @@ import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -28,6 +26,7 @@ import ru.morozov.sweetApp.config.SweetProduct;
 import ru.morozov.sweetApp.config.SweetProperty;
 import ru.morozov.sweetApp.config.SweetTemplate;
 import ru.morozov.sweetApp.config.SystemConfigs;
+import ru.morozov.sweetApp.generate.BaseSweetGenerator;
 
 public class CalcsTab extends Tab {
 
@@ -75,7 +74,7 @@ public class CalcsTab extends Tab {
 					}
 				});
 
-		grid.add(table, 0, 1, 4, 1);
+		grid.add(table, 0, 1, 3, 1);
 		
 		final FileChooser fileChooser = new FileChooser();
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel files", "*.xls*"));
@@ -86,20 +85,29 @@ public class CalcsTab extends Tab {
 		if (initDir != null)
 			fileChooser.setInitialDirectory(initDir);
 		
-        openButton.setOnAction(
-                new EventHandler<ActionEvent>() {
-                    @Override
-                    public void handle(final ActionEvent e) {
+        final Button runButton = new Button(l12n.bundle.getString(l12n.RUN_KEY));
+        runButton.setDisable(true);
+		
+        openButton.setOnAction((e) -> {
                         File file = fileChooser.showOpenDialog(stage);
                         if (file != null) {
                         	SweetContext.getSystemConfigs().setSystemProperty(SystemConfigs.PROPERTY_LAST_PARAMS_FILE, file.getParent());
                         	ParametersHolder holder = new ParametersHolder(file, productsBox.getValue());
                         	table.setItems(FXCollections.observableArrayList(holder.getParameters()));
+                        	table.setUserData(holder);
+                        	runButton.setDisable(false);
                         }
-                    }
                 });
         
-        grid.add(openButton, 3, 0);
+        grid.add(openButton, 2, 0);
+        
+        runButton.setOnAction((e) -> {
+        	BaseSweetGenerator generator = new BaseSweetGenerator(SweetContext.getSystemConfigs(), productsBox.getValue().getTemplate(),
+        			(ParametersHolder)table.getUserData());
+        	if (generator.generate()) {}
+        });
+        
+        grid.add(runButton, 0, 2, 2, 1);
 
 		setContent(grid);
 	}
