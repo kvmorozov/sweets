@@ -7,6 +7,10 @@
 	
 	<import resource="app-context-main.xml"/>
 	
+	<!-- Цены -->
+	
+	<import resource="app-context-prices.xml"/>
+	
 	<!-- Прокладка 3х слойная -->
 	
 	<import resource="app-context-prokl3.xml"/>

@@ -1,7 +1,5 @@
 package ru.morozov.test.sweetApp;
 
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -9,7 +7,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.Assert;
 
 import ru.morozov.sweetApp.config.ParametersHolder;
-import ru.morozov.sweetApp.config.PropertyValue;
 import ru.morozov.sweetApp.config.PropertyValueSet;
 import ru.morozov.sweetApp.config.SweetConfig;
 import ru.morozov.sweetApp.config.SweetProduct;
