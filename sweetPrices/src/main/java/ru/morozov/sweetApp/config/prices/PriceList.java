@@ -73,4 +73,6 @@ public class PriceList implements InitializingBean {
 		
 		isValidConfig = true;
 	}
+	
+	public Double getPrice(String itemName) {return pricesMap.containsKey(itemName) ? pricesMap.get(itemName).getPrice() : 0;}
 }

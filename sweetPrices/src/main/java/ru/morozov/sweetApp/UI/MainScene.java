@@ -14,7 +14,7 @@ import ru.morozov.sweetApp.Utils.Constants.l12n;
 public class MainScene extends Scene {
 	
 	public MainScene(Stage stage, VBox root) {
-		super(root, 400, 400);
+		super(root, 450, 400);
 
 		TabPane tabPane = new TabPane();
 		Tab settingsTab = new SettingsTab();

@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -67,6 +68,19 @@ public class CalcsTab extends Tab {
 							     }
 							  });
 							
+							column.setCellFactory(col -> 
+						    new TableCell<PropertyValueSet, Double>() {
+						        @Override 
+						        public void updateItem(Double value, boolean empty) {
+						            super.updateItem(value, empty);
+						            if (empty) {
+						                setText(null);
+						            } else {
+						                setText(String.format("%.0f", value.doubleValue()));
+						            }
+						        }
+					    });
+							
 							table.getColumns().add(column);
 						}
 						
@@ -77,6 +91,19 @@ public class CalcsTab extends Tab {
 						    	 return new ReadOnlyObjectWrapper<Double>(p.getValue().getTotal());
 						     }
 						  });
+						
+						column.setCellFactory(col -> 
+						    new TableCell<PropertyValueSet, Double>() {
+						        @Override 
+						        public void updateItem(Double total, boolean empty) {
+						            super.updateItem(total, empty);
+						            if (empty) {
+						                setText(null);
+						            } else {
+						                setText(String.format("₽%,.2f", total.doubleValue()));
+						            }
+						        }
+					    });
 						
 						table.getColumns().add(column);
 						column.setVisible(false);

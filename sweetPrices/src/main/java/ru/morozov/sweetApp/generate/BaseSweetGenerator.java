@@ -1,5 +1,7 @@
 package ru.morozov.sweetApp.generate;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,15 +12,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javafx.beans.property.ReadOnlyObjectWrapper;
-
+import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFFormulaEvaluator;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import ru.morozov.sweetApp.SweetContext;
 import ru.morozov.sweetApp.config.ParametersHolder;
 import ru.morozov.sweetApp.config.PropertyValueSet;
 import ru.morozov.sweetApp.config.SweetTemplate;
 import ru.morozov.sweetApp.config.SystemConfigs;
+import ru.morozov.sweetApp.config.prices.PriceItem;
 import ru.morozov.sweetApp.config.prices.PriceList;
 
 public class BaseSweetGenerator {
@@ -51,7 +57,20 @@ public class BaseSweetGenerator {
 		for(PropertyValueSet params : parametersHolder.getParameters()) {
 			Workbook generatedWorkbook = template.applyParams(params);
 			
-			Double total = 11d;
+			if (generatedWorkbook instanceof HSSFWorkbook)
+				HSSFFormulaEvaluator.evaluateAllFormulaCells(generatedWorkbook);
+			else
+				XSSFFormulaEvaluator.evaluateAllFormulaCells((XSSFWorkbook) generatedWorkbook);
+			
+			Double total = 0d;
+			
+			for(PriceItem amount : template.getAmounts()) {
+				Double price = priceList.getPrice(amount.getItem().getItemName());
+				Cell cell = generatedWorkbook.getSheetAt(0).getRow(amount.getRow()).getCell(amount.getCol());
+				
+				if (cell != null)
+					total+=cell.getNumericCellValue() * price;
+			}
 			
 			Path newPath = Paths.get(outputPath.toString(), params.getShortDesc() + ".xls");
 			
@@ -71,6 +90,13 @@ public class BaseSweetGenerator {
 		}
 		
 		parametersHolder.invalidate();
+		
+		try {
+			Desktop.getDesktop().open(new File(outputPath.toString()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return true;
 	}
