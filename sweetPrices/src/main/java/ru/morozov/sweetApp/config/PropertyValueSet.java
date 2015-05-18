@@ -11,12 +11,16 @@ public class PropertyValueSet {
 	private List<PropertyValue> valueSet = new ArrayList<PropertyValue>();
 	private Map<String, PropertyValue> internalMap = new HashMap<String, PropertyValue>();
 	private Double total;
+	private int row;
 
 	public List<PropertyValue> getValueSet() {return valueSet;}
 	public void setValueSet(List<PropertyValue> valueSet) {this.valueSet = valueSet;}
 	
 	public Double getTotal() {return total;}
 	public void setTotal(Double total) {this.total = total;}
+	
+	public int getRow() {return row;}
+	public void setRow(int row) {this.row = row;}
 	
 	public void add(PropertyValue value) {
 		valueSet.add(value);

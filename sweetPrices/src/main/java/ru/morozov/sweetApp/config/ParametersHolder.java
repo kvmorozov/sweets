@@ -83,11 +83,12 @@ public class ParametersHolder {
 
 		Sheet sheet = workbook.getSheetAt(0);
 		Iterator<Row> rowIterator = sheet.iterator();
-
+		
 		while (rowIterator.hasNext()) {
 			Row row = rowIterator.next();
 
 			PropertyValueSet paramsSet = new PropertyValueSet();
+			paramsSet.setRow(row.getRowNum());
 
 			Iterator<Cell> cellIterator = row.iterator();
 			int index = 0;
@@ -139,4 +140,5 @@ public class ParametersHolder {
 	}
 
 	public boolean isParamsValid() {return isParamsValid;}
+	public Workbook getWorkbook() {return workbook;}
 }

@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import ru.morozov.sweetApp.SweetContext;
 import ru.morozov.sweetApp.config.ParametersHolder;
@@ -48,6 +49,8 @@ public class BaseSweetGenerator {
 		String outputSubDirName = subDirDateFormat.format(new Date());
 		Path outputPath = systemConfig.createSubdirectory(outputSubDirName);
 		
+		Workbook resultBook = parametersHolder.getWorkbook();
+		
 		totals = new ArrayList<Double>();
 		PriceList priceList = SweetContext.getPriceList();
 		
@@ -78,6 +81,16 @@ public class BaseSweetGenerator {
 				return false;
 			}
 			
+			try {
+				Cell totalCell = resultBook.getSheetAt(0).getRow(params.getRow()).getCell(params.getValueSet().size());
+				if (totalCell == null)
+					totalCell = resultBook.getSheetAt(0).getRow(params.getRow()).createCell(params.getValueSet().size(), Cell.CELL_TYPE_NUMERIC);
+				totalCell.setCellValue(total);
+			}
+			catch(Exception ex) {
+				ex.printStackTrace();
+			}
+			
 			params.setTotal(total);
 			totals.add(total);
 		}
@@ -85,6 +98,8 @@ public class BaseSweetGenerator {
 		parametersHolder.invalidate();
 		
 		try {
+			resultBook.write(new FileOutputStream(outputPath.toString() +
+					"/Результаты.xls" + (resultBook instanceof XSSFWorkbook ? "x" : "")));
 			Desktop.getDesktop().open(new File(outputPath.toString()));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

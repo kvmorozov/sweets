@@ -10,7 +10,7 @@ import ru.morozov.sweetApp.config.prices.PriceList;
 
 public class SwPrices {
 	
-	private static final int PRICES_COUNT = 2;
+	private static final int PRICES_COUNT = 5;
 	private static final double PRICE_1_VALUE = 59;
 	private static final double PRICE_2_VALUE = 45.64;
 	
