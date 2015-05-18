@@ -8,9 +8,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import ru.morozov.sweetApp.config.SweetConfig;
 import ru.morozov.sweetApp.config.SweetProduct;
-import ru.morozov.sweetApp.config.SweetTemplate;
 import ru.morozov.sweetApp.config.SystemConfigs;
 import ru.morozov.sweetApp.config.prices.PriceList;
+import ru.morozov.sweetApp.config.templates.SweetTemplate;
 
 public class SweetContext {
 	

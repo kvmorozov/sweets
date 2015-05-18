@@ -22,10 +22,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import ru.morozov.sweetApp.SweetContext;
 import ru.morozov.sweetApp.config.ParametersHolder;
 import ru.morozov.sweetApp.config.PropertyValueSet;
-import ru.morozov.sweetApp.config.SweetTemplate;
 import ru.morozov.sweetApp.config.SystemConfigs;
 import ru.morozov.sweetApp.config.prices.PriceItem;
 import ru.morozov.sweetApp.config.prices.PriceList;
+import ru.morozov.sweetApp.config.templates.SweetTemplate;
 
 public class BaseSweetGenerator {
 	

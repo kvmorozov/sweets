@@ -1,4 +1,4 @@
-package ru.morozov.sweetApp.config;
+package ru.morozov.sweetApp.config.templates;
 
 import java.util.List;
 
@@ -7,6 +7,9 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.InitializingBean;
 
+import ru.morozov.sweetApp.config.PropertyValue;
+import ru.morozov.sweetApp.config.PropertyValueSet;
+import ru.morozov.sweetApp.config.SweetPropertySet;
 import ru.morozov.sweetApp.config.prices.PriceItem;
 import ru.morozov.utils.ParserUtils;
 

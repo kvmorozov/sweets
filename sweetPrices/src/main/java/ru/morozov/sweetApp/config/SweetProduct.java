@@ -1,6 +1,7 @@
 package ru.morozov.sweetApp.config;
 
 import ru.morozov.sweetApp.SweetContext;
+import ru.morozov.sweetApp.config.templates.SweetTemplate;
 
 public class SweetProduct {
 	

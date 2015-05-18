@@ -5,7 +5,7 @@
 	
 	<!-- Прокладка 5х слойная -->
 	
-	<bean id="prokl5" class="ru.morozov.sweetApp.config.SweetTemplate">
+	<bean id="prokl5" class="ru.morozov.sweetApp.config.templates.PaperTemplate">
 		<property name="templateFileName" value="010-15 Прокладка 5 слойнаая 230х330 Ассорти  ТКЗ+ЛЗК+КВЗ.xls"/>
 		<property name="properties" ref="prokl5_props"/>
 	</bean>
