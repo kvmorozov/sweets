@@ -28,7 +28,7 @@ public class PaperTemplate extends SweetTemplate {
 		for(PaperTitle title : titles) {
 			String titleStr = String.format(title.getTitleMask(), args.toArray());
 			
-			Cell cell = newWorkbook.getSheetAt(0).getRow(title.getCell().getRow()).getCell(title.getCell().getCol());
+			Cell cell = newWorkbook.getSheetAt(title.getCell().getSheet()).getRow(title.getCell().getRow()).getCell(title.getCell().getCol());
 			cell.setCellValue(titleStr);
 		}
 		

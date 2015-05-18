@@ -6,8 +6,97 @@
 	<!-- Прокладка 5х слойная -->
 	
 	<bean id="prokl5" class="ru.morozov.sweetApp.config.templates.PaperTemplate">
-		<property name="templateFileName" value="010-15 Прокладка 5 слойнаая 230х330 Ассорти  ТКЗ+ЛЗК+КВЗ.xls"/>
+		<property name="templateFileName" value="prokl5.xls"/>
 		<property name="properties" ref="prokl5_props"/>
+		<property name="amounts">
+			<list>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+					<property name="item" ref="item_bum_edp"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="1"/>
+							<property name="row" value="39"/>
+						</bean>
+					</property>
+				</bean>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+					<property name="item" ref="item_bum_edp"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="5"/>
+							<property name="row" value="39"/>
+						</bean>
+					</property>
+				</bean>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+					<property name="item" ref="item_perg_1040"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="3"/>
+							<property name="row" value="39"/>
+						</bean>
+					</property>
+				</bean>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+					<property name="item" ref="item_perg_1040"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="7"/>
+							<property name="row" value="39"/>
+						</bean>
+					</property>
+				</bean>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+					<property name="item" ref="item_bopp"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="9"/>
+							<property name="row" value="39"/>
+						</bean>
+					</property>
+				</bean>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+					<property name="item" ref="item_DyRab40"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="7"/>
+							<property name="row" value="42"/>
+						</bean>
+					</property>
+				</bean>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+					<property name="item" ref="item_Ds4000"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="9"/>
+							<property name="row" value="42"/>
+						</bean>
+					</property>
+				</bean>
+			</list>
+		</property>
+		<property name="titles">
+			<list>
+				<bean class="ru.morozov.sweetApp.config.templates.paper.PaperTitle">
+					<property name="titleMask" value="Прокладка пятислойная с логотипом %dх%d 'Ассорти'"/>
+					<property name="cell">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="2"/>
+							<property name="row" value="3"/>
+						</bean>
+					</property>
+				</bean>
+				<bean class="ru.morozov.sweetApp.config.templates.paper.PaperTitle">
+					<property name="titleMask" value="На ярлыках указать:    Прокладка пятислойная с логотипом %dх%d  Ассорти"/>
+					<property name="cell">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="0"/>
+							<property name="row" value="29"/>
+						</bean>
+					</property>
+				</bean>
+			</list>
+		</property>
 	</bean>
 	
 	<bean id="prokl5_props" class="ru.morozov.sweetApp.config.SweetPropertySet">

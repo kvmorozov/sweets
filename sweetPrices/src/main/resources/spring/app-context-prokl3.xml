@@ -69,7 +69,7 @@
 					</property>
 				</bean>
 				<bean class="ru.morozov.sweetApp.config.templates.paper.PaperTitle">
-					<property name="titleMask" value="На ярлыках указать:    Прокладка пятислойная с логотипом %dх%d  Ассорти  "/>
+					<property name="titleMask" value="На ярлыках указать:    Прокладка трехслойная с логотипом %dх%d  Ассорти"/>
 					<property name="cell">
 						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
 							<property name="col" value="0"/>
