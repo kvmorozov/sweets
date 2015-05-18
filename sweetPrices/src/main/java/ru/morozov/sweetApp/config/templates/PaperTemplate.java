@@ -24,10 +24,13 @@ public class PaperTemplate extends SweetTemplate {
 		
 		List<Object> args = new ArrayList<Object>();
 		for(PropertyValue value : values.getValueSet())
-			args.add(value.getValue().intValue());
+			args.add(value.getValue());
 		
 		for(PaperTitle title : titles) {
 			String titleStr = String.format(title.getTitleMask(), args.toArray());
+			
+			titleStr = titleStr.replaceAll(".0", "");
+			titleStr = titleStr.replaceAll(",0", "");
 			
 			CellCoord coord = title.getCell();
 			Cell cell = newWorkbook.getSheetAt(coord.getSheet()).getRow(coord.getRow()).getCell(coord.getCol());

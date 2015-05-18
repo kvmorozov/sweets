@@ -16,6 +16,10 @@
 					<property name="prefix" value="prokl5"/>
 					<property name="description" value="Прокладка 5ти слойная"/>
 				</bean>
+				<bean id="tart_product" class="ru.morozov.sweetApp.config.SweetProduct">
+					<property name="prefix" value="tartalet"/>
+					<property name="description" value="Тарталетки"/>
+				</bean>
 			</list>
 		</property>
 	</bean>

@@ -57,6 +57,7 @@ public class CalcsTab extends Tab {
 					@Override
 					public void changed(@SuppressWarnings("rawtypes") ObservableValue ov, SweetProduct oldValue, SweetProduct newValue) {
 						table.getColumns().clear();
+						table.getItems().clear();
 						
 						SweetTemplate template = newValue.getTemplate();
 						for(SweetProperty property : template.getProperties().getProperties()) {
@@ -76,7 +77,7 @@ public class CalcsTab extends Tab {
 						            if (empty) {
 						                setText(null);
 						            } else {
-						                setText(String.format("%.0f", value.doubleValue()));
+						                setText(String.format("%.1f", value.doubleValue()));
 						            }
 						        }
 					    });

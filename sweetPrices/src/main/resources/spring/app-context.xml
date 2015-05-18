@@ -18,5 +18,9 @@
 	<!-- Прокладка 5х слойная -->
 	
 	<import resource="app-context-prokl5.xml"/>
+	
+	<!-- Тарталетки -->
+	
+	<import resource="app-context-tart.xml"/>
 
 </beans>
