@@ -13,6 +13,7 @@ import org.springframework.beans.factory.InitializingBean;
 import ru.morozov.sweetApp.config.PropertyValue;
 import ru.morozov.sweetApp.config.PropertyValueSet;
 import ru.morozov.sweetApp.config.SweetPropertySet;
+import ru.morozov.sweetApp.config.base.CellCoord;
 import ru.morozov.sweetApp.config.prices.PriceItem;
 import ru.morozov.utils.ParserUtils;
 
@@ -50,7 +51,8 @@ public class SweetTemplate implements InitializingBean{
 		Workbook newWorkbook = workbook;
 		
 		for(PropertyValue value : values.getValueSet()) {
-			Cell cell = workbook.getSheetAt(0).getRow(value.getProperty().getCoord().getRow()).getCell(value.getProperty().getCoord().getCol());
+			CellCoord coord = value.getProperty().getCoord();
+			Cell cell = workbook.getSheetAt(coord.getSheet()).getRow(coord.getRow()).getCell(coord.getCol());
 			
 			switch (cell.getCellType()) {
 				case Cell.CELL_TYPE_NUMERIC:

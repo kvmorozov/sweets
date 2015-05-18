@@ -8,6 +8,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import ru.morozov.sweetApp.config.PropertyValue;
 import ru.morozov.sweetApp.config.PropertyValueSet;
+import ru.morozov.sweetApp.config.base.CellCoord;
 import ru.morozov.sweetApp.config.templates.paper.PaperTitle;
 
 public class PaperTemplate extends SweetTemplate {
@@ -28,7 +29,8 @@ public class PaperTemplate extends SweetTemplate {
 		for(PaperTitle title : titles) {
 			String titleStr = String.format(title.getTitleMask(), args.toArray());
 			
-			Cell cell = newWorkbook.getSheetAt(title.getCell().getSheet()).getRow(title.getCell().getRow()).getCell(title.getCell().getCol());
+			CellCoord coord = title.getCell();
+			Cell cell = newWorkbook.getSheetAt(coord.getSheet()).getRow(coord.getRow()).getCell(coord.getCol());
 			cell.setCellValue(titleStr);
 		}
 		
