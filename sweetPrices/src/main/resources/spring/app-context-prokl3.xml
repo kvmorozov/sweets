@@ -6,7 +6,7 @@
 	<!-- Прокладка 3х слойная -->
 	
 	<bean id="prokl3" class="ru.morozov.sweetApp.config.templates.PaperTemplate">
-		<property name="templateFileName" value="009-15 Прокладка 3х сл 231х152 Ассорти ТКЗ+ЛЗК+КВЗ.xls"/>
+		<property name="templateFileName" value="prokl3.xls"/>
 		<property name="properties" ref="prokl3_props"/>
 		<property name="amounts">
 			<list>
@@ -25,6 +25,28 @@
 						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
 							<property name="col" value="1"/>
 							<property name="row" value="37"/>
+						</bean>
+					</property>
+				</bean>
+			</list>
+		</property>
+		<property name="titles">
+			<list>
+				<bean class="ru.morozov.sweetApp.config.templates.paper.PaperTitle">
+					<property name="titleMask" value="Прокладка трехслойная с логотипом %dх%d 'Ассорти'"/>
+					<property name="cell">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="3"/>
+							<property name="row" value="3"/>
+						</bean>
+					</property>
+				</bean>
+				<bean class="ru.morozov.sweetApp.config.templates.paper.PaperTitle">
+					<property name="titleMask" value="На ярлыках указать:    Прокладка пятислойная с логотипом %dх%d  Ассорти  "/>
+					<property name="cell">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="0"/>
+							<property name="row" value="27"/>
 						</bean>
 					</property>
 				</bean>

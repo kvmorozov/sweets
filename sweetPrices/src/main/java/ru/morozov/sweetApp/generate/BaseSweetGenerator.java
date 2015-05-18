@@ -12,12 +12,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFFormulaEvaluator;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import ru.morozov.sweetApp.SweetContext;
 import ru.morozov.sweetApp.config.ParametersHolder;
@@ -56,11 +52,6 @@ public class BaseSweetGenerator {
 		
 		for(PropertyValueSet params : parametersHolder.getParameters()) {
 			Workbook generatedWorkbook = template.applyParams(params);
-			
-			if (generatedWorkbook instanceof HSSFWorkbook)
-				HSSFFormulaEvaluator.evaluateAllFormulaCells(generatedWorkbook);
-			else
-				XSSFFormulaEvaluator.evaluateAllFormulaCells((XSSFWorkbook) generatedWorkbook);
 			
 			Double total = 0d;
 			

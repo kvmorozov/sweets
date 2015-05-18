@@ -2,9 +2,12 @@ package ru.morozov.sweetApp.config.templates;
 
 import java.util.List;
 
+import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFFormulaEvaluator;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.InitializingBean;
 
 import ru.morozov.sweetApp.config.PropertyValue;
@@ -44,7 +47,7 @@ public class SweetTemplate implements InitializingBean{
 	}
 	
 	public Workbook applyParams(PropertyValueSet values) {
-		HSSFWorkbook newWorkbook = workbook;
+		Workbook newWorkbook = workbook;
 		
 		for(PropertyValue value : values.getValueSet()) {
 			Cell cell = workbook.getSheetAt(0).getRow(value.getProperty().getCoord().getRow()).getCell(value.getProperty().getCoord().getCol());
@@ -61,6 +64,11 @@ public class SweetTemplate implements InitializingBean{
 					break;
 			}
 		}
+		
+		if (newWorkbook instanceof HSSFWorkbook)
+			HSSFFormulaEvaluator.evaluateAllFormulaCells(newWorkbook);
+		else
+			XSSFFormulaEvaluator.evaluateAllFormulaCells((XSSFWorkbook) newWorkbook);
 		
 		return newWorkbook;
 	}
