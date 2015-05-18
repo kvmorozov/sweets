@@ -66,7 +66,7 @@ public class BaseSweetGenerator {
 			
 			for(PriceItem amount : template.getAmounts()) {
 				Double price = priceList.getPrice(amount.getItem().getItemName());
-				Cell cell = generatedWorkbook.getSheetAt(0).getRow(amount.getRow()).getCell(amount.getCol());
+				Cell cell = generatedWorkbook.getSheetAt(0).getRow(amount.getCoord().getRow()).getCell(amount.getCoord().getCol());
 				
 				if (cell != null)
 					total+=cell.getNumericCellValue() * price;

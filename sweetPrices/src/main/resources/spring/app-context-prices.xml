@@ -21,13 +21,21 @@
 			<list>
 				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
 					<property name="item" ref="item_perg_1040"/>
-					<property name="col" value="4"/>
-					<property name="row" value="15"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="4"/>
+							<property name="row" value="15"/>
+						</bean>
+					</property>
 				</bean>
 				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
 					<property name="item" ref="item_bum_edp"/>
-					<property name="col" value="4"/>
-					<property name="row" value="13"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="4"/>
+							<property name="row" value="13"/>
+						</bean>
+					</property>
 				</bean>
 			</list>
 		</property>

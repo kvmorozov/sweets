@@ -47,7 +47,7 @@ public class SweetTemplate implements InitializingBean{
 		HSSFWorkbook newWorkbook = workbook;
 		
 		for(PropertyValue value : values.getValueSet()) {
-			Cell cell = workbook.getSheetAt(0).getRow(value.getProperty().getRow()).getCell(value.getProperty().getCol());
+			Cell cell = workbook.getSheetAt(0).getRow(value.getProperty().getCoord().getRow()).getCell(value.getProperty().getCoord().getCol());
 			
 			switch (cell.getCellType()) {
 				case Cell.CELL_TYPE_NUMERIC:
