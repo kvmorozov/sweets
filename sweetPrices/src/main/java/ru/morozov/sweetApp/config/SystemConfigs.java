@@ -86,7 +86,7 @@ public class SystemConfigs {
 		}
 	}
 	
-	public String getSystemProperty(String propKey) {return getProperties().getProperty(propKey);}
+	public String getSystemProperty(String propKey) {return getProperties() == null ? null : getProperties().getProperty(propKey);}
 	public void setSystemProperty(String propKey, String value) {
 		getProperties().setProperty(propKey, value);
 		saveProperties();

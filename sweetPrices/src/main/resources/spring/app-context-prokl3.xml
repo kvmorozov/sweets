@@ -11,6 +11,15 @@
 		<property name="amounts">
 			<list>
 				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+					<property name="item" ref="item_bum_edp"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="1"/>
+							<property name="row" value="37"/>
+						</bean>
+					</property>
+				</bean>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
 					<property name="item" ref="item_perg_1040"/>
 					<property name="coord">
 						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
@@ -20,10 +29,28 @@
 					</property>
 				</bean>
 				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
-					<property name="item" ref="item_bum_edp"/>
+					<property name="item" ref="item_bopp"/>
 					<property name="coord">
 						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
-							<property name="col" value="1"/>
+							<property name="col" value="5"/>
+							<property name="row" value="37"/>
+						</bean>
+					</property>
+				</bean>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+					<property name="item" ref="item_DyRab40"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="7"/>
+							<property name="row" value="37"/>
+						</bean>
+					</property>
+				</bean>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+					<property name="item" ref="item_Ds4000"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="9"/>
 							<property name="row" value="37"/>
 						</bean>
 					</property>

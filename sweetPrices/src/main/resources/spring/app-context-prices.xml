@@ -6,11 +6,23 @@
 	<!-- Запчасти -->
 
 	<bean id="item_perg_1040" class="ru.morozov.sweetApp.config.prices.SweetItem">
-		<property name="itemName" value="ПЕРГАМИН  1040/40"/>
+		<property name="itemName" value="ПЕРГАМИН 1040/40"/>
 	</bean>
 	
 	<bean id="item_bum_edp" class="ru.morozov.sweetApp.config.prices.SweetItem">
-		<property name="itemName" value="БУМАГА  ЭДП 1040/38"/>
+		<property name="itemName" value="ОДП"/>
+	</bean>
+	
+	<bean id="item_bopp" class="ru.morozov.sweetApp.config.prices.SweetItem">
+		<property name="itemName" value="БОПП"/>
+	</bean>
+	
+	<bean id="item_DyRab40" class="ru.morozov.sweetApp.config.prices.SweetItem">
+		<property name="itemName" value="DyRab 40"/>
+	</bean>
+	
+	<bean id="item_Ds4000" class="ru.morozov.sweetApp.config.prices.SweetItem">
+		<property name="itemName" value="DS 4000"/>
 	</bean>
 	
 	<!-- Цены -->
@@ -34,6 +46,33 @@
 						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
 							<property name="col" value="4"/>
 							<property name="row" value="13"/>
+						</bean>
+					</property>
+				</bean>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+					<property name="item" ref="item_bopp"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="4"/>
+							<property name="row" value="12"/>
+						</bean>
+					</property>
+				</bean>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+					<property name="item" ref="item_DyRab40"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="4"/>
+							<property name="row" value="26"/>
+						</bean>
+					</property>
+				</bean>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+					<property name="item" ref="item_Ds4000"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="4"/>
+							<property name="row" value="26"/>
 						</bean>
 					</property>
 				</bean>

@@ -119,7 +119,8 @@ public class CalcsTab extends Tab {
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XLS", "*.xls"));
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("XLSX", "*.xlsx"));
 		
-		File initDir = new File(SweetContext.getSystemConfigs().getSystemProperty(SystemConfigs.PROPERTY_LAST_PARAMS_FILE));
+		String initDirName = SweetContext.getSystemConfigs().getSystemProperty(SystemConfigs.PROPERTY_LAST_PARAMS_FILE);
+		File initDir = initDirName == null ? null : new File(initDirName);
 		if (initDir != null)
 			fileChooser.setInitialDirectory(initDir);
 		
@@ -130,6 +131,8 @@ public class CalcsTab extends Tab {
                         File file = fileChooser.showOpenDialog(stage);
                         if (file != null) {
                         	SweetContext.getSystemConfigs().setSystemProperty(SystemConfigs.PROPERTY_LAST_PARAMS_FILE, file.getParent());
+                        	fileChooser.setInitialDirectory(file.getParentFile());
+                        	
                         	ParametersHolder holder = new ParametersHolder(file, productsBox.getValue());
                         	if (holder.isParamsValid()) {
 	                        	table.setItems(holder.getObservableParameters());
