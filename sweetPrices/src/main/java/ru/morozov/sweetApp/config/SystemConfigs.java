@@ -1,24 +1,21 @@
 package ru.morozov.sweetApp.config;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Properties;
+import java.util.prefs.Preferences;
 
 public class SystemConfigs {
 	
-	private static final String PROPS_FILE_NAME = "sweet.properties";
+	private static final String PREFERENCES_NODE = "ru/morozov/sweets";
 	public static final String PROPERTY_LAST_PARAMS_FILE = "last.params.file";
 	public static final String PROPERTY_LAST_AMOUNT = "last.amount";
+	public static final String PROPERTY_RUNS_COUNT = "runs.count";
 	
 	private String outputBaseDir;
 	private Path outputBaseDirPath;
 	
-	private Properties properties;
+	private Preferences preferences;
 
 	public String getOutputBaseDir() {return outputBaseDir;}
 	
@@ -46,50 +43,16 @@ public class SystemConfigs {
 		}
 	}
 	
-	public Properties getProperties() {
-		if (properties == null) {
-			FileInputStream fis = null;
-			try {
-				properties = new Properties();
-				fis = new FileInputStream(getOutputBaseDir() + PROPS_FILE_NAME);
-				if(fis != null) {
-					properties.load(fis);
-				}
-			} catch (FileNotFoundException e) {
-				properties = new Properties();
-				saveProperties();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			finally {
-				if (fis != null)
-					try {
-						fis.close();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-			}
-		}
+	public Preferences getPreferences() {
+		if (preferences == null)
+			preferences = Preferences.userRoot().node(PREFERENCES_NODE);
 		
-		return properties;
+		return preferences;
 	}
 	
-	private void saveProperties() {
-		if (properties != null) {
-			try {
-				properties.store(new FileOutputStream(getOutputBaseDir() + PROPS_FILE_NAME), null);
-				properties = null;
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-	}
+	public String getSystemProperty(String propKey) {return getPreferences() == null ? null : getPreferences().get(propKey, null);}
+	public void setSystemProperty(String propKey, String value) {getPreferences().put(propKey, value);}
 	
-	public String getSystemProperty(String propKey) {return getProperties() == null ? null : getProperties().getProperty(propKey);}
-	public void setSystemProperty(String propKey, String value) {
-		getProperties().setProperty(propKey, value);
-		saveProperties();
-	}
+	public int getIntProperty(String propKey) {return  getPreferences() == null ? 0 :  getPreferences().getInt(propKey, 0);}
+	public void setIntProperty(String propKey, int value) {getPreferences().putInt(propKey, value);}
 }
