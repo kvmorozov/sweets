@@ -120,22 +120,22 @@ public class CalcsTab extends Tab {
         runButton.setDisable(true);
 		
         openButton.setOnAction((e) -> {
-                        File file = fileChooser.showOpenDialog(stage);
-                        if (file != null) {
-                        	SweetContext.getSystemConfigs().setSystemProperty(SystemConfigs.PROPERTY_LAST_PARAMS_FILE, file.getParent());
-                        	fileChooser.setInitialDirectory(file.getParentFile());
-                        	
-                        	ParametersHolder holder = new ParametersHolder(file, productsBox.getValue());
-                        	if (holder.isParamsValid()) {
-	                        	table.setItems(holder.getObservableParameters());
-	                        	table.setUserData(holder);
-	                        	runButton.setDisable(false);
-                        	}
-                        	else {
-                        		// Show alert
-                        	}
-                        }
-                });
+        	File file = fileChooser.showOpenDialog(stage);
+        	if (file != null) {
+        		SweetContext.getSystemConfigs().setSystemProperty(SystemConfigs.PROPERTY_LAST_PARAMS_FILE, file.getParent());
+        		fileChooser.setInitialDirectory(file.getParentFile());
+
+        		ParametersHolder holder = new ParametersHolder(file, productsBox.getValue());
+        		if (holder.isParamsValid()) {
+        			table.setItems(holder.getObservableParameters());
+        			table.setUserData(holder);
+        			runButton.setDisable(false);
+        		}
+        		else {
+        			// Show alert
+        		}
+        	}
+        });
         
         grid.add(openButton, 3, 0, 2, 1);
         grid.add(new Label(l12n.bundle.getString(l12n.AMOUNT_KEY)), 0, 2, 2, 1);
