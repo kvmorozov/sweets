@@ -70,18 +70,13 @@ public class CalcsTab extends Tab {
 							     }
 							  });
 							
-							column.setCellFactory(col -> 
-						    new TableCell<PropertyValueSet, Double>() {
-						        @Override 
+							column.setCellFactory(col -> new TableCell<PropertyValueSet, Double>() {
+								@Override 
 						        public void updateItem(Double value, boolean empty) {
 						            super.updateItem(value, empty);
-						            if (empty) {
-						                setText(null);
-						            } else {
-						                setText(String.format("%.1f", value.doubleValue()));
-						            }
-						        }
-					    });
+						            setText(empty ? null : String.format("%.1f", value.doubleValue()));
+								}
+							});
 							
 							table.getColumns().add(column);
 						}
@@ -92,20 +87,15 @@ public class CalcsTab extends Tab {
 						     public ObservableValue<Double> call(CellDataFeatures<PropertyValueSet, Double> p) {
 						    	 return new ReadOnlyObjectWrapper<Double>(p.getValue().getTotal());
 						     }
-						  });
+						});
 						
-						column.setCellFactory(col -> 
-						    new TableCell<PropertyValueSet, Double>() {
-						        @Override 
-						        public void updateItem(Double total, boolean empty) {
-						            super.updateItem(total, empty);
-						            if (empty) {
-						                setText(null);
-						            } else {
-						                setText(String.format("₽%,.2f", total.doubleValue()));
-						            }
-						        }
-					    });
+						column.setCellFactory(col -> new TableCell<PropertyValueSet, Double>() {
+							@Override 
+							public void updateItem(Double total, boolean empty) {
+								super.updateItem(total, empty);
+								setText(empty ? null : String.format("₽%,.2f", total.doubleValue()));
+							}
+						});
 						
 						table.getColumns().add(column);
 						column.setVisible(false);
