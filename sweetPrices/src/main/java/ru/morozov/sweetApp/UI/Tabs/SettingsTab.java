@@ -1,9 +1,12 @@
 package ru.morozov.sweetApp.UI.Tabs;
 
-import javafx.geometry.Pos;
+import java.util.Map.Entry;
+import java.util.Properties;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
+import ru.morozov.sweetApp.SweetContext;
 import ru.morozov.sweetApp.Utils.Constants.l12n;
 
 public class SettingsTab extends Tab {
@@ -14,10 +17,18 @@ public class SettingsTab extends Tab {
 		setClosable(false);
 		setText(l12n.bundle.getString(l12n.SETTINGS_KEY));
 		
-		HBox hbox = new HBox();
-		hbox.getChildren().add(new Label("Tab 1"));
-		hbox.setAlignment(Pos.CENTER);
-		setContent(hbox);
-	}
+		Properties properties = SweetContext.getSystemConfigs().getProperties();
+		
+		GridPane grid = new GridPane();
 
+		int rowIndex = 0;
+		for(Entry<Object, Object> entries : properties.entrySet()) {
+			grid.add(new Label(l12n.bundle.getString(entries.getKey().toString()) + ":"), 0, rowIndex);
+			grid.add(new Label(entries.getValue().toString()), 1, rowIndex);
+			
+			rowIndex++;
+		}
+
+		setContent(grid);
+	}
 }
