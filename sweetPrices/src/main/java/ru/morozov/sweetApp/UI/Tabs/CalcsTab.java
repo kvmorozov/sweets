@@ -28,6 +28,7 @@ import ru.morozov.sweetApp.config.SweetProperty;
 import ru.morozov.sweetApp.config.SystemConfigs;
 import ru.morozov.sweetApp.config.templates.SweetTemplate;
 import ru.morozov.sweetApp.generate.BaseSweetGenerator;
+import ru.morozov.utils.components.NumberTextField;
 
 public class CalcsTab extends Tab {
 
@@ -42,10 +43,10 @@ public class CalcsTab extends Tab {
 		GridPane grid = new GridPane();
 		grid.setVgap(4);
 		grid.setHgap(10);
-		grid.setPadding(new Insets(5, 5, 5, 5));
+		grid.setPadding(new Insets(6, 6, 6, 6));
 
-		grid.add(new Label(l12n.bundle.getString(l12n.PRODUCTS_KEY)), 0, 0);
-		grid.add(productsBox, 1, 0);
+		grid.add(new Label(l12n.bundle.getString(l12n.PRODUCTS_KEY)), 0, 0, 2, 1);
+		grid.add(productsBox, 2, 0);
 
 		final TableView<PropertyValueSet> table = new TableView<PropertyValueSet>();
 		
@@ -113,7 +114,7 @@ public class CalcsTab extends Tab {
 					}
 				});
 
-		grid.add(table, 0, 1, 3, 1);
+		grid.add(table, 0, 1, 6, 1);
 		
 		final FileChooser fileChooser = new FileChooser();
 		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Excel files", "*.xls*"));
@@ -146,16 +147,22 @@ public class CalcsTab extends Tab {
                         }
                 });
         
-        grid.add(openButton, 2, 0);
+        grid.add(openButton, 3, 0, 2, 1);
+        grid.add(new Label(l12n.bundle.getString(l12n.AMOUNT_KEY)), 0, 2, 2, 1);
+        
+        final NumberTextField amountInput = new NumberTextField();
+        amountInput.setText(SweetContext.getSystemConfigs().getSystemProperty(SystemConfigs.PROPERTY_LAST_AMOUNT));
         
         runButton.setOnAction((e) -> {
+        	SweetContext.getSystemConfigs().setSystemProperty(SystemConfigs.PROPERTY_LAST_AMOUNT, amountInput.getText());
         	BaseSweetGenerator generator = new BaseSweetGenerator(SweetContext.getSystemConfigs(), productsBox.getValue().getTemplate(),
-        			(ParametersHolder)table.getUserData());
+        			(ParametersHolder)table.getUserData(), amountInput.getDoubleValue());
         	if (generator.generate())
         		table.getColumns().get(table.getColumns().size() - 1).setVisible(true);
         });
         
-        grid.add(runButton, 0, 2, 2, 1);
+        grid.add(amountInput, 2, 2);
+        grid.add(runButton, 3, 2, 1, 1);
 
 		setContent(grid);
 	}

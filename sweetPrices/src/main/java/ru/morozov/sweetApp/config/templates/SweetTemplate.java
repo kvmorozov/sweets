@@ -24,6 +24,7 @@ public class SweetTemplate implements InitializingBean{
 	private HSSFWorkbook workbook;
 	private SweetPropertySet properties;
 	private List<PriceItem> amounts;
+	private CellCoord amountCoord;
 
 	public SweetPropertySet getProperties() {return properties;}
 	public void setProperties(SweetPropertySet properties) {this.properties = properties;}
@@ -37,6 +38,9 @@ public class SweetTemplate implements InitializingBean{
 	public boolean isValidConfig() {return isValidConfig;}
 	public HSSFWorkbook getWorkbook() {return workbook;}
 	
+	public CellCoord getAmount() {return amountCoord;}
+	public void setAmount(CellCoord amount) {this.amountCoord = amount;}
+	
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		if (templateFileName == null || templateFileName.isEmpty())
@@ -47,12 +51,13 @@ public class SweetTemplate implements InitializingBean{
 		isValidConfig = true;
 	}
 	
-	public Workbook applyParams(PropertyValueSet values) {
+	public Workbook applyParams(PropertyValueSet values, Double amount) {
 		Workbook newWorkbook = workbook;
 		
+		amountCoord.getCell(newWorkbook).setCellValue(amount);
+		
 		for(PropertyValue value : values.getValueSet()) {
-			CellCoord coord = value.getProperty().getCoord();
-			Cell cell = workbook.getSheetAt(coord.getSheet()).getRow(coord.getRow()).getCell(coord.getCol());
+			Cell cell = value.getProperty().getCoord().getCell(workbook);
 			
 			switch (cell.getCellType()) {
 				case Cell.CELL_TYPE_NUMERIC:

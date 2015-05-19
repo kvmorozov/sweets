@@ -12,7 +12,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.InitializingBean;
 
-import ru.morozov.sweetApp.config.base.CellCoord;
 import ru.morozov.utils.ParserUtils;
 
 public class PriceList implements InitializingBean {
@@ -56,8 +55,7 @@ public class PriceList implements InitializingBean {
 		pricesMap = new HashMap<String, PriceItem>();
 		
 		for(PriceItem price : prices) {
-			CellCoord coord = price.getCoord();
-			Cell cell = workbook.getSheetAt(coord.getSheet()).getRow(coord.getRow()).getCell(coord.getCol());
+			Cell cell = price.getCoord().getCell(workbook);
 			
 			switch (cell.getCellType()) {
 				case Cell.CELL_TYPE_NUMERIC:

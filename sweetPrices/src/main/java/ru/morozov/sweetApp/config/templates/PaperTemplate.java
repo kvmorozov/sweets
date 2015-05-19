@@ -8,7 +8,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import ru.morozov.sweetApp.config.PropertyValue;
 import ru.morozov.sweetApp.config.PropertyValueSet;
-import ru.morozov.sweetApp.config.base.CellCoord;
 import ru.morozov.sweetApp.config.templates.paper.PaperTitle;
 
 public class PaperTemplate extends SweetTemplate {
@@ -19,8 +18,8 @@ public class PaperTemplate extends SweetTemplate {
 	public void setTitles(List<PaperTitle> titles) {this.titles = titles;}
 	
 	@Override
-	public Workbook applyParams(PropertyValueSet values) {
-		Workbook newWorkbook = super.applyParams(values);
+	public Workbook applyParams(PropertyValueSet values, Double amount) {
+		Workbook newWorkbook = super.applyParams(values, amount);
 		
 		List<Object> args = new ArrayList<Object>();
 		for(PropertyValue value : values.getValueSet())
@@ -32,8 +31,7 @@ public class PaperTemplate extends SweetTemplate {
 			titleStr = titleStr.replaceAll(".0", "");
 			titleStr = titleStr.replaceAll(",0", "");
 			
-			CellCoord coord = title.getCell();
-			Cell cell = newWorkbook.getSheetAt(coord.getSheet()).getRow(coord.getRow()).getCell(coord.getCol());
+			Cell cell = title.getCell().getCell(newWorkbook);
 			cell.setCellValue(titleStr);
 		}
 		

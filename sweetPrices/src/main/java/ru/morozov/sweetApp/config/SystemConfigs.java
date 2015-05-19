@@ -13,6 +13,7 @@ public class SystemConfigs {
 	
 	private static final String PROPS_FILE_NAME = "sweet.properties";
 	public static final String PROPERTY_LAST_PARAMS_FILE = "last.params.file";
+	public static final String PROPERTY_LAST_AMOUNT = "last.amount";
 	
 	private String outputBaseDir;
 	private Path outputBaseDirPath;

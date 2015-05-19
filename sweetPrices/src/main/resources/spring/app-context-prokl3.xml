@@ -8,6 +8,12 @@
 	<bean id="prokl3" class="ru.morozov.sweetApp.config.templates.PaperTemplate">
 		<property name="templateFileName" value="prokl3.xls"/>
 		<property name="properties" ref="prokl3_props"/>
+		<property name="amount">
+			<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+				<property name="col" value="7"/>
+				<property name="row" value="1"/>
+			</bean>
+		</property>
 		<property name="amounts">
 			<list>
 				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">

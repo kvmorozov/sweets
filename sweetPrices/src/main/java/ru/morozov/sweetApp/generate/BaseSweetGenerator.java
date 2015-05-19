@@ -20,7 +20,6 @@ import ru.morozov.sweetApp.SweetContext;
 import ru.morozov.sweetApp.config.ParametersHolder;
 import ru.morozov.sweetApp.config.PropertyValueSet;
 import ru.morozov.sweetApp.config.SystemConfigs;
-import ru.morozov.sweetApp.config.base.CellCoord;
 import ru.morozov.sweetApp.config.prices.PriceItem;
 import ru.morozov.sweetApp.config.prices.PriceList;
 import ru.morozov.sweetApp.config.templates.SweetTemplate;
@@ -33,6 +32,9 @@ public class BaseSweetGenerator {
 	private SweetTemplate template;
 	private ParametersHolder parametersHolder;
 	private List<Double> totals;
+	private Double amount;
+	
+	private static final Double DEFAULT_AMOUNT = 10000d;
 	
 	public SystemConfigs getSystemConfig() {return systemConfig;}
 	public SweetTemplate getTemplate() {return template;}
@@ -43,6 +45,14 @@ public class BaseSweetGenerator {
 		this.systemConfig = systemConfig;
 		this.template = template;
 		this.parametersHolder = parametersHolder;
+		this.amount = DEFAULT_AMOUNT;
+	}
+	
+	public BaseSweetGenerator(SystemConfigs systemConfig, SweetTemplate template, ParametersHolder parametersHolder, Double amount) {
+		this.systemConfig = systemConfig;
+		this.template = template;
+		this.parametersHolder = parametersHolder;
+		this.amount = amount;
 	}
 	
 	public boolean generate() {
@@ -55,14 +65,13 @@ public class BaseSweetGenerator {
 		PriceList priceList = SweetContext.getPriceList();
 		
 		for(PropertyValueSet params : parametersHolder.getParameters()) {
-			Workbook generatedWorkbook = template.applyParams(params);
+			Workbook generatedWorkbook = template.applyParams(params, amount);
 			
 			Double total = 0d;
 			
 			for(PriceItem amount : template.getAmounts()) {
 				Double price = priceList.getPrice(amount.getItem().getItemName());
-				CellCoord coord = amount.getCoord();
-				Cell cell = generatedWorkbook.getSheetAt(coord.getSheet()).getRow(coord.getRow()).getCell(coord.getCol());
+				Cell cell = amount.getCoord().getCell(generatedWorkbook);
 				
 				if (cell != null)
 					total+=cell.getNumericCellValue() * price;
