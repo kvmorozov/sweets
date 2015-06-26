@@ -11,6 +11,7 @@ public class PropertyValue {
 	}
 
 	public Double getValue() {return value;}
-	public SweetProperty getProperty() {return property;}
+	public void setValue(Double value) {this.value = value;}
 	
+	public SweetProperty getProperty() {return property;}
 }

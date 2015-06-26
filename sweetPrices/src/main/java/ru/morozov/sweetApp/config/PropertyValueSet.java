@@ -30,6 +30,10 @@ public class PropertyValueSet {
 	public int size() {return valueSet.size();}
 	
 	public Double getValue(String propertyKey) {return internalMap.containsKey(propertyKey) ? internalMap.get(propertyKey).getValue() : null;}
+	public void setValue(String propertyKey, Double value) {
+		if (internalMap.containsKey(propertyKey))
+			internalMap.get(propertyKey).setValue(value);
+	}
 	
 	public String getShortDesc() {
 		StringBuilder sb = new StringBuilder();
@@ -43,5 +47,14 @@ public class PropertyValueSet {
 		}
 		
 		return sb.toString();
+	}
+	
+	public static PropertyValueSet createValueSet(SweetPropertySet propertiesSet) {
+		PropertyValueSet valueSet = new PropertyValueSet();
+		
+		for(SweetProperty property : propertiesSet.getProperties())
+			valueSet.add(new PropertyValue(0d, property));
+		
+		return valueSet;
 	}
 }

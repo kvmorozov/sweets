@@ -29,6 +29,14 @@ public class ParametersHolder {
 
 	private Workbook workbook;
 	
+	public ParametersHolder(SweetPropertySet propertiesSet) {
+		this.propertiesSet = propertiesSet;
+		parameters = new ArrayList<PropertyValueSet>(1);
+		parameters.add(PropertyValueSet.createValueSet(propertiesSet));
+		
+		observableParameters = FXCollections.observableArrayList(parameters);
+	}
+	
 	public ParametersHolder(String resourcePath, SweetPropertySet propertiesSet) {
 		this.propertiesSet = propertiesSet;
 		
