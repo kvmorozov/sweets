@@ -7,7 +7,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import ru.morozov.sweetApp.UI.Tabs.CalcsTab;
+import ru.morozov.sweetApp.SweetContext;
 import ru.morozov.sweetApp.UI.Tabs.SettingsTab;
 import ru.morozov.sweetApp.Utils.Constants.l12n;
 
@@ -18,7 +18,7 @@ public class MainScene extends Scene {
 
 		TabPane tabPane = new TabPane();
 		Tab settingsTab = new SettingsTab();
-		Tab calcsTab = new CalcsTab(stage);
+		Tab calcsTab = SweetContext.getSystemConfigs().getCalcsTabRenderer().initCalcsTab(stage);
 
 		tabPane.getTabs().add(calcsTab);
 		tabPane.getTabs().add(settingsTab);

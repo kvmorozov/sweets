@@ -5,6 +5,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.prefs.Preferences;
 
+import ru.morozov.sweetApp.UI.Tabs.ICalcsTab;
+
 public class SystemConfigs {
 	
 	private static final String PREFERENCES_NODE = "ru/morozov/sweets";
@@ -14,6 +16,7 @@ public class SystemConfigs {
 	
 	private String outputBaseDir;
 	private Path outputBaseDirPath;
+	private ICalcsTab calcsTabRenderer;
 	
 	private Preferences preferences;
 
@@ -60,4 +63,7 @@ public class SystemConfigs {
 	
 	public int getIntProperty(String propKey) {return  getPreferences() == null ? 0 :  getPreferences().getInt(propKey, 0);}
 	public void setIntProperty(String propKey, int value) {getPreferences().putInt(propKey, value);}
+
+	public ICalcsTab getCalcsTabRenderer() {return calcsTabRenderer;}
+	public void setCalcsTabRenderer(ICalcsTab calcsTabRenderer) {this.calcsTabRenderer = calcsTabRenderer;}
 }

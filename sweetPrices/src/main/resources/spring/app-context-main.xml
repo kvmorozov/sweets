@@ -24,9 +24,13 @@
 		</property>
 	</bean>
 	
+	<bean id="calcsTabRenderer_multi" class="ru.morozov.sweetApp.UI.Tabs.CalcsTabMulti"/>
+	<bean id="calcsTabRenderer_single" class="ru.morozov.sweetApp.UI.Tabs.CalcsTabSingle"/>
+	
 	<bean id="systemConfig" class="ru.morozov.sweetApp.config.SystemConfigs"/>
 	<bean id="systemConfig_demo" class="ru.morozov.sweetApp.config.SystemConfigs">
 		<property name="outputBaseDir" value="C:\Личное\out\"/>
+		<property name="calcsTabRenderer" ref="calcsTabRenderer_single"/>
 	</bean>
 	
 </beans>

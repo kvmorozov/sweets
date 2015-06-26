@@ -30,11 +30,9 @@ import ru.morozov.sweetApp.config.templates.SweetTemplate;
 import ru.morozov.sweetApp.generate.BaseSweetGenerator;
 import ru.morozov.utils.components.NumberTextField;
 
-public class CalcsTab extends Tab {
+public class CalcsTabMulti extends Tab implements ICalcsTab {
 
-	public CalcsTab(Stage stage) {
-		super();
-
+	public Tab initCalcsTab(Stage stage) {
 		setClosable(false);
 		setText(l12n.bundle.getString(l12n.CALCS_KEY));
 
@@ -155,5 +153,7 @@ public class CalcsTab extends Tab {
         grid.add(runButton, 3, 2, 1, 1);
 
 		setContent(grid);
+		
+		return this;
 	}
 }
