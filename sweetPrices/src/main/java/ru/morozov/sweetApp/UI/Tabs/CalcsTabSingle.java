@@ -15,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import ru.morozov.sweetApp.SweetContext;
 import ru.morozov.sweetApp.Utils.Constants.l12n;
@@ -55,6 +56,7 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
         gridProps.getColumnConstraints().addAll(col1, col2);
 		
 		final Button runButton = new Button(l12n.bundle.getString(l12n.RUN_KEY));
+		Label totalLabel = new Label("");
 
 		productsBox.valueProperty().addListener(new ChangeListener<SweetProduct>() {
 			@Override
@@ -95,6 +97,8 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
 					rowIndex++;
 				}
 
+				totalLabel.textProperty().unbind();
+				totalLabel.textProperty().bind(pHolder.getParameters().get(0).getTotalPropertyStr());
 				gridProps.setUserData(pHolder);
 			}
 		});
@@ -103,7 +107,9 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
        
         runButton.setDisable(true);
         
-        HBox bottomBox = new HBox();
+        VBox bottomBox = new VBox(); 
+        
+        HBox runBox = new HBox();
         Label amountLabel = new Label(l12n.bundle.getString(l12n.AMOUNT_KEY));
 		
         final NumberTextField amountInput = new NumberTextField();
@@ -118,8 +124,15 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
         	}
         });
         
-        bottomBox.getChildren().addAll(amountLabel, amountInput, runButton);
-        bottomBox.setSpacing(10);
+        runBox.getChildren().addAll(amountLabel, amountInput, runButton);
+        runBox.setSpacing(10);
+        
+        HBox resultBox = new HBox();
+        resultBox.setSpacing(10);
+        resultBox.getChildren().addAll(new Label(l12n.bundle.getString(l12n.TOTAL_KEY) + ":"), totalLabel);
+        
+        bottomBox.getChildren().addAll(runBox, resultBox);
+        
         borderPane.setBottom(bottomBox);
 
 		setContent(borderPane);

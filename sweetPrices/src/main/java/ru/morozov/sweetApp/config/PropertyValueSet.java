@@ -6,18 +6,25 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class PropertyValueSet {
 	
 	private List<PropertyValue> valueSet = new ArrayList<PropertyValue>();
 	private Map<String, PropertyValue> internalMap = new HashMap<String, PropertyValue>();
 	private Double total;
 	private int row;
+	private StringProperty totalPropertyStr = new SimpleStringProperty("");
 
 	public List<PropertyValue> getValueSet() {return valueSet;}
 	public void setValueSet(List<PropertyValue> valueSet) {this.valueSet = valueSet;}
 	
 	public Double getTotal() {return total;}
-	public void setTotal(Double total) {this.total = total;}
+	public void setTotal(Double total) {
+		this.total = total;
+		totalPropertyStr.setValue(String.format("₽%,.2f", total));
+	}
 	
 	public int getRow() {return row;}
 	public void setRow(int row) {this.row = row;}
@@ -48,6 +55,8 @@ public class PropertyValueSet {
 		
 		return sb.toString();
 	}
+	
+	public StringProperty getTotalPropertyStr() {return totalPropertyStr;}
 	
 	public static PropertyValueSet createValueSet(SweetPropertySet propertiesSet) {
 		PropertyValueSet valueSet = new PropertyValueSet();

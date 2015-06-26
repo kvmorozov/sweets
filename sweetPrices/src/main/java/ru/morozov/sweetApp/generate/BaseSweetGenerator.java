@@ -92,15 +92,16 @@ public class BaseSweetGenerator {
 				}
 			}
 			
-			try {
-				Cell totalCell = resultBook.getSheetAt(0).getRow(params.getRow()).getCell(params.getValueSet().size());
-				if (totalCell == null)
-					totalCell = resultBook.getSheetAt(0).getRow(params.getRow()).createCell(params.getValueSet().size(), Cell.CELL_TYPE_NUMERIC);
-				totalCell.setCellValue(total);
-			}
-			catch(Exception ex) {
-				ex.printStackTrace();
-			}
+			if (resultBook != null)
+				try {
+					Cell totalCell = resultBook.getSheetAt(0).getRow(params.getRow()).getCell(params.getValueSet().size());
+					if (totalCell == null)
+						totalCell = resultBook.getSheetAt(0).getRow(params.getRow()).createCell(params.getValueSet().size(), Cell.CELL_TYPE_NUMERIC);
+					totalCell.setCellValue(total);
+				}
+				catch(Exception ex) {
+					ex.printStackTrace();
+				}
 			
 			params.setTotal(total);
 			totals.add(total);
@@ -109,7 +110,7 @@ public class BaseSweetGenerator {
 		parametersHolder.invalidate();
 		
 		try {
-			if (outputPath != null) {
+			if (outputPath != null && resultBook != null) {
 				resultBook.write(new FileOutputStream(outputPath.toString() +
 						"/Результаты.xls" + (resultBook instanceof XSSFWorkbook ? "x" : "")));
 				Desktop.getDesktop().open(new File(outputPath.toString()));

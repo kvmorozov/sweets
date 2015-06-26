@@ -29,7 +29,7 @@
 	
 	<bean id="systemConfig" class="ru.morozov.sweetApp.config.SystemConfigs"/>
 	<bean id="systemConfig_demo" class="ru.morozov.sweetApp.config.SystemConfigs">
-		<property name="outputBaseDir" value="C:\Личное\out\"/>
+		<property name="outputBaseDir" value="C:\Work\out\"/>
 		<property name="calcsTabRenderer" ref="calcsTabRenderer_single"/>
 	</bean>
 	
