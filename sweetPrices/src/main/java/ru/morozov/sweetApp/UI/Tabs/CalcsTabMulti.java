@@ -32,7 +32,7 @@ import ru.morozov.utils.components.NumberTextField;
 
 public class CalcsTabMulti extends Tab implements ICalcsTab {
 
-	public Tab initCalcsTab(Stage stage) {
+	public void initCalcsTab(Stage stage) {
 		setClosable(false);
 		setText(l12n.bundle.getString(l12n.CALCS_KEY));
 
@@ -153,7 +153,5 @@ public class CalcsTabMulti extends Tab implements ICalcsTab {
         grid.add(runButton, 3, 2, 1, 1);
 
 		setContent(grid);
-		
-		return this;
 	}
 }
