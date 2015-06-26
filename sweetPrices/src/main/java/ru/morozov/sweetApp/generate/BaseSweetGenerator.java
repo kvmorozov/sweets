@@ -77,17 +77,19 @@ public class BaseSweetGenerator {
 					total+=cell.getNumericCellValue() * price;
 			}
 			
-			Path newPath = Paths.get(outputPath.toString(), params.getShortDesc() + ".xls");
-			
-			try {
-				Path newFilePath = Files.createFile(newPath);
-				FileOutputStream out = new FileOutputStream(newFilePath.toString());
-				generatedWorkbook.write(out);
-				out.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+			if (outputPath != null) {
+				Path newPath = Paths.get(outputPath.toString(), params.getShortDesc() + ".xls");
 				
-				return false;
+				try {
+					Path newFilePath = Files.createFile(newPath);
+					FileOutputStream out = new FileOutputStream(newFilePath.toString());
+					generatedWorkbook.write(out);
+					out.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+					
+					return false;
+				}
 			}
 			
 			try {
@@ -107,9 +109,11 @@ public class BaseSweetGenerator {
 		parametersHolder.invalidate();
 		
 		try {
-			resultBook.write(new FileOutputStream(outputPath.toString() +
-					"/Результаты.xls" + (resultBook instanceof XSSFWorkbook ? "x" : "")));
-			Desktop.getDesktop().open(new File(outputPath.toString()));
+			if (outputPath != null) {
+				resultBook.write(new FileOutputStream(outputPath.toString() +
+						"/Результаты.xls" + (resultBook instanceof XSSFWorkbook ? "x" : "")));
+				Desktop.getDesktop().open(new File(outputPath.toString()));
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

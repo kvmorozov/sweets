@@ -17,4 +17,6 @@ public interface l12n {
 	public static final String EXIT_KEY = "exit";
 	public static final String TOTAL_KEY = "total";
 	public static final String AMOUNT_KEY = "amount";
+	
+	public static final String OUTPUT_DIR = "output.dir";
 }

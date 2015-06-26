@@ -23,13 +23,18 @@ public class SystemConfigs {
 		this.outputBaseDir = outputBaseDir;
 		
 		outputBaseDirPath = Paths.get(outputBaseDir);
-		if (!Files.exists(outputBaseDirPath))
-			outputBaseDirPath = null;
+		if (!Files.exists(outputBaseDirPath)) {
+			this.outputBaseDir = System.getProperty("user.dir");
+			outputBaseDirPath = Paths.get(outputBaseDir);
+		}
 	}
 	
 	public Path getBaseFolderPath() {return outputBaseDirPath;}
 	
 	public Path createSubdirectory(String subdirName) {
+		if (outputBaseDirPath == null)
+			return null;
+		
 		Path newPath = Paths.get(outputBaseDir, subdirName);
 		
 		if (Files.exists(newPath))
