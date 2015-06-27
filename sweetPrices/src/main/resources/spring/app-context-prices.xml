@@ -28,15 +28,18 @@
 	<!-- Цены -->
 	
 	<bean id="priceList" class="ru.morozov.sweetApp.config.prices.PriceList">
-		<property name="priceListFileName" value="Остатки.xlsx"/>
+		<property name="priceListFileName" value="Prices.xlsx"/>
+		<property name="descColumn" value="0"/>
+		<property name="nameColumn" value="3"/>
+		<property name="price1Column" value="6"/>
+		<property name="price2Column" value="7"/>
 		<property name="prices">
 			<list>
 				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
 					<property name="item" ref="item_perg_1040"/>
 					<property name="coord">
 						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
-							<property name="col" value="4"/>
-							<property name="row" value="15"/>
+							<property name="row" value="12"/>
 						</bean>
 					</property>
 				</bean>
@@ -44,8 +47,7 @@
 					<property name="item" ref="item_bum_edp"/>
 					<property name="coord">
 						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
-							<property name="col" value="4"/>
-							<property name="row" value="13"/>
+							<property name="row" value="5"/>
 						</bean>
 					</property>
 				</bean>
@@ -53,8 +55,7 @@
 					<property name="item" ref="item_bopp"/>
 					<property name="coord">
 						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
-							<property name="col" value="4"/>
-							<property name="row" value="12"/>
+							<property name="row" value="15"/>
 						</bean>
 					</property>
 				</bean>
@@ -62,8 +63,7 @@
 					<property name="item" ref="item_DyRab40"/>
 					<property name="coord">
 						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
-							<property name="col" value="4"/>
-							<property name="row" value="26"/>
+							<property name="row" value="-1"/>
 						</bean>
 					</property>
 				</bean>
@@ -71,8 +71,7 @@
 					<property name="item" ref="item_Ds4000"/>
 					<property name="coord">
 						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
-							<property name="col" value="4"/>
-							<property name="row" value="26"/>
+							<property name="row" value="-1"/>
 						</bean>
 					</property>
 				</bean>

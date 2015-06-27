@@ -3,9 +3,19 @@ package ru.morozov.sweetApp.config.base;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import ru.morozov.utils.ParserUtils;
+
 public class CellCoord {
 	
 	private int sheet = 0, col, row;
+	
+	public CellCoord() {}
+	
+	public CellCoord(int sheet, int col, int row) {
+		this.sheet = sheet;
+		this.col = col;
+		this.row = row;
+	}
 	
 	public int getSheet() {return sheet;}
 	public void setSheet(int sheet) {this.sheet = sheet;}
@@ -17,4 +27,23 @@ public class CellCoord {
 	public void setRow(int row) {this.row = row;}
 	
 	public Cell getCell(Workbook wb) {return wb.getSheetAt(getSheet()).getRow(getRow()).getCell(getCol());}
+	
+	public Object getValue(Workbook wb) {
+		if (sheet < 0 || col < 0 || row < 0)
+			return null;
+		
+		Object result = null;
+		Cell cell = getCell(wb);
+		
+		switch (cell.getCellType()) {
+			case Cell.CELL_TYPE_NUMERIC:
+				return cell.getNumericCellValue();
+			case Cell.CELL_TYPE_STRING:
+				return ParserUtils.getDoubleResult(cell.getStringCellValue());
+			default:
+				break;
+		}
+		
+		return result;
+	}
 }

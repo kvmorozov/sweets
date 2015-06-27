@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.OfficeXmlFileException;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.InitializingBean;
@@ -21,6 +20,7 @@ public class PriceList implements InitializingBean {
 	private boolean isValidConfig = false;
 	private List<PriceItem> prices;
 	private Map<String, PriceItem> pricesMap;
+	private int descColumn, nameColumn, price1Column, price2Column;
 	
 	public String getPriceListFileName() {return priceListFileName;}
 	public void setPriceListFileName(String priceListFileName) {this.priceListFileName = priceListFileName;}
@@ -30,6 +30,18 @@ public class PriceList implements InitializingBean {
 	
 	public List<PriceItem> getPrices() {return prices;}
 	public void setPrices(List<PriceItem> prices) {this.prices = prices;}
+	
+	public int getDescColumn() {return descColumn;}
+	public void setDescColumn(int descColumn) {this.descColumn = descColumn;}
+	
+	public int getNameColumn() {return nameColumn;}
+	public void setNameColumn(int nameColumn) {this.nameColumn = nameColumn;}
+	
+	public int getPrice1Column() {return price1Column;}
+	public void setPrice1Column(int price1Column) {this.price1Column = price1Column;}
+	
+	public int getPrice2Column() {return price2Column;}
+	public void setPrice2Column(int price2Column) {this.price2Column = price2Column;}
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -55,18 +67,15 @@ public class PriceList implements InitializingBean {
 		pricesMap = new HashMap<String, PriceItem>();
 		
 		for(PriceItem price : prices) {
-			Cell cell = price.getCoord().getCell(workbook);
+			Double price1 = ParserUtils.getDoubleResult(price.getCoord(price1Column).getValue(workbook));
+			Double price2 = ParserUtils.getDoubleResult(price.getCoord(price2Column).getValue(workbook));
+			String desc = (new ParserUtils(price.getCoord(descColumn).getValue(workbook))).getStringResult();
+			String name = (new ParserUtils(price.getCoord(nameColumn).getValue(workbook))).getStringResult();
 			
-			switch (cell.getCellType()) {
-				case Cell.CELL_TYPE_NUMERIC:
-					price.setPrice(cell.getNumericCellValue());
-					break;
-				case Cell.CELL_TYPE_STRING:
-					price.setPrice(ParserUtils.getDoubleResult(cell.getStringCellValue()));
-					break;
-				default:
-					break;
-			}
+			price.setPrice1(price1);
+			price.setPrice1(price2);
+			price.setDesc(desc);
+			price.setName(name);
 			
 			pricesMap.put(price.getItem().getItemName(), price);
 		}
