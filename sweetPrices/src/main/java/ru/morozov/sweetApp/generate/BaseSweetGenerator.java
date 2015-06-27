@@ -110,11 +110,12 @@ public class BaseSweetGenerator {
 		parametersHolder.invalidate();
 		
 		try {
-			if (outputPath != null && resultBook != null) {
+			if (outputPath != null && resultBook != null)
 				resultBook.write(new FileOutputStream(outputPath.toString() +
 						"/Результаты.xls" + (resultBook instanceof XSSFWorkbook ? "x" : "")));
+			
+			if (outputPath != null)
 				Desktop.getDesktop().open(new File(outputPath.toString()));
-			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

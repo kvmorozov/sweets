@@ -84,7 +84,7 @@
 		<property name="titles">
 			<list>
 				<bean class="ru.morozov.sweetApp.config.templates.paper.PaperTitle">
-					<property name="titleMask" value="Прокладка пятислойная с логотипом %fх%f 'Ассорти'"/>
+					<property name="titleMask" value="Прокладка пятислойная с логотипом %.1fх%.1f 'Ассорти'"/>
 					<property name="cell">
 						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
 							<property name="col" value="2"/>
@@ -93,7 +93,7 @@
 					</property>
 				</bean>
 				<bean class="ru.morozov.sweetApp.config.templates.paper.PaperTitle">
-					<property name="titleMask" value="На ярлыках указать:    Прокладка пятислойная с логотипом %fх%f  Ассорти"/>
+					<property name="titleMask" value="На ярлыках указать:    Прокладка пятислойная с логотипом %.1fх%.1f  Ассорти"/>
 					<property name="cell">
 						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
 							<property name="col" value="0"/>
