@@ -21,7 +21,7 @@ import ru.morozov.sweetApp.config.ParametersHolder;
 import ru.morozov.sweetApp.config.PropertyValueSet;
 import ru.morozov.sweetApp.config.SystemConfigs;
 import ru.morozov.sweetApp.config.prices.PriceItem;
-import ru.morozov.sweetApp.config.prices.PriceList;
+import ru.morozov.sweetApp.config.prices.PricesSet;
 import ru.morozov.sweetApp.config.templates.SweetTemplate;
 
 public class BaseSweetGenerator {
@@ -62,7 +62,7 @@ public class BaseSweetGenerator {
 		Workbook resultBook = parametersHolder.getWorkbook();
 		
 		totals = new ArrayList<Double>();
-		PriceList priceList = SweetContext.getPriceList();
+		PricesSet appPrices = SweetContext.getPricesSet();
 		
 		for(PropertyValueSet params : parametersHolder.getParameters()) {
 			Workbook generatedWorkbook = template.applyParams(params, amount);
@@ -70,7 +70,7 @@ public class BaseSweetGenerator {
 			Double total = 0d;
 			
 			for(PriceItem amount : template.getAmounts()) {
-				Double price = priceList.getPrice(amount.getItem().getItemName());
+				Double price = appPrices.getPrice(amount.getItem().getItemName());
 				Cell cell = amount.getCoord().getCell(generatedWorkbook);
 				
 				if (cell != null)

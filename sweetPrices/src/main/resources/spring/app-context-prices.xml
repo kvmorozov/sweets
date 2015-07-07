@@ -27,8 +27,8 @@
 	
 	<!-- Цены -->
 	
-	<bean id="priceList" class="ru.morozov.sweetApp.config.prices.PriceList">
-		<property name="priceListFileName" value="Prices.xlsx"/>
+	<bean id="priceList_main" class="ru.morozov.sweetApp.config.prices.PriceList">
+		<property name="priceListFileName" value="Наименование материала в 1с и тех карте + цены.xlsx"/>
 		<property name="descColumn" value="0"/>
 		<property name="nameColumn" value="3"/>
 		<property name="price1Column" value="6"/>
@@ -75,6 +75,16 @@
 						</bean>
 					</property>
 				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Все цены -->
+	
+	<bean id="all_prices" class="ru.morozov.sweetApp.config.prices.PricesSet">
+		<property name="priceLists">
+			<list>
+				<ref bean="priceList_main"/>
 			</list>
 		</property>
 	</bean>
