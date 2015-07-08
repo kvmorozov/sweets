@@ -32,6 +32,8 @@
 		<property name="outputBaseDir" value="C:\Work\out\"/>
 		<property name="calcsTabRenderer" ref="calcsTabRenderer_single"/>
 		<property name="extraCharge" value="40"/>
+		<property name="generateFiles" value="true"/>
+		<property name="popupWindow" value="false"/>
 	</bean>
 	
 </beans>

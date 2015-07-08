@@ -20,6 +20,7 @@ public class SystemConfigs {
 	private Path outputBaseDirPath;
 	private ICalcsTab calcsTabRenderer;
 	private int extraCharge  = DEFAULT_EXTRA_CHARGE;
+	private boolean generateFiles, popupWindow;
 	
 	private Preferences preferences;
 
@@ -72,4 +73,10 @@ public class SystemConfigs {
 
 	public int getExtraCharge() {return extraCharge;}
 	public void setExtraCharge(int extraCharge) {this.extraCharge = extraCharge;}
+
+	public boolean isGenerateFiles() {return generateFiles;}
+	public void setGenerateFiles(boolean generateFiles) {this.generateFiles = generateFiles;}
+
+	public boolean isPopupWindow() {return popupWindow;}
+	public void setPopupWindow(boolean popupWindow) {this.popupWindow = popupWindow;}
 }
