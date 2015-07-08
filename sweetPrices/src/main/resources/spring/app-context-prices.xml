@@ -111,6 +111,16 @@
 		</property>
 	</bean>
 	
+	<bean id="priceList_paints" class="ru.morozov.sweetApp.config.prices.PriceList">
+		<property name="priceListFileName" value="Наименование краски + цены.xlsx"/>
+		<property name="descColumn" value="0"/>
+		<property name="nameColumn" value="0"/>
+		<property name="price1Column" value="3"/>
+		<property name="price2Column" value="3"/>
+		<property name="firstRow" value="5"/>
+		<property name="lastRow" value="10"/>
+	</bean>
+	
 	<!-- Все цены -->
 	
 	<bean id="all_prices" class="ru.morozov.sweetApp.config.prices.PricesSet">

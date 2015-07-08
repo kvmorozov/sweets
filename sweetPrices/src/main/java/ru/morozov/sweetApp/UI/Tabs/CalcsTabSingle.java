@@ -23,6 +23,7 @@ import ru.morozov.sweetApp.config.ParametersHolder;
 import ru.morozov.sweetApp.config.SweetProduct;
 import ru.morozov.sweetApp.config.SweetProperty;
 import ru.morozov.sweetApp.config.SystemConfigs;
+import ru.morozov.sweetApp.config.prices.PriceItem;
 import ru.morozov.sweetApp.config.templates.SweetTemplate;
 import ru.morozov.sweetApp.generate.BaseSweetGenerator;
 import ru.morozov.utils.components.NumberTextField;
@@ -70,29 +71,37 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
 				valueFieldList.clear();
 
 				for(SweetProperty property : template.getProperties().getProperties()) {
-					NumberTextField valueInput = new NumberTextField();
-					valueFieldList.add(valueInput);
-					
-					valueInput.textProperty().addListener(new ChangeListener<String>() {
-					    @Override
-					    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-					    	if (newValue != null && !newValue.isEmpty())
-					    		pHolder.getParameters().get(0).setValue(property.getPropertyName(), Double.valueOf(newValue));
-					    	
-					    	boolean runEnabled = true;
-					    	for(NumberTextField input : valueFieldList)
-					    		if (input.getText().trim().isEmpty()) {
-					    			runEnabled = false;
-					    			break;
-					    		}
-					    	
-					    	runButton.setDisable(!runEnabled);
-					    }
-					});
-							
-
-					gridProps.add(new Label(property.getPropertyName() + ":"), 0, rowIndex);
-					gridProps.add(valueInput, 1, rowIndex);
+					if (property.getPriceList() == null) {
+						NumberTextField valueInput = new NumberTextField();
+						valueFieldList.add(valueInput);
+						
+						valueInput.textProperty().addListener(new ChangeListener<String>() {
+						    @Override
+						    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+						    	if (newValue != null && !newValue.isEmpty())
+						    		pHolder.getParameters().get(0).setValue(property.getPropertyName(), Double.valueOf(newValue));
+						    	
+						    	boolean runEnabled = true;
+						    	for(NumberTextField input : valueFieldList)
+						    		if (input.getText().trim().isEmpty()) {
+						    			runEnabled = false;
+						    			break;
+						    		}
+						    	
+						    	runButton.setDisable(!runEnabled);
+						    }
+						});
+								
+	
+						gridProps.add(new Label(property.getPropertyName() + ":"), 0, rowIndex);
+						gridProps.add(valueInput, 1, rowIndex);
+					}
+					else {
+						ComboBox<PriceItem> itemsBox = new ComboBox<PriceItem>(FXCollections.observableArrayList(property.getPriceList().getPrices()));
+						
+						gridProps.add(new Label(property.getPropertyName() + ":"), 0, rowIndex);
+						gridProps.add(itemsBox, 1, rowIndex);
+					}
 
 					rowIndex++;
 				}

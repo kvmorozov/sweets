@@ -1,6 +1,7 @@
 package ru.morozov.sweetApp.config.prices;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class PriceList implements InitializingBean {
 	private boolean isValidConfig = false;
 	private List<PriceItem> prices;
 	private Map<String, PriceItem> pricesMap;
-	private int descColumn, nameColumn, price1Column, price2Column;
+	private int descColumn, nameColumn, price1Column, price2Column, firstRow, lastRow;
 	
 	public String getPriceListFileName() {return priceListFileName;}
 	public void setPriceListFileName(String priceListFileName) {this.priceListFileName = priceListFileName;}
@@ -42,6 +43,12 @@ public class PriceList implements InitializingBean {
 	
 	public int getPrice2Column() {return price2Column;}
 	public void setPrice2Column(int price2Column) {this.price2Column = price2Column;}
+	
+	public int getFirstRow() {return firstRow;}
+	public void setFirstRow(int firstRow) {this.firstRow = firstRow;}
+	
+	public int getLastRow() {return lastRow;}
+	public void setLastRow(int lastRow) {this.lastRow = lastRow;}
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -66,18 +73,42 @@ public class PriceList implements InitializingBean {
 		
 		pricesMap = new HashMap<String, PriceItem>();
 		
-		for(PriceItem price : prices) {
-			Double price1 = ParserUtils.getDoubleResult(price.getCoord(price1Column).getValue(workbook));
-			Double price2 = ParserUtils.getDoubleResult(price.getCoord(price2Column).getValue(workbook));
-			String desc = (new ParserUtils(price.getCoord(descColumn).getValue(workbook))).getStringResult();
-			String name = (new ParserUtils(price.getCoord(nameColumn).getValue(workbook))).getStringResult();
+		if (prices != null)
+			for(PriceItem price : prices) {
+				Double price1 = ParserUtils.getDoubleResult(price.getCoord(price1Column).getDoubleValue(workbook));
+				Double price2 = ParserUtils.getDoubleResult(price.getCoord(price2Column).getDoubleValue(workbook));
+				String desc = (new ParserUtils(price.getCoord(descColumn).getDoubleValue(workbook))).getStringResult();
+				String name = (new ParserUtils(price.getCoord(nameColumn).getDoubleValue(workbook))).getStringResult();
+				
+				price.setPrice1(price1);
+				price.setPrice1(price2);
+				price.setDesc(desc);
+				price.setName(name);
+				
+				pricesMap.put(price.getItem().getItemName(), price);
+			}
+		
+		if (firstRow > 0 && lastRow > 0) {
+			prices = new ArrayList<PriceItem>();
 			
-			price.setPrice1(price1);
-			price.setPrice1(price2);
-			price.setDesc(desc);
-			price.setName(name);
-			
-			pricesMap.put(price.getItem().getItemName(), price);
+			for(int row = firstRow; row < lastRow; row++) {
+				PriceItem price = new PriceItem(row);
+				
+				Double price1 = ParserUtils.getDoubleResult(price.getCoord(price1Column).getDoubleValue(workbook));
+				Double price2 = ParserUtils.getDoubleResult(price.getCoord(price2Column).getDoubleValue(workbook));
+				String desc = price.getCoord(descColumn).getStringValue(workbook);
+				String name = price.getCoord(nameColumn).getStringValue(workbook);
+				
+				price.setItem(new SweetItem(name));
+				
+				price.setPrice1(price1);
+				price.setPrice1(price2);
+				price.setDesc(desc);
+				price.setName(name);
+				
+				prices.add(price);
+				pricesMap.put(price.getItem().getItemName(), price);
+			}
 		}
 		
 		isValidConfig = true;

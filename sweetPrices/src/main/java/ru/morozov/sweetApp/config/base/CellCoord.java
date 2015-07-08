@@ -17,6 +17,15 @@ public class CellCoord {
 		this.row = row;
 	}
 	
+	public CellCoord(int col, int row) {
+		this.col = col;
+		this.row = row;
+	}
+	
+	public CellCoord(int row) {
+		this.row = row;
+	}
+	
 	public int getSheet() {return sheet;}
 	public void setSheet(int sheet) {this.sheet = sheet;}
 	
@@ -28,11 +37,11 @@ public class CellCoord {
 	
 	public Cell getCell(Workbook wb) {return wb.getSheetAt(getSheet()).getRow(getRow()).getCell(getCol());}
 	
-	public Object getValue(Workbook wb) {
+	public Double getDoubleValue(Workbook wb) {
 		if (sheet < 0 || col < 0 || row < 0)
 			return null;
 		
-		Object result = null;
+		Double result = 0d;
 		Cell cell = getCell(wb);
 		
 		switch (cell.getCellType()) {
@@ -40,6 +49,25 @@ public class CellCoord {
 				return cell.getNumericCellValue();
 			case Cell.CELL_TYPE_STRING:
 				return ParserUtils.getDoubleResult(cell.getStringCellValue());
+			default:
+				break;
+		}
+		
+		return result;
+	}
+	
+	public String getStringValue(Workbook wb) {
+		if (sheet < 0 || col < 0 || row < 0)
+			return null;
+		
+		String result = null;
+		Cell cell = getCell(wb);
+		
+		switch (cell.getCellType()) {
+			case Cell.CELL_TYPE_NUMERIC:
+				return String.valueOf(cell.getNumericCellValue());
+			case Cell.CELL_TYPE_STRING:
+				return cell.getStringCellValue();
 			default:
 				break;
 		}

@@ -9,6 +9,12 @@ public class PriceItem {
 	private CellCoord coord;
 	private String desc, name;
 	
+	public PriceItem() {}
+	
+	public PriceItem(int row) {
+		coord = new CellCoord(row);
+	}
+	
 	public CellCoord getCoord() {return coord;}
 	public CellCoord getCoord(int column) {return new CellCoord(coord.getSheet(), column, coord.getRow());}
 	
@@ -31,4 +37,7 @@ public class PriceItem {
 	
 	public String getName() {return name;}
 	public void setName(String name) {this.name = name;}
+	
+	@Override
+	public String toString() {return desc;}
 }
