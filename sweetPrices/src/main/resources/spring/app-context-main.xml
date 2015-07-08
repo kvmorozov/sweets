@@ -31,6 +31,7 @@
 	<bean id="systemConfig_demo" class="ru.morozov.sweetApp.config.SystemConfigs">
 		<property name="outputBaseDir" value="C:\Work\out\"/>
 		<property name="calcsTabRenderer" ref="calcsTabRenderer_single"/>
+		<property name="extraCharge" value="40"/>
 	</bean>
 	
 </beans>

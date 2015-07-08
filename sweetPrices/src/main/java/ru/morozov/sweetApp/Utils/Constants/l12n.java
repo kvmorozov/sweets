@@ -18,5 +18,8 @@ public interface l12n {
 	public static final String TOTAL_KEY = "total";
 	public static final String AMOUNT_KEY = "amount";
 	
+	public static final String COST_KEY = "cost_1";
+	public static final String COST_KEY_ADD = "cost_1_add";
+	
 	public static final String OUTPUT_DIR = "output.dir";
 }

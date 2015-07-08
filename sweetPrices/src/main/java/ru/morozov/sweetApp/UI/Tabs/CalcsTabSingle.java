@@ -56,7 +56,7 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
         gridProps.getColumnConstraints().addAll(col1, col2);
 		
 		final Button runButton = new Button(l12n.bundle.getString(l12n.RUN_KEY));
-		Label totalLabel = new Label("");
+		Label totalLabel = new Label(""), costLabel = new Label(""), costLabelWithAdd = new Label("");
 
 		productsBox.valueProperty().addListener(new ChangeListener<SweetProduct>() {
 			@Override
@@ -99,6 +99,13 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
 
 				totalLabel.textProperty().unbind();
 				totalLabel.textProperty().bind(pHolder.getParameters().get(0).getTotalPropertyStr());
+				
+				costLabel.textProperty().unbind();
+				costLabel.textProperty().bind(pHolder.getParameters().get(0).getCostPropertyStr());
+				
+				costLabelWithAdd.textProperty().unbind();
+				costLabelWithAdd.textProperty().bind(pHolder.getParameters().get(0).getCostPropertyStrWithAdd());
+				
 				gridProps.setUserData(pHolder);
 			}
 		});
@@ -127,11 +134,20 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
         runBox.getChildren().addAll(amountLabel, amountInput, runButton);
         runBox.setSpacing(10);
         
-        HBox resultBox = new HBox();
-        resultBox.setSpacing(10);
-        resultBox.getChildren().addAll(new Label(l12n.bundle.getString(l12n.TOTAL_KEY) + ":"), totalLabel);
+        HBox resultBox1 = new HBox();
+        resultBox1.setSpacing(10);
+        resultBox1.getChildren().addAll(new Label(l12n.bundle.getString(l12n.TOTAL_KEY) + ":"), totalLabel);
         
-        bottomBox.getChildren().addAll(runBox, resultBox);
+        HBox resultBox2 = new HBox();
+        resultBox2.setSpacing(10);
+        resultBox2.getChildren().addAll(new Label(l12n.bundle.getString(l12n.COST_KEY) + ":"), costLabel);
+        
+        HBox resultBox3 = new HBox();
+        resultBox3.setSpacing(10);
+        resultBox3.getChildren().addAll(new Label(String.format(l12n.bundle.getString(l12n.COST_KEY_ADD),
+						   SweetContext.getSystemConfigs().getExtraCharge()) + "% :"), costLabelWithAdd);
+        
+        bottomBox.getChildren().addAll(runBox, resultBox1, resultBox2, resultBox3);
         
         borderPane.setBottom(bottomBox);
 

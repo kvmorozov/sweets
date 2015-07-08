@@ -103,7 +103,7 @@ public class BaseSweetGenerator {
 					ex.printStackTrace();
 				}
 			
-			params.setTotal(total);
+			params.setTotal(total, amount);
 			totals.add(total);
 		}
 		

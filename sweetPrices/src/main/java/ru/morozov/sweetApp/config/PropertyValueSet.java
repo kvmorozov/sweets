@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import ru.morozov.sweetApp.SweetContext;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -15,15 +16,23 @@ public class PropertyValueSet {
 	private Map<String, PropertyValue> internalMap = new HashMap<String, PropertyValue>();
 	private Double total;
 	private int row;
-	private StringProperty totalPropertyStr = new SimpleStringProperty("");
+	private StringProperty totalPropertyStr = new SimpleStringProperty(""),
+						   costPropertyStr = new SimpleStringProperty(""),
+						   costPropertyStrWithAdd = new SimpleStringProperty("");
 
 	public List<PropertyValue> getValueSet() {return valueSet;}
 	public void setValueSet(List<PropertyValue> valueSet) {this.valueSet = valueSet;}
 	
 	public Double getTotal() {return total;}
-	public void setTotal(Double total) {
+	public void setTotal(Double total, Double amount) {
 		this.total = total;
+		
+		Double cost = total / amount;
+		Double costWithAdd = cost * (1 + ((SweetContext.getSystemConfigs().getExtraCharge() + 0d) / 100));
+		
 		totalPropertyStr.setValue(String.format("₽%,.2f", total));
+		costPropertyStr.setValue(String.format("₽%,.2f", cost));
+		costPropertyStrWithAdd.setValue(String.format("₽%,.2f", costWithAdd));
 	}
 	
 	public int getRow() {return row;}
@@ -57,6 +66,8 @@ public class PropertyValueSet {
 	}
 	
 	public StringProperty getTotalPropertyStr() {return totalPropertyStr;}
+	public StringProperty getCostPropertyStr() {return costPropertyStr;}
+	public StringProperty getCostPropertyStrWithAdd() {return costPropertyStrWithAdd;}
 	
 	public static PropertyValueSet createValueSet(SweetPropertySet propertiesSet) {
 		PropertyValueSet valueSet = new PropertyValueSet();

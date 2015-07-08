@@ -9,6 +9,8 @@ import ru.morozov.sweetApp.UI.Tabs.ICalcsTab;
 
 public class SystemConfigs {
 	
+	private static final int DEFAULT_EXTRA_CHARGE = 40;
+	
 	private static final String PREFERENCES_NODE = "ru/morozov/sweets";
 	public static final String PROPERTY_LAST_PARAMS_FILE = "last.params.file";
 	public static final String PROPERTY_LAST_AMOUNT = "last.amount";
@@ -17,6 +19,7 @@ public class SystemConfigs {
 	private String outputBaseDir;
 	private Path outputBaseDirPath;
 	private ICalcsTab calcsTabRenderer;
+	private int extraCharge  = DEFAULT_EXTRA_CHARGE;
 	
 	private Preferences preferences;
 
@@ -66,4 +69,7 @@ public class SystemConfigs {
 
 	public ICalcsTab getCalcsTabRenderer() {return calcsTabRenderer;}
 	public void setCalcsTabRenderer(ICalcsTab calcsTabRenderer) {this.calcsTabRenderer = calcsTabRenderer;}
+
+	public int getExtraCharge() {return extraCharge;}
+	public void setExtraCharge(int extraCharge) {this.extraCharge = extraCharge;}
 }
