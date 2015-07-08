@@ -26,6 +26,36 @@
 						</bean>
 					</property>
 				</bean>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+					<property name="item" ref="box"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="sheet" value="1"/>
+							<property name="col" value="11"/>
+							<property name="row" value="9"/>
+						</bean>
+					</property>
+				</bean>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+					<property name="item" ref="scotch"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="sheet" value="1"/>
+							<property name="col" value="11"/>
+							<property name="row" value="10"/>
+						</bean>
+					</property>
+				</bean>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+					<property name="item" ref="underbox"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="sheet" value="1"/>
+							<property name="col" value="11"/>
+							<property name="row" value="11"/>
+						</bean>
+					</property>
+				</bean>
 			</list>
 		</property>
 		<property name="titles">

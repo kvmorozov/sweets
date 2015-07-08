@@ -25,6 +25,18 @@
 		<property name="itemName" value="DS 4000"/>
 	</bean>
 	
+	<bean id="box" class="ru.morozov.sweetApp.config.prices.SweetItem">
+		<property name="itemName" value="Короба"/>
+	</bean>
+	
+	<bean id="scotch" class="ru.morozov.sweetApp.config.prices.SweetItem">
+		<property name="itemName" value="Скотч"/>
+	</bean>
+	
+	<bean id="underbox" class="ru.morozov.sweetApp.config.prices.SweetItem">
+		<property name="itemName" value="Поддоны"/>
+	</bean>
+	
 	<!-- Цены -->
 	
 	<bean id="priceList_main" class="ru.morozov.sweetApp.config.prices.PriceList">
@@ -59,19 +71,39 @@
 						</bean>
 					</property>
 				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="priceList_other" class="ru.morozov.sweetApp.config.prices.PriceList">
+		<property name="priceListFileName" value="Наименование прочее + цены.xlsx"/>
+		<property name="descColumn" value="0"/>
+		<property name="nameColumn" value="0"/>
+		<property name="price1Column" value="3"/>
+		<property name="price2Column" value="4"/>
+		<property name="prices">
+			<list>
 				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
-					<property name="item" ref="item_DyRab40"/>
+					<property name="item" ref="box"/>
 					<property name="coord">
 						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
-							<property name="row" value="-1"/>
+							<property name="row" value="5"/>
 						</bean>
 					</property>
 				</bean>
 				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
-					<property name="item" ref="item_Ds4000"/>
+					<property name="item" ref="scotch"/>
 					<property name="coord">
 						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
-							<property name="row" value="-1"/>
+							<property name="row" value="7"/>
+						</bean>
+					</property>
+				</bean>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+					<property name="item" ref="underbox"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="row" value="8"/>
 						</bean>
 					</property>
 				</bean>
@@ -85,6 +117,7 @@
 		<property name="priceLists">
 			<list>
 				<ref bean="priceList_main"/>
+				<ref bean="priceList_other"/>
 			</list>
 		</property>
 	</bean>
