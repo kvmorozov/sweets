@@ -91,6 +91,8 @@ public class PriceList implements InitializingBean {
 		if (firstRow > 0 && lastRow > 0) {
 			prices = new ArrayList<PriceItem>();
 			
+			prices.add(PriceItem.getEmptyPrice());
+			
 			for(int row = firstRow; row < lastRow; row++) {
 				PriceItem price = new PriceItem(row);
 				

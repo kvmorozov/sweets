@@ -117,7 +117,7 @@
 		<property name="nameColumn" value="0"/>
 		<property name="price1Column" value="3"/>
 		<property name="price2Column" value="3"/>
-		<property name="firstRow" value="5"/>
+		<property name="firstRow" value="9"/>
 		<property name="lastRow" value="10"/>
 	</bean>
 	

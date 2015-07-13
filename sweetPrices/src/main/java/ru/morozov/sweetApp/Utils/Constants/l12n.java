@@ -22,4 +22,5 @@ public interface l12n {
 	public static final String COST_KEY_ADD = "cost_1_add";
 	
 	public static final String OUTPUT_DIR = "output.dir";
+	public static final String NO_VALUE = "no_value";
 }

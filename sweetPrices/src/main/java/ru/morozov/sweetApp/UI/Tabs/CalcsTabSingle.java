@@ -98,6 +98,7 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
 					}
 					else {
 						ComboBox<PriceItem> itemsBox = new ComboBox<PriceItem>(FXCollections.observableArrayList(property.getPriceList().getPrices()));
+						itemsBox.setValue(itemsBox.getItems().get(0));
 						
 						gridProps.add(new Label(property.getPropertyName() + ":"), 0, rowIndex);
 						gridProps.add(itemsBox, 1, rowIndex);

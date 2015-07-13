@@ -1,5 +1,6 @@
 package ru.morozov.sweetApp.config.prices;
 
+import ru.morozov.sweetApp.Utils.Constants.l12n;
 import ru.morozov.sweetApp.config.base.CellCoord;
 
 public class PriceItem {
@@ -40,4 +41,13 @@ public class PriceItem {
 	
 	@Override
 	public String toString() {return desc;}
+	
+	public static PriceItem getEmptyPrice() {
+		PriceItem emptyPrice = new PriceItem();
+		
+		emptyPrice.setDesc(l12n.bundle.getString(l12n.NO_VALUE));
+		emptyPrice.setPrice(-1d);
+		
+		return emptyPrice;
+	}
 }
