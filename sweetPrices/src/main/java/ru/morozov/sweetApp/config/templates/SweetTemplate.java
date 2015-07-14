@@ -57,6 +57,9 @@ public class SweetTemplate implements InitializingBean{
 		amountCoord.getCell(newWorkbook).setCellValue(amount);
 		
 		for(PropertyValue value : values.getValueSet()) {
+			if (value.getProperty().getCoord() == null)
+				continue;
+			
 			Cell cell = value.getProperty().getCoord().getCell(workbook);
 			
 			switch (cell.getCellType()) {

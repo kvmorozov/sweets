@@ -57,9 +57,11 @@ public class PropertyValueSet {
 		
 		while(itr.hasNext()) {
 			PropertyValue value = itr.next();
-			sb.append(String.format("%.1f", value.getValue()).replaceAll(".0", "").replaceAll(",0", ""));
-			if (itr.hasNext())
-				sb.append("x");
+			if (value.getProperty().getCoord() != null) {
+				if (sb.length() > 0)
+					sb.append("x");
+				sb.append(String.format("%.1f", value.getValue()).replaceAll(".0", "").replaceAll(",0", ""));
+			}
 		}
 		
 		return sb.toString();

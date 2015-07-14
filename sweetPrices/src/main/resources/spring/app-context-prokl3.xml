@@ -161,12 +161,6 @@
 				</bean>
 				<bean class="ru.morozov.sweetApp.config.SweetProperty">
 					<property name="propertyName" value="Накатка"/>
-					<property name="coord">
-						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
-							<property name="col" value="9"/>
-							<property name="row" value="21"/>
-						</bean>
-					</property>
 					<property name="priceList" ref="priceList_paints"/>
 				</bean>
 			</list>
