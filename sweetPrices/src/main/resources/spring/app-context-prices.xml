@@ -79,6 +79,34 @@
 		</property>
 	</bean>
 	
+	<bean id="priceList_glue" class="ru.morozov.sweetApp.config.prices.PriceList">
+		<property name="priceListFileName" value="Наименование клей + цены.xlsx"/>
+		<property name="descColumn" value="0"/>
+		<property name="nameColumn" value="0"/>
+		<property name="price1Column" value="3"/>
+		<property name="price2Column" value="3"/>
+		<property name="prices">
+			<list>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+					<property name="item" ref="item_DyRab40"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="row" value="5"/>
+						</bean>
+					</property>
+				</bean>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+					<property name="item" ref="item_Ds4000"/>
+					<property name="coord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="row" value="6"/>
+						</bean>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
 	<bean id="priceList_other" class="ru.morozov.sweetApp.config.prices.PriceList">
 		<property name="priceListFileName" value="Наименование прочее + цены.xlsx"/>
 		<property name="descColumn" value="0"/>
@@ -137,6 +165,7 @@
 		<property name="priceLists">
 			<list>
 				<ref bean="priceList_main"/>
+				<ref bean="priceList_glue"/>
 				<ref bean="priceList_other"/>
 			</list>
 		</property>
