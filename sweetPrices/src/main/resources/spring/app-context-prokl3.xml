@@ -99,17 +99,17 @@
 							<property name="row" value="37"/>
 						</bean>
 					</property>
+					<property name="addInfoCoord">
+						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+							<property name="col" value="3"/>
+							<property name="row" value="14"/>
+						</bean>
+					</property>
 					<property name="itemProperties">
-						<list>
-							<bean class="ru.morozov.sweetApp.config.prices.PriceItemProperty">
-								<property name="propertyName" value="originalWidth"/>
-								<property name="propertyValue" value="1040"/>
-							</bean>
-							<bean class="ru.morozov.sweetApp.config.prices.PriceItemProperty">
-								<property name="propertyName" value="realWidth"/>
-								<property name="propertyValue" value="1005"/>
-							</bean>
-						</list>
+						<map>
+							<entry key="originalWidth" value="1040"/>
+							<entry key="realWidth" value="1005"/>
+						</map>
 					</property>
 				</bean>
 			</list>

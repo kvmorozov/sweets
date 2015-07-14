@@ -124,12 +124,9 @@
 		<property name="firstRow" value="9"/>
 		<property name="lastRow" value="10"/>
 		<property name="itemProperties">
-			<list>
-				<bean class="ru.morozov.sweetApp.config.prices.PriceItemProperty">
-					<property name="propertyName" value="density"/>
-					<property name="propertyValue" value="6"/>
-				</bean>
-			</list>
+			<map>
+				<entry key="density" value="6"/>
+			</map>
 		</property>
 		<property name="itemFactory" ref="pifPaints"/>
 	</bean>

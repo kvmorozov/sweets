@@ -1,6 +1,6 @@
 package ru.morozov.sweetApp.config.prices;
 
-import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -10,12 +10,12 @@ import ru.morozov.sweetApp.config.base.CellCoord;
 
 public class PriceItem {
 	
-	private SweetItem item;
-	private Double price, price1 = 0d, price2 = 0d;
-	private CellCoord coord;
-	private String desc, name;
-	private List<PriceItemProperty> itemProperties;
-	private PriceList itemProvider;
+	protected SweetItem item;
+	protected Double price, price1 = 0d, price2 = 0d;
+	protected CellCoord coord, addInfoCoord;
+	protected String desc, name;
+	protected Map<String, Object> itemProperties;
+	protected PriceList itemProvider;
 	
 	public PriceItem() {}
 	
@@ -46,11 +46,14 @@ public class PriceItem {
 	public String getName() {return name;}
 	public void setName(String name) {this.name = name;}
 	
-	public List<PriceItemProperty> getItemProperties() {return itemProperties;}
-	public void setItemProperties(List<PriceItemProperty> itemProperties) {this.itemProperties = itemProperties;}
+	public Map<String, Object> getItemProperties() {return itemProperties;}
+	public void setItemProperties(Map<String, Object> itemProperties) {this.itemProperties = itemProperties;}
 	
 	public PriceList getItemProvider() {return itemProvider;}
 	public void setItemProvider(PriceList itemProvider) {this.itemProvider = itemProvider;}
+	
+	public CellCoord getAddInfoCoord() {return addInfoCoord;}
+	public void setAddInfoCoord(CellCoord addInfoCoord) {this.addInfoCoord = addInfoCoord;}
 
 	@Override
 	public String toString() {return desc;}
@@ -64,12 +67,14 @@ public class PriceItem {
 		return emptyPrice;
 	}
 	
+	public Double getAmount(Workbook workbook) {
+		Cell cell = getCoord().getCell(workbook);
+		
+		return cell == null ? 0d : cell.getNumericCellValue();
+	}
+	
 	public Double getTotal(PriceItem amountItem, Workbook workbook) {
-		Cell cell = amountItem.getCoord().getCell(workbook);
-		
-		if (cell == null) return 0d;
-		
-		Double amount = cell.getNumericCellValue();
+		Double amount = amountItem.getAmount(workbook);
 		
 		return (getPrice() == null ? 0d : getPrice()) * (amount == null ? 0d : amount);
 	}

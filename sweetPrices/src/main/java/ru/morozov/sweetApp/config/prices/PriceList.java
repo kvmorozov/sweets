@@ -24,7 +24,7 @@ public class PriceList implements InitializingBean {
 	private List<PriceItem> prices;
 	private Map<String, PriceItem> pricesMap;
 	private int descColumn, nameColumn, price1Column, price2Column, firstRow, lastRow;
-	private List<PriceItemProperty> itemProperties;
+	private Map<String, Object> itemProperties;
 	private PriceItemFactory itemFactory;
 	
 	public SimpleObjectProperty<PriceItem> currentItem = new SimpleObjectProperty<PriceItem>();
@@ -56,8 +56,8 @@ public class PriceList implements InitializingBean {
 	public int getLastRow() {return lastRow;}
 	public void setLastRow(int lastRow) {this.lastRow = lastRow;}
 	
-	public List<PriceItemProperty> getItemProperties() {return itemProperties;}
-	public void setItemProperties(List<PriceItemProperty> itemProperties) {this.itemProperties = itemProperties;}
+	public Map<String, Object> getItemProperties() {return itemProperties;}
+	public void setItemProperties(Map<String, Object> itemProperties) {this.itemProperties = itemProperties;}
 	
 	public PriceItemFactory getItemFactory() {return itemFactory;}
 	public void setItemFactory(PriceItemFactory itemFactory) {this.itemFactory = itemFactory;}
