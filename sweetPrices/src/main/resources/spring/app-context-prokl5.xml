@@ -177,7 +177,7 @@
 						</bean>
 					</property>
 				</bean>
-				<bean class="ru.morozov.sweetApp.config.SweetProperty">
+				<bean class="ru.morozov.sweetApp.config.ListSweetProperty">
 					<property name="propertyName" value="Накатка"/>
 					<property name="priceList" ref="priceList_paints"/>
 				</bean>

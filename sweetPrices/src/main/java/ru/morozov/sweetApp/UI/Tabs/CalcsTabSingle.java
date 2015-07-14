@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import ru.morozov.sweetApp.SweetContext;
 import ru.morozov.sweetApp.Utils.Constants.l12n;
+import ru.morozov.sweetApp.config.ListSweetProperty;
 import ru.morozov.sweetApp.config.ParametersHolder;
 import ru.morozov.sweetApp.config.SweetProduct;
 import ru.morozov.sweetApp.config.SweetProperty;
@@ -71,7 +72,17 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
 				valueFieldList.clear();
 
 				for(SweetProperty property : template.getProperties().getProperties()) {
-					if (property.getPriceList() == null) {
+					if (property instanceof ListSweetProperty) {
+						ListSweetProperty lswp = (ListSweetProperty) property;
+						
+						ComboBox<PriceItem> itemsBox = new ComboBox<PriceItem>(FXCollections.observableArrayList(lswp.getPriceList().getPrices()));
+						itemsBox.setValue(itemsBox.getItems().get(0));
+						lswp.getPriceList().currentItem.bind(itemsBox.valueProperty());
+						
+						gridProps.add(new Label(lswp.getPropertyName() + ":"), 0, rowIndex);
+						gridProps.add(itemsBox, 1, rowIndex);
+					}
+					else {
 						NumberTextField valueInput = new NumberTextField();
 						valueFieldList.add(valueInput);
 						
@@ -95,14 +106,6 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
 	
 						gridProps.add(new Label(property.getPropertyName() + ":"), 0, rowIndex);
 						gridProps.add(valueInput, 1, rowIndex);
-					}
-					else {
-						ComboBox<PriceItem> itemsBox = new ComboBox<PriceItem>(FXCollections.observableArrayList(property.getPriceList().getPrices()));
-						itemsBox.setValue(itemsBox.getItems().get(0));
-						property.getPriceList().currentItem.bind(itemsBox.valueProperty());
-						
-						gridProps.add(new Label(property.getPropertyName() + ":"), 0, rowIndex);
-						gridProps.add(itemsBox, 1, rowIndex);
 					}
 
 					rowIndex++;
