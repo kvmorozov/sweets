@@ -20,4 +20,16 @@ public class PricesSet {
 		
 		return result;
 	}
+	
+	public PriceItem getPriceItem(String itemName) {
+		PriceItem result = null;
+		
+		for(PriceList priceList : priceLists) {
+			PriceItem _result = priceList.getPriceItem(itemName);
+			if (_result != null)
+				return _result;
+		}
+		
+		return result;
+	}
 }

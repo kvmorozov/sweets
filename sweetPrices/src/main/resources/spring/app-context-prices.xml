@@ -37,6 +37,10 @@
 		<property name="itemName" value="Поддоны"/>
 	</bean>
 	
+	<!-- Фабрики -->
+	
+	<bean id="pifPaints" class="ru.morozov.sweetApp.config.prices.PaintPriceItemFactory"/>
+	
 	<!-- Цены -->
 	
 	<bean id="priceList_main" class="ru.morozov.sweetApp.config.prices.PriceList">
@@ -119,6 +123,15 @@
 		<property name="price2Column" value="3"/>
 		<property name="firstRow" value="9"/>
 		<property name="lastRow" value="10"/>
+		<property name="itemProperties">
+			<list>
+				<bean class="ru.morozov.sweetApp.config.prices.PriceItemProperty">
+					<property name="propertyName" value="density"/>
+					<property name="propertyValue" value="6"/>
+				</bean>
+			</list>
+		</property>
+		<property name="itemFactory" ref="pifPaints"/>
 	</bean>
 	
 	<!-- Все цены -->

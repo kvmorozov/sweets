@@ -1,5 +1,10 @@
 package ru.morozov.sweetApp.config.prices;
 
+import java.util.List;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Workbook;
+
 import ru.morozov.sweetApp.Utils.Constants.l12n;
 import ru.morozov.sweetApp.config.base.CellCoord;
 
@@ -9,6 +14,8 @@ public class PriceItem {
 	private Double price, price1 = 0d, price2 = 0d;
 	private CellCoord coord;
 	private String desc, name;
+	private List<PriceItemProperty> itemProperties;
+	private PriceList itemProvider;
 	
 	public PriceItem() {}
 	
@@ -39,6 +46,12 @@ public class PriceItem {
 	public String getName() {return name;}
 	public void setName(String name) {this.name = name;}
 	
+	public List<PriceItemProperty> getItemProperties() {return itemProperties;}
+	public void setItemProperties(List<PriceItemProperty> itemProperties) {this.itemProperties = itemProperties;}
+	
+	public PriceList getItemProvider() {return itemProvider;}
+	public void setItemProvider(PriceList itemProvider) {this.itemProvider = itemProvider;}
+
 	@Override
 	public String toString() {return desc;}
 	
@@ -49,5 +62,15 @@ public class PriceItem {
 		emptyPrice.setPrice(-1d);
 		
 		return emptyPrice;
+	}
+	
+	public Double getTotal(PriceItem amountItem, Workbook workbook) {
+		Cell cell = amountItem.getCoord().getCell(workbook);
+		
+		if (cell == null) return 0d;
+		
+		Double amount = cell.getNumericCellValue();
+		
+		return (getPrice() == null ? 0d : getPrice()) * (amount == null ? 0d : amount);
 	}
 }

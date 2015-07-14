@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.beans.property.SimpleObjectProperty;
+
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.OfficeXmlFileException;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -22,6 +24,10 @@ public class PriceList implements InitializingBean {
 	private List<PriceItem> prices;
 	private Map<String, PriceItem> pricesMap;
 	private int descColumn, nameColumn, price1Column, price2Column, firstRow, lastRow;
+	private List<PriceItemProperty> itemProperties;
+	private PriceItemFactory itemFactory;
+	
+	public SimpleObjectProperty<PriceItem> currentItem = new SimpleObjectProperty<PriceItem>();
 	
 	public String getPriceListFileName() {return priceListFileName;}
 	public void setPriceListFileName(String priceListFileName) {this.priceListFileName = priceListFileName;}
@@ -49,6 +55,12 @@ public class PriceList implements InitializingBean {
 	
 	public int getLastRow() {return lastRow;}
 	public void setLastRow(int lastRow) {this.lastRow = lastRow;}
+	
+	public List<PriceItemProperty> getItemProperties() {return itemProperties;}
+	public void setItemProperties(List<PriceItemProperty> itemProperties) {this.itemProperties = itemProperties;}
+	
+	public PriceItemFactory getItemFactory() {return itemFactory;}
+	public void setItemFactory(PriceItemFactory itemFactory) {this.itemFactory = itemFactory;}
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
@@ -94,7 +106,7 @@ public class PriceList implements InitializingBean {
 			prices.add(PriceItem.getEmptyPrice());
 			
 			for(int row = firstRow; row < lastRow; row++) {
-				PriceItem price = new PriceItem(row);
+				PriceItem price = (itemFactory == null ? itemFactory = new DefaultPriceItemFactory() : itemFactory).createItem(row);
 				
 				Double price1 = ParserUtils.getDoubleResult(price.getCoord(price1Column).getDoubleValue(workbook));
 				Double price2 = ParserUtils.getDoubleResult(price.getCoord(price2Column).getDoubleValue(workbook));
@@ -108,6 +120,9 @@ public class PriceList implements InitializingBean {
 				price.setDesc(desc);
 				price.setName(name);
 				
+				if (itemProperties != null && !itemProperties.isEmpty())
+					price.setItemProperties(itemProperties);
+				
 				prices.add(price);
 				pricesMap.put(price.getItem().getItemName(), price);
 			}
@@ -117,4 +132,5 @@ public class PriceList implements InitializingBean {
 	}
 	
 	public Double getPrice(String itemName) {return pricesMap.containsKey(itemName) ? pricesMap.get(itemName).getPrice() : 0;}
+	public PriceItem getPriceItem(String itemName) {return pricesMap.containsKey(itemName) ? pricesMap.get(itemName) : null;}
 }
