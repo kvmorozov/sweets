@@ -47,7 +47,7 @@ public class Spring2 {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void checkParams() {
 		ParametersHolder prokl3params = (ParametersHolder)ctx.getBean("prokl3_demo_params");
 		ParametersHolder prokl5params = (ParametersHolder)ctx.getBean("prokl5_demo_params");
