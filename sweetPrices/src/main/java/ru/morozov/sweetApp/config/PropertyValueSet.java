@@ -6,9 +6,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import ru.morozov.sweetApp.SweetContext;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import ru.morozov.sweetApp.SweetContext;
+import ru.morozov.sweetApp.config.templates.paper.StripesPropertyValue;
+import ru.morozov.sweetApp.config.templates.paper.StripesSweetProperty;
 
 public class PropertyValueSet {
 	
@@ -46,10 +48,7 @@ public class PropertyValueSet {
 	public int size() {return valueSet.size();}
 	
 	public Double getValue(String propertyKey) {return internalMap.containsKey(propertyKey) ? internalMap.get(propertyKey).getValue() : null;}
-	public void setValue(String propertyKey, Double value) {
-		if (internalMap.containsKey(propertyKey))
-			internalMap.get(propertyKey).setValue(value);
-	}
+	public StringProperty getValueStrProperty(String propertyKey) {return internalMap.containsKey(propertyKey) ? internalMap.get(propertyKey).strValueProperty : null;}
 	
 	public String getShortDesc() {
 		StringBuilder sb = new StringBuilder();
@@ -57,10 +56,13 @@ public class PropertyValueSet {
 		
 		while(itr.hasNext()) {
 			PropertyValue value = itr.next();
-			if (value.getProperty().getCoord() != null) {
+			
+			Double _value = value.getValue();
+			
+			if (value.getProperty().getCoord() != null && value.getValue() > 0) {
 				if (sb.length() > 0)
 					sb.append("x");
-				sb.append(String.format("%.1f", value.getValue()).replaceAll(".0", "").replaceAll(",0", ""));
+				sb.append(_value == _value.longValue() ?  String.format("%d", _value.longValue()) : String.format("%s", _value));
 			}
 		}
 		
@@ -75,7 +77,12 @@ public class PropertyValueSet {
 		PropertyValueSet valueSet = new PropertyValueSet();
 		
 		for(SweetProperty property : propertiesSet.getProperties())
-			valueSet.add(new PropertyValue(0d, property));
+			if (property instanceof StripesSweetProperty)
+				valueSet.add(new StripesPropertyValue(0d, property, valueSet));
+			else if (property instanceof ComplexSweetProperty)
+				valueSet.add(new CalculatedPropertyValue(0d, property, valueSet));
+			else
+				valueSet.add(new PropertyValue(0d, property));
 		
 		return valueSet;
 	}

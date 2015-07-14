@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import ru.morozov.sweetApp.SweetContext;
 import ru.morozov.sweetApp.Utils.Constants.l12n;
+import ru.morozov.sweetApp.config.ComplexSweetProperty;
 import ru.morozov.sweetApp.config.ListSweetProperty;
 import ru.morozov.sweetApp.config.ParametersHolder;
 import ru.morozov.sweetApp.config.SweetProduct;
@@ -82,15 +83,18 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
 						gridProps.add(new Label(lswp.getPropertyName() + ":"), 0, rowIndex);
 						gridProps.add(itemsBox, 1, rowIndex);
 					}
+					else if (property instanceof ComplexSweetProperty) {
+						
+					}
 					else {
 						NumberTextField valueInput = new NumberTextField();
 						valueFieldList.add(valueInput);
 						
+						pHolder.getParameters().get(0).getValueStrProperty(property.getPropertyName()).bind(valueInput.textProperty());
+						
 						valueInput.textProperty().addListener(new ChangeListener<String>() {
 						    @Override
 						    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-						    	if (newValue != null && !newValue.isEmpty())
-						    		pHolder.getParameters().get(0).setValue(property.getPropertyName(), Double.valueOf(newValue));
 						    	
 						    	boolean runEnabled = true;
 						    	for(NumberTextField input : valueFieldList)
