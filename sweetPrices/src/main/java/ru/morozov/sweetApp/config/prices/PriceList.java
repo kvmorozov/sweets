@@ -27,7 +27,7 @@ public class PriceList implements InitializingBean {
 	private Map<String, Object> itemProperties;
 	private PriceItemFactory itemFactory;
 	
-	public SimpleObjectProperty<PriceItem> currentItem = new SimpleObjectProperty<PriceItem>();
+	public SimpleObjectProperty<PriceItem> currentItem = new SimpleObjectProperty<>();
 	
 	public String getPriceListFileName() {return priceListFileName;}
 	public void setPriceListFileName(String priceListFileName) {this.priceListFileName = priceListFileName;}
@@ -83,7 +83,7 @@ public class PriceList implements InitializingBean {
 			e.printStackTrace();
 		}
 		
-		pricesMap = new HashMap<String, PriceItem>();
+		pricesMap = new HashMap<>();
 		
 		if (prices != null)
 			for(PriceItem price : prices) {
@@ -101,7 +101,7 @@ public class PriceList implements InitializingBean {
 			}
 		
 		if (firstRow > 0 && lastRow > 0) {
-			prices = new ArrayList<PriceItem>();
+			prices = new ArrayList<>();
 			
 			prices.add(PriceItem.getEmptyPrice());
 			

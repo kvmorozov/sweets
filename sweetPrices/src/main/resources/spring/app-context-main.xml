@@ -5,7 +5,7 @@
 	
 	<!-- Конфигурация -->
 	
-	<bean id="sweetConfig" class="ru.morozov.sweetApp.config.SweetConfig" autowire="byName">
+	<bean id="sweetConfig" class="ru.morozov.sweetApp.config.SweetConfig">
 		<property name="sweetsList">
 			<list>
 				<bean id="prokl_3_product" class="ru.morozov.sweetApp.config.SweetProduct">

@@ -37,7 +37,7 @@ public class SettingsTab extends Tab {
 		try {
 			for(String key : preferences.keys()) {
 				grid.add(new Label(l12n.bundle.getString(key) + ":"), 0, rowIndex);
-				grid.add(new Label(preferences.get(key, "").toString()), 1, rowIndex);
+				grid.add(new Label(preferences.get(key, "")), 1, rowIndex);
 				
 				rowIndex++;
 			}

@@ -4,7 +4,7 @@ public class CalculatedPropertyValue extends PropertyValue {
 	
 	protected PropertyValueSet valueSet;
 
-	public CalculatedPropertyValue(Double value, SweetProperty property) {super(value, property);}
+	protected CalculatedPropertyValue(Double value, SweetProperty property) {super(value, property);}
 	
 	public CalculatedPropertyValue(Double value, SweetProperty property, PropertyValueSet valueSet) {
 		super(value, property);

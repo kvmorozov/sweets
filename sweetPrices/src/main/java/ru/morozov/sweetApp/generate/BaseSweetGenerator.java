@@ -61,7 +61,7 @@ public class BaseSweetGenerator {
 		
 		Workbook resultBook = parametersHolder.getWorkbook();
 		
-		totals = new ArrayList<Double>();
+		totals = new ArrayList<>();
 		PricesSet appPrices = SweetContext.getPricesSet();
 		
 		for(PropertyValueSet params : parametersHolder.getParameters()) {

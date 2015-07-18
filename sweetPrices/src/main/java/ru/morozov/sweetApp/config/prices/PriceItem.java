@@ -31,7 +31,7 @@ public class PriceItem {
 	public SweetItem getItem() {return item;}
 	public void setItem(SweetItem item) {this.item = item;}
 	
-	public Double getPrice() {return price == null || price <= 0 ? Math.max(price1, price2) : price;}
+	public Double getPrice() {return price == null || price <= 0 ? Double.max(price1, price2) : price;}
 	public void setPrice(Double price) {this.price = price;}
 	
 	public Double getPrice1() {return price1;}
@@ -76,6 +76,6 @@ public class PriceItem {
 	public Double getTotal(PriceItem amountItem, Workbook workbook) {
 		Double amount = amountItem.getAmount(workbook);
 		
-		return (getPrice() == null ? 0d : getPrice()) * (amount == null ? 0d : amount);
+		return getPrice() * amount;
 	}
 }

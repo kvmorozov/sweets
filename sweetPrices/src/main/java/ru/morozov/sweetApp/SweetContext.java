@@ -22,7 +22,8 @@ public class SweetContext {
 	public static PricesSet getPricesSet() {return (PricesSet)ctx.getBean("all_prices");}
 
 	@PreDestroy
-	public void finalize() {
+	protected void finalize() throws Throwable {
+		super.finalize();
 		ctx.close();
 	}
 }

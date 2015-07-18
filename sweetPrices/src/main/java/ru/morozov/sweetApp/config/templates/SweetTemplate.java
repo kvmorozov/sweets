@@ -1,7 +1,5 @@
 package ru.morozov.sweetApp.config.templates;
 
-import java.util.List;
-
 import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -9,8 +7,6 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFFormulaEvaluator;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.InitializingBean;
-
-import ru.morozov.sweetApp.config.ComplexSweetProperty;
 import ru.morozov.sweetApp.config.PropertyValue;
 import ru.morozov.sweetApp.config.PropertyValueSet;
 import ru.morozov.sweetApp.config.SweetPropertySet;
@@ -18,11 +14,13 @@ import ru.morozov.sweetApp.config.base.CellCoord;
 import ru.morozov.sweetApp.config.prices.PriceItem;
 import ru.morozov.utils.ParserUtils;
 
+import java.util.List;
+
 public class SweetTemplate implements InitializingBean{
 	
 	private boolean isValidConfig = false;
 	private String templateFileName;
-	private HSSFWorkbook workbook;
+	private Workbook workbook;
 	private SweetPropertySet properties;
 	private List<PriceItem> amounts;
 	private CellCoord amountCoord;
@@ -37,7 +35,7 @@ public class SweetTemplate implements InitializingBean{
 	public void setAmounts(List<PriceItem> amounts) {this.amounts = amounts;}
 	
 	public boolean isValidConfig() {return isValidConfig;}
-	public HSSFWorkbook getWorkbook() {return workbook;}
+	public Workbook getWorkbook() {return workbook;}
 	
 	public CellCoord getAmount() {return amountCoord;}
 	public void setAmount(CellCoord amount) {this.amountCoord = amount;}

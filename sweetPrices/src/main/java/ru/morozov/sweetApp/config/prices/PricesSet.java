@@ -30,6 +30,6 @@ public class PricesSet {
 				return _result;
 		}
 		
-		return result;
+		return new PriceItem();
 	}
 }

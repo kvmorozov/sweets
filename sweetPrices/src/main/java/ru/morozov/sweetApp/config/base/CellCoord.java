@@ -72,6 +72,6 @@ public class CellCoord {
 				break;
 		}
 		
-		return result;
+		return "";
 	}
 }

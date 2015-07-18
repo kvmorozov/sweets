@@ -14,15 +14,15 @@ public class ParserUtils {
 		else if (obj instanceof Double) {
 			Double doubleObj = (Double)obj;
 			if (doubleObj.intValue() - doubleObj == 0)
-				return (new Integer(doubleObj.intValue())).toString();
+				return Double.toString(doubleObj);
 		}
 		
-		return obj == null ? "" : obj.toString();
+		return obj.toString();
 		
 	}
 	
 	public final Long getLongResult() {return getLongResult(this.obj);}
-	public static final Long getLongResult(Object obj) {
+	public static Long getLongResult(Object obj) {
 		if (obj == null) return 0L;
 		
 		if (obj instanceof BigDecimal)
@@ -45,7 +45,7 @@ public class ParserUtils {
 	}
 	
 	public final Integer getIntResult() {return getIntResult(this.obj);}
-	public static final Integer getIntResult(Object obj) {
+	public static Integer getIntResult(Object obj) {
 		if (obj == null) return 0;
 		
 		if (obj instanceof Integer)
@@ -53,7 +53,7 @@ public class ParserUtils {
 		else if (obj instanceof BigDecimal)
 			return ((BigDecimal)obj).intValue();
 		else if (obj instanceof Boolean)
-			return ((Boolean)obj).booleanValue() ? 1 : 0;
+			return (Boolean) obj ? 1 : 0;
 		else if (obj instanceof Long)
 			return ((Long)obj).intValue();
 		else if (obj instanceof Double)
@@ -70,14 +70,9 @@ public class ParserUtils {
 	}
 	
 	public final Boolean getBooleanResult() {
-		if (obj == null) return false;
-		
-		if (obj instanceof Integer)
-			return ((Integer)obj) > 0 ? true : false;	
-			
-		return false;
+		return obj != null && (obj instanceof Integer && (Integer) obj > 0);
 	}
-	
+
 	public final Float getFloatResult() {
 		Float res = 0F ;
 		if (obj instanceof String || obj instanceof Double)
@@ -90,7 +85,7 @@ public class ParserUtils {
 	}
 	public final Double getDoubleResult() {return getDoubleResult(this.obj);}
 
-	public static final Double getDoubleResult(Object obj) {
+	public static Double getDoubleResult(Object obj) {
 		Double res = 0.0 ;
 		if (obj == null) return res;
 		

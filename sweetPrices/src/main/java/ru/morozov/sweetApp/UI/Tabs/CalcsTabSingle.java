@@ -1,38 +1,27 @@
 package ru.morozov.sweetApp.UI.Tabs;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import ru.morozov.sweetApp.SweetContext;
 import ru.morozov.sweetApp.Utils.Constants.l12n;
-import ru.morozov.sweetApp.config.ComplexSweetProperty;
-import ru.morozov.sweetApp.config.ListSweetProperty;
-import ru.morozov.sweetApp.config.ParametersHolder;
-import ru.morozov.sweetApp.config.SweetProduct;
-import ru.morozov.sweetApp.config.SweetProperty;
-import ru.morozov.sweetApp.config.SystemConfigs;
+import ru.morozov.sweetApp.config.*;
 import ru.morozov.sweetApp.config.prices.PriceItem;
 import ru.morozov.sweetApp.config.templates.SweetTemplate;
 import ru.morozov.sweetApp.generate.BaseSweetGenerator;
 import ru.morozov.utils.components.NumberTextField;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CalcsTabSingle extends Tab implements ICalcsTab {
 	
-	private final List<NumberTextField> valueFieldList = new ArrayList<NumberTextField>(1);
+	private final List<NumberTextField> valueFieldList = new ArrayList<>(1);
 
 	public void initCalcsTab(Stage stage) {
 		setClosable(false);
@@ -43,7 +32,7 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
 		borderPane.prefWidthProperty().bind(getTabPane().widthProperty());
 		
 		HBox topBox = new HBox();
-		ComboBox<SweetProduct> productsBox = new ComboBox<SweetProduct>(FXCollections.observableArrayList(SweetContext.getProducts()));
+		ComboBox<SweetProduct> productsBox = new ComboBox<>(FXCollections.observableArrayList(SweetContext.getProducts()));
 		topBox.getChildren().addAll(new Label(l12n.bundle.getString(l12n.PRODUCTS_KEY)), productsBox);
 		topBox.setSpacing(10);
 		borderPane.setTop(topBox);
@@ -61,72 +50,66 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
 		final Button runButton = new Button(l12n.bundle.getString(l12n.RUN_KEY));
 		Label totalLabel = new Label(""), costLabel = new Label(""), costLabelWithAdd = new Label("");
 
-		productsBox.valueProperty().addListener(new ChangeListener<SweetProduct>() {
-			@Override
-			public void changed(@SuppressWarnings("rawtypes") ObservableValue ov, SweetProduct oldValue, SweetProduct newValue) {
-				gridProps.getChildren().clear();
+		productsBox.valueProperty().addListener((ov, oldValue, newValue) -> {
+            gridProps.getChildren().clear();
 
-				SweetTemplate template = newValue.getTemplate();
-				final ParametersHolder pHolder = new ParametersHolder(template.getProperties());
-						
-				int rowIndex = 0;
-				valueFieldList.clear();
+            SweetTemplate template = newValue.getTemplate();
+            final ParametersHolder pHolder = new ParametersHolder(template.getProperties());
 
-				for(SweetProperty property : template.getProperties().getProperties()) {
-					if (property instanceof ListSweetProperty) {
-						ListSweetProperty lswp = (ListSweetProperty) property;
-						
-						ComboBox<PriceItem> itemsBox = new ComboBox<PriceItem>(FXCollections.observableArrayList(lswp.getPriceList().getPrices()));
-						itemsBox.setValue(itemsBox.getItems().get(0));
-						lswp.getPriceList().currentItem.bind(itemsBox.valueProperty());
-						
-						gridProps.add(new Label(lswp.getPropertyName() + ":"), 0, rowIndex);
-						gridProps.add(itemsBox, 1, rowIndex);
-					}
-					else if (property instanceof ComplexSweetProperty) {
-						
-					}
-					else {
-						NumberTextField valueInput = new NumberTextField();
-						valueFieldList.add(valueInput);
-						
-						pHolder.getParameters().get(0).getValueStrProperty(property.getPropertyName()).bind(valueInput.textProperty());
-						
-						valueInput.textProperty().addListener(new ChangeListener<String>() {
-						    @Override
-						    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-						    	
-						    	boolean runEnabled = true;
-						    	for(NumberTextField input : valueFieldList)
-						    		if (input.getText().trim().isEmpty()) {
-						    			runEnabled = false;
-						    			break;
-						    		}
-						    	
-						    	runButton.setDisable(!runEnabled);
-						    }
-						});
-								
-	
-						gridProps.add(new Label(property.getPropertyName() + ":"), 0, rowIndex);
-						gridProps.add(valueInput, 1, rowIndex);
-					}
+            int rowIndex = 0;
+            valueFieldList.clear();
 
-					rowIndex++;
-				}
+            for(SweetProperty property : template.getProperties().getProperties()) {
+                if (property instanceof ListSweetProperty) {
+                    ListSweetProperty lswp = (ListSweetProperty) property;
 
-				totalLabel.textProperty().unbind();
-				totalLabel.textProperty().bind(pHolder.getParameters().get(0).getTotalPropertyStr());
-				
-				costLabel.textProperty().unbind();
-				costLabel.textProperty().bind(pHolder.getParameters().get(0).getCostPropertyStr());
-				
-				costLabelWithAdd.textProperty().unbind();
-				costLabelWithAdd.textProperty().bind(pHolder.getParameters().get(0).getCostPropertyStrWithAdd());
-				
-				gridProps.setUserData(pHolder);
-			}
-		});
+                    ComboBox<PriceItem> itemsBox = new ComboBox<>(FXCollections.observableArrayList(lswp.getPriceList().getPrices()));
+                    itemsBox.setValue(itemsBox.getItems().get(0));
+                    lswp.getPriceList().currentItem.bind(itemsBox.valueProperty());
+
+                    gridProps.add(new Label(lswp.getPropertyName() + ":"), 0, rowIndex);
+                    gridProps.add(itemsBox, 1, rowIndex);
+                }
+                else if (property instanceof ComplexSweetProperty) {
+
+                }
+                else {
+                    NumberTextField valueInput = new NumberTextField();
+                    valueFieldList.add(valueInput);
+
+                    pHolder.getParameters().get(0).getValueStrProperty(property.getPropertyName()).bind(valueInput.textProperty());
+
+                    valueInput.textProperty().addListener((observable, oldValue1, newValue1) -> {
+
+                        boolean runEnabled = true;
+                        for(NumberTextField input : valueFieldList)
+                            if (input.getText().trim().isEmpty()) {
+                                runEnabled = false;
+                                break;
+                            }
+
+                        runButton.setDisable(!runEnabled);
+                    });
+
+
+                    gridProps.add(new Label(property.getPropertyName() + ":"), 0, rowIndex);
+                    gridProps.add(valueInput, 1, rowIndex);
+                }
+
+                rowIndex++;
+            }
+
+            totalLabel.textProperty().unbind();
+            totalLabel.textProperty().bind(pHolder.getParameters().get(0).getTotalPropertyStr());
+
+            costLabel.textProperty().unbind();
+            costLabel.textProperty().bind(pHolder.getParameters().get(0).getCostPropertyStr());
+
+            costLabelWithAdd.textProperty().unbind();
+            costLabelWithAdd.textProperty().bind(pHolder.getParameters().get(0).getCostPropertyStrWithAdd());
+
+            gridProps.setUserData(pHolder);
+        });
 
 		borderPane.setCenter(gridProps);
        

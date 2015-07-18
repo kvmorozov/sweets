@@ -1,21 +1,20 @@
 package ru.morozov.sweetApp.config;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import ru.morozov.sweetApp.SweetContext;
 import ru.morozov.sweetApp.config.templates.paper.StripesPropertyValue;
 import ru.morozov.sweetApp.config.templates.paper.StripesSweetProperty;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class PropertyValueSet {
 	
-	private List<PropertyValue> valueSet = new ArrayList<PropertyValue>();
-	private Map<String, PropertyValue> internalMap = new HashMap<String, PropertyValue>();
+	private List<PropertyValue> valueSet = new ArrayList<>();
+	private Map<String, PropertyValue> internalMap = new HashMap<>();
 	private Double total;
 	private int row;
 	private StringProperty totalPropertyStr = new SimpleStringProperty(""),
@@ -52,17 +51,14 @@ public class PropertyValueSet {
 	
 	public String getShortDesc() {
 		StringBuilder sb = new StringBuilder();
-		Iterator<PropertyValue> itr = valueSet.iterator();
-		
-		while(itr.hasNext()) {
-			PropertyValue value = itr.next();
-			
+
+		for (PropertyValue value : valueSet) {
 			Double _value = value.getValue();
-			
+
 			if (value.getProperty().getCoord() != null && value.getValue() > 0) {
 				if (sb.length() > 0)
 					sb.append("x");
-				sb.append(_value == _value.longValue() ?  String.format("%d", _value.longValue()) : String.format("%s", _value));
+				sb.append(_value == _value.longValue() ? String.format("%d", _value.longValue()) : String.format("%s", _value));
 			}
 		}
 		

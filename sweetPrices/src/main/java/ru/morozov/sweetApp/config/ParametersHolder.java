@@ -31,7 +31,7 @@ public class ParametersHolder {
 	
 	public ParametersHolder(SweetPropertySet propertiesSet) {
 		this.propertiesSet = propertiesSet;
-		parameters = new ArrayList<PropertyValueSet>(1);
+		parameters = new ArrayList<>(1);
 		parameters.add(PropertyValueSet.createValueSet(propertiesSet));
 		
 		observableParameters = FXCollections.observableArrayList(parameters);
@@ -87,14 +87,11 @@ public class ParametersHolder {
 		if (workbook == null)
 			return;
 
-		parameters = new ArrayList<PropertyValueSet>();
+		parameters = new ArrayList<>();
 
 		Sheet sheet = workbook.getSheetAt(0);
-		Iterator<Row> rowIterator = sheet.iterator();
-		
-		while (rowIterator.hasNext()) {
-			Row row = rowIterator.next();
 
+		for (Row row : sheet) {
 			PropertyValueSet paramsSet = new PropertyValueSet();
 			paramsSet.setRow(row.getRowNum());
 
@@ -118,10 +115,10 @@ public class ParametersHolder {
 					default:
 						break;
 				}
-				
+
 				index++;
 			}
-			
+
 			parameters.add(paramsSet);
 		}
 	}

@@ -1,34 +1,22 @@
 package ru.morozov.sweetApp.UI.Tabs;
 
-import java.io.File;
-
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import ru.morozov.sweetApp.SweetContext;
 import ru.morozov.sweetApp.Utils.Constants.l12n;
-import ru.morozov.sweetApp.config.ParametersHolder;
-import ru.morozov.sweetApp.config.PropertyValueSet;
-import ru.morozov.sweetApp.config.SweetProduct;
-import ru.morozov.sweetApp.config.SweetProperty;
-import ru.morozov.sweetApp.config.SystemConfigs;
+import ru.morozov.sweetApp.config.*;
 import ru.morozov.sweetApp.config.templates.SweetTemplate;
 import ru.morozov.sweetApp.generate.BaseSweetGenerator;
 import ru.morozov.utils.components.NumberTextField;
+
+import java.io.File;
 
 public class CalcsTabMulti extends Tab implements ICalcsTab {
 
@@ -36,7 +24,7 @@ public class CalcsTabMulti extends Tab implements ICalcsTab {
 		setClosable(false);
 		setText(l12n.bundle.getString(l12n.CALCS_KEY));
 
-		ComboBox<SweetProduct> productsBox = new ComboBox<SweetProduct>(FXCollections.observableArrayList(SweetContext.getProducts()));
+		ComboBox<SweetProduct> productsBox = new ComboBox<>(FXCollections.observableArrayList(SweetContext.getProducts()));
 
 		GridPane grid = new GridPane();
 		grid.setVgap(4);
@@ -46,7 +34,7 @@ public class CalcsTabMulti extends Tab implements ICalcsTab {
 		grid.add(new Label(l12n.bundle.getString(l12n.PRODUCTS_KEY)), 0, 0, 2, 1);
 		grid.add(productsBox, 2, 0);
 
-		final TableView<PropertyValueSet> table = new TableView<PropertyValueSet>();
+		final TableView<PropertyValueSet> table = new TableView<>();
 		
 		final Button openButton = new Button(l12n.bundle.getString(l12n.SELECT_PARAMS_KEY));
 		openButton.setDisable(true);
@@ -60,38 +48,30 @@ public class CalcsTabMulti extends Tab implements ICalcsTab {
 						
 						SweetTemplate template = newValue.getTemplate();
 						for(SweetProperty property : template.getProperties().getProperties()) {
-							TableColumn<PropertyValueSet, Double> column = new TableColumn<PropertyValueSet, Double>(property.getPropertyName());
+							TableColumn<PropertyValueSet, Double> column = new TableColumn<>(property.getPropertyName());
 							
-							column.setCellValueFactory(new Callback<CellDataFeatures<PropertyValueSet, Double>, ObservableValue<Double>>() {
-							     public ObservableValue<Double> call(CellDataFeatures<PropertyValueSet, Double> p) {
-							    	 return new ReadOnlyObjectWrapper<Double>(p.getValue().getValue(property.getPropertyName()));
-							     }
-							  });
+							column.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(p.getValue().getValue(property.getPropertyName())));
 							
 							column.setCellFactory(col -> new TableCell<PropertyValueSet, Double>() {
 								@Override 
 						        public void updateItem(Double value, boolean empty) {
 						            super.updateItem(value, empty);
-						            setText(empty ? null : String.format("%.1f", value.doubleValue()));
+						            setText(empty ? null : String.format("%.1f", value));
 								}
 							});
 							
 							table.getColumns().add(column);
 						}
 						
-						TableColumn<PropertyValueSet, Double> column = new TableColumn<PropertyValueSet, Double>(l12n.bundle.getString(l12n.TOTAL_KEY));
+						TableColumn<PropertyValueSet, Double> column = new TableColumn<>(l12n.bundle.getString(l12n.TOTAL_KEY));
 						
-						column.setCellValueFactory(new Callback<CellDataFeatures<PropertyValueSet, Double>, ObservableValue<Double>>() {
-						     public ObservableValue<Double> call(CellDataFeatures<PropertyValueSet, Double> p) {
-						    	 return new ReadOnlyObjectWrapper<Double>(p.getValue().getTotal());
-						     }
-						});
+						column.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(p.getValue().getTotal()));
 						
 						column.setCellFactory(col -> new TableCell<PropertyValueSet, Double>() {
 							@Override 
 							public void updateItem(Double total, boolean empty) {
 								super.updateItem(total, empty);
-								setText(empty ? null : String.format("₽%,.2f", total.doubleValue()));
+								setText(empty ? null : String.format("₽%,.2f", total));
 							}
 						});
 						

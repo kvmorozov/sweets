@@ -2,8 +2,6 @@ package ru.morozov.sweetApp.config;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 
 public class PropertyValue {
 
@@ -16,13 +14,10 @@ public class PropertyValue {
 		this.value = new SimpleDoubleProperty(value);
 		this.property = property;
 		
-		strValueProperty.addListener(new ChangeListener<String>() {
-		    @Override
-		    public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-		    	if (newValue != null && !newValue.isEmpty())
-		    		setValue(Double.valueOf(newValue));
-		    }
-		});
+		strValueProperty.addListener((observable, oldValue, newValue) -> {
+            if (newValue != null && !newValue.isEmpty())
+                setValue(Double.valueOf(newValue));
+        });
 	}
 
 	public Double getValue() {return value.get();}
