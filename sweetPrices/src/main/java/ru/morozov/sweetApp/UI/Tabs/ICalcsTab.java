@@ -4,6 +4,6 @@ import javafx.stage.Stage;
 
 public interface ICalcsTab {
 	
-	public void initCalcsTab(Stage stage);
+	void initCalcsTab(Stage stage);
 
 }

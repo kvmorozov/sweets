@@ -7,20 +7,20 @@ import ru.morozov.utils.UTF8Control;
 
 public interface l12n {
 	
-	public static ResourceBundle bundle = ResourceBundle.getBundle("sweets", new Locale("ru", "RU"), new UTF8Control());
+	ResourceBundle bundle = ResourceBundle.getBundle("sweets", new Locale("ru", "RU"), new UTF8Control());
 	
-	public static final String SETTINGS_KEY = "settings";
-	public static final String CALCS_KEY = "calcs";
-	public static final String PRODUCTS_KEY = "products";
-	public static final String SELECT_PARAMS_KEY = "select-params";
-	public static final String RUN_KEY = "run";
-	public static final String EXIT_KEY = "exit";
-	public static final String TOTAL_KEY = "total";
-	public static final String AMOUNT_KEY = "amount";
+	String SETTINGS_KEY = "settings";
+	String CALCS_KEY = "calcs";
+	String PRODUCTS_KEY = "products";
+	String SELECT_PARAMS_KEY = "select-params";
+	String RUN_KEY = "run";
+	String EXIT_KEY = "exit";
+	String TOTAL_KEY = "total";
+	String AMOUNT_KEY = "amount";
 	
-	public static final String COST_KEY = "cost_1";
-	public static final String COST_KEY_ADD = "cost_1_add";
+	String COST_KEY = "cost_1";
+	String COST_KEY_ADD = "cost_1_add";
 	
-	public static final String OUTPUT_DIR = "output.dir";
-	public static final String NO_VALUE = "no_value";
+	String OUTPUT_DIR = "output.dir";
+	String NO_VALUE = "no_value";
 }

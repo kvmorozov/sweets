@@ -2,7 +2,6 @@ package ru.morozov.sweetApp.config.templates;
 
 import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFFormulaEvaluator;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -12,7 +11,6 @@ import ru.morozov.sweetApp.config.PropertyValueSet;
 import ru.morozov.sweetApp.config.SweetPropertySet;
 import ru.morozov.sweetApp.config.base.CellCoord;
 import ru.morozov.sweetApp.config.prices.PriceItem;
-import ru.morozov.utils.ParserUtils;
 
 import java.util.List;
 
@@ -55,24 +53,8 @@ public class SweetTemplate implements InitializingBean{
 		
 		amountCoord.getCell(newWorkbook).setCellValue(amount);
 		
-		for(PropertyValue value : values.getValueSet()) {
-			if (value.getProperty().getCoord() == null)
-				continue;
-			
-			Cell cell = value.getProperty().getCoord().getCell(workbook);
-			
-			switch (cell.getCellType()) {
-				case Cell.CELL_TYPE_NUMERIC:
-					cell.setCellValue(ParserUtils.getDoubleResult(value.getValue()));
-					break;
-				case Cell.CELL_TYPE_STRING:
-					cell.setCellValue(value.getValue().toString());
-					break;
-				default:
-					cell.setCellValue(value.getValue().toString());
-					break;
-			}
-		}
+		for(PropertyValue value : values.getValueSet())
+			value.applyParam(workbook);
 		
 		if (newWorkbook instanceof HSSFWorkbook)
 			HSSFFormulaEvaluator.evaluateAllFormulaCells(newWorkbook);

@@ -13,4 +13,7 @@ public class SweetProperty {
 	public CellCoord getCoord() {return coord;}
 	public void setCoord(CellCoord coord) {this.coord = coord;}
 
+	public PropertyValue createPropertyValue(SweetProperty property, PropertyValueSet valueSet) {
+		return new PropertyValue(0d, property);
+	}
 }

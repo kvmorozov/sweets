@@ -59,8 +59,7 @@ public class CellCoord {
 	public String getStringValue(Workbook wb) {
 		if (sheet < 0 || col < 0 || row < 0)
 			return null;
-		
-		String result = null;
+
 		Cell cell = getCell(wb);
 		
 		switch (cell.getCellType()) {

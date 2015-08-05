@@ -2,6 +2,9 @@ package ru.morozov.sweetApp.config;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Workbook;
+import ru.morozov.utils.ParserUtils;
 
 public class PropertyValue {
 
@@ -24,4 +27,25 @@ public class PropertyValue {
 	private void setValue(Double value) {this.value.set(value);}
 	
 	public SweetProperty getProperty() {return property;}
+
+	protected void applyParam(Cell cell, Object applyValue) {
+		switch (cell.getCellType()) {
+			case Cell.CELL_TYPE_NUMERIC:
+				cell.setCellValue(ParserUtils.getDoubleResult(applyValue));
+				break;
+			case Cell.CELL_TYPE_STRING:
+				cell.setCellValue(applyValue.toString());
+				break;
+			default:
+				cell.setCellValue(applyValue.toString());
+				break;
+		}
+	}
+
+	public void applyParam(Workbook workbook) {
+		if (getProperty().getCoord() == null)
+			return;
+
+		applyParam(getProperty().getCoord().getCell(workbook), value.getValue());
+	}
 }

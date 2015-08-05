@@ -70,11 +70,15 @@ public class BaseSweetGenerator {
 			Double total = 0d;
 			
 			for(PriceItem amount : template.getAmounts()) {
-				PriceItem price = amount.getItem() != null ? appPrices.getPriceItem(amount.getItem().getItemName()) :
-								  amount.getItemProvider().currentItem.get();
-				
-				if (price != null)
-					total+=price.getTotal(amount, generatedWorkbook);
+				PriceItem price = amount.getPrice(appPrices);
+
+				try {
+					if (price != null)
+						total += price.getTotal(amount, generatedWorkbook);
+				}
+				catch(Exception ex) {
+					System.out.println("Ошибка вычисления!");
+				}
 			}
 			
 			if (outputPath != null) {

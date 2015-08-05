@@ -6,16 +6,19 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import ru.morozov.sweetApp.Utils.Constants.l12n;
+import ru.morozov.sweetApp.config.ListSweetProperty;
+import ru.morozov.sweetApp.config.SweetProperty;
 import ru.morozov.sweetApp.config.base.CellCoord;
 
 public class PriceItem {
 	
 	protected SweetItem item;
-	protected Double price, price1 = 0d, price2 = 0d;
+	protected Double price, price1 = 0d, price2 = 0d, density;
 	protected CellCoord coord, addInfoCoord;
 	protected String desc, name;
 	protected Map<String, Object> itemProperties;
 	protected PriceList itemProvider;
+	protected SweetProperty referenceProperty;
 	
 	public PriceItem() {}
 	
@@ -55,6 +58,12 @@ public class PriceItem {
 	public CellCoord getAddInfoCoord() {return addInfoCoord;}
 	public void setAddInfoCoord(CellCoord addInfoCoord) {this.addInfoCoord = addInfoCoord;}
 
+	public Double getDensity() {return density;}
+	public void setDensity(Double density) {this.density = density;}
+
+	public SweetProperty getReferenceProperty() {return referenceProperty;}
+	public void setReferenceProperty(SweetProperty referenceProperty) {this.referenceProperty = referenceProperty;}
+
 	@Override
 	public String toString() {return desc;}
 	
@@ -77,5 +86,16 @@ public class PriceItem {
 		Double amount = amountItem.getAmount(workbook);
 		
 		return getPrice() * amount;
+	}
+
+	public PriceItem getPrice(PricesSet appPrices) {
+		if (getItem() != null)
+			return appPrices.getPriceItem(getItem().getItemName());
+		else if (referenceProperty != null && referenceProperty instanceof ListSweetProperty)
+			return ((ListSweetProperty) referenceProperty).getPriceList().currentItem.get();
+		else if (getItemProvider() != null)
+			return getItemProvider().currentItem.get();
+		else
+			return null;
 	}
 }

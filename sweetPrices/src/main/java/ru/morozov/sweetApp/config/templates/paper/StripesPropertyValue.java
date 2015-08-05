@@ -1,5 +1,6 @@
 package ru.morozov.sweetApp.config.templates.paper;
 
+import org.apache.poi.ss.usermodel.Workbook;
 import ru.morozov.sweetApp.config.CalculatedPropertyValue;
 import ru.morozov.sweetApp.config.PropertyValueSet;
 import ru.morozov.sweetApp.config.SweetProperty;
@@ -30,4 +31,11 @@ public class StripesPropertyValue extends CalculatedPropertyValue {
 		return resultStripes;
 	}
 
+	@Override
+	public void applyParam(Workbook workbook) {
+		if (getProperty().getCoord() == null)
+			return;
+
+		applyParam(getProperty().getCoord().getCell(workbook), getValue());
+	}
 }

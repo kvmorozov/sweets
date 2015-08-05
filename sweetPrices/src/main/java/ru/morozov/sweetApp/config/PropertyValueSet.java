@@ -3,8 +3,6 @@ package ru.morozov.sweetApp.config;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import ru.morozov.sweetApp.SweetContext;
-import ru.morozov.sweetApp.config.templates.paper.StripesPropertyValue;
-import ru.morozov.sweetApp.config.templates.paper.StripesSweetProperty;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,13 +71,8 @@ public class PropertyValueSet {
 		PropertyValueSet valueSet = new PropertyValueSet();
 		
 		for(SweetProperty property : propertiesSet.getProperties())
-			if (property instanceof StripesSweetProperty)
-				valueSet.add(new StripesPropertyValue(0d, property, valueSet));
-			else if (property instanceof ComplexSweetProperty)
-				valueSet.add(new CalculatedPropertyValue(0d, property, valueSet));
-			else
-				valueSet.add(new PropertyValue(0d, property));
-		
+			valueSet.add(property.createPropertyValue(property, valueSet));
+
 		return valueSet;
 	}
 }

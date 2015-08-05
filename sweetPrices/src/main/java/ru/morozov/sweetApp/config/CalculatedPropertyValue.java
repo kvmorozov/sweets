@@ -10,4 +10,8 @@ public class CalculatedPropertyValue extends PropertyValue {
 		super(value, property);
 		this.valueSet = valueSet;
 	}
+
+	public PropertyValue createPropertyValue(SweetProperty property, PropertyValueSet valueSet) {
+		return new PropertyValue(0d, property);
+	}
 }

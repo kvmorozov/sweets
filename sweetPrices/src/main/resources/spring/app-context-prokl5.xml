@@ -53,7 +53,7 @@
 					</property>
 				</bean>
 				<bean class="ru.morozov.sweetApp.config.prices.PriceItem">
-					<property name="item" ref="item_bopp"/>
+					<property name="referenceProperty" ref="prok5_last_layer"/>
 					<property name="coord">
 						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
 							<property name="col" value="9"/>
@@ -174,6 +174,22 @@
 			</bean>
 		</property>
 	</bean>
+	<bean id="prok5_last_layer" class="ru.morozov.sweetApp.config.SelectLayerProperty">
+		<property name="propertyName" value="Материал последнего слоя"/>
+		<property name="priceList" ref="priceList_paper"/>
+		<property name="coord">
+			<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+				<property name="col" value="3"/>
+				<property name="row" value="17"/>
+			</bean>
+		</property>
+		<property name="paperCoord">
+			<bean class="ru.morozov.sweetApp.config.base.CellCoord">
+				<property name="col" value="2"/>
+				<property name="row" value="17"/>
+			</bean>
+		</property>
+	</bean>
 	
 	<bean id="prokl5_props" class="ru.morozov.sweetApp.config.SweetPropertySet">
 		<property name="properties">
@@ -200,6 +216,7 @@
 					</property>
 					<property name="realWidth" value="1005"/>
 				</bean>
+				<ref bean="prok5_last_layer"/>
 			</list>
 		</property>
 	</bean>
