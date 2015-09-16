@@ -27,7 +27,7 @@ public class PropertyValueSet {
 		this.total = total;
 		
 		Double cost = total / amount;
-		Double costWithAdd = cost * (1 + ((SweetContext.getSystemConfigs().getExtraCharge() + 0d) / 100));
+		Double costWithAdd = cost * (1 + ((SweetContext.getSystemConfigs().extraChargeProperty.get() + 0d) / 100));
 		
 		totalPropertyStr.setValue(String.format("₽%,.2f", total));
 		costPropertyStr.setValue(String.format("₽%,.2f", cost));

@@ -15,7 +15,7 @@ import ru.morozov.sweetApp.Utils.Constants.l12n;
 public class MainScene extends Scene {
 	
 	public MainScene(Stage stage, BorderPane root) {
-		super(root, 450, 400);
+		super(root, 550, 400);
 
 		TabPane tabPane = new TabPane();
 		

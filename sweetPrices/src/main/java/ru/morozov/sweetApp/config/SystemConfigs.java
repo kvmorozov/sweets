@@ -1,13 +1,16 @@
 package ru.morozov.sweetApp.config;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import org.springframework.beans.factory.InitializingBean;
+import ru.morozov.sweetApp.UI.Tabs.ICalcsTab;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.prefs.Preferences;
 
-import ru.morozov.sweetApp.UI.Tabs.ICalcsTab;
-
-public class SystemConfigs {
+public class SystemConfigs implements InitializingBean {
 	
 	private static final int DEFAULT_EXTRA_CHARGE = 40;
 	
@@ -15,6 +18,8 @@ public class SystemConfigs {
 	public static final String PROPERTY_LAST_PARAMS_FILE = "last.params.file";
 	public static final String PROPERTY_LAST_AMOUNT = "last.amount";
 	public static final String PROPERTY_RUNS_COUNT = "runs.count";
+
+    public static IntegerProperty extraChargeProperty = new SimpleIntegerProperty(0);
 	
 	private String outputBaseDir;
 	private Path outputBaseDirPath;
@@ -25,6 +30,11 @@ public class SystemConfigs {
 	private Preferences preferences;
 
 	public String getOutputBaseDir() {return outputBaseDir;}
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        extraChargeProperty.set(getExtraCharge());
+    }
 	
 	public void setOutputBaseDir(String outputBaseDir) {
 		this.outputBaseDir = outputBaseDir;

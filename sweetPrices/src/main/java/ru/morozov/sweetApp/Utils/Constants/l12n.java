@@ -17,6 +17,7 @@ public interface l12n {
 	String EXIT_KEY = "exit";
 	String TOTAL_KEY = "total";
 	String AMOUNT_KEY = "amount";
+    String EXTRA_CHARHE_KEY = "extra.charge";
 	
 	String COST_KEY = "cost_1";
 	String COST_KEY_ADD = "cost_1_add";
