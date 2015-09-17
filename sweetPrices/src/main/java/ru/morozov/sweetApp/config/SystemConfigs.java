@@ -19,7 +19,7 @@ public class SystemConfigs implements InitializingBean {
 	public static final String PROPERTY_LAST_AMOUNT = "last.amount";
 	public static final String PROPERTY_RUNS_COUNT = "runs.count";
 
-    public static IntegerProperty extraChargeProperty = new SimpleIntegerProperty(0);
+    public static final IntegerProperty extraChargeProperty = new SimpleIntegerProperty(0);
 	
 	private String outputBaseDir;
 	private Path outputBaseDirPath;
