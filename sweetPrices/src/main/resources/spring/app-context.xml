@@ -20,7 +20,15 @@
 	<import resource="app-context-prokl5.xml"/>
 	
 	<!-- Тарталетки -->
-	
-	<import resource="app-context-tart.xml"/>
+
+    <import resource="app-context-tart.xml"/>
+
+    <!-- Пакеты SOS SRM -->
+
+    <import resource="app-context-pksos.xml"/>
+
+    <!-- Пакеты с окном -->
+
+    <import resource="app-context-pkwnd.xml"/>
 
 </beans>

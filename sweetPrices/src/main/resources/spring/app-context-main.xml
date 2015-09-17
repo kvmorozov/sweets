@@ -9,17 +9,25 @@
 		<property name="sweetsList">
 			<list>
 				<bean id="prokl_3_product" class="ru.morozov.sweetApp.config.SweetProduct">
-					<property name="prefix" value="prokl3"/>
+					<property name="template" ref="prokl3"/>
 					<property name="description" value="Прокладка 3х слойная"/>
 				</bean>
 				<bean id="prokl_5_product" class="ru.morozov.sweetApp.config.SweetProduct">
-					<property name="prefix" value="prokl5"/>
+					<property name="template" ref="prokl5"/>
 					<property name="description" value="Прокладка 5ти слойная"/>
 				</bean>
 				<bean id="tart_product" class="ru.morozov.sweetApp.config.SweetProduct">
-					<property name="prefix" value="tartalet"/>
+					<property name="template" ref="tartalet"/>
 					<property name="description" value="Тарталетки"/>
 				</bean>
+                <bean id="paket_sos_product" class="ru.morozov.sweetApp.config.SweetProduct">
+                    <property name="template" ref="pksos"/>
+                    <property name="description" value="Пакеты SOS SRM"/>
+                </bean>
+                <bean id="paket_wnd_product" class="ru.morozov.sweetApp.config.SweetProduct">
+                    <property name="template" ref="pkwnd"/>
+                    <property name="description" value="Пакеты с окном"/>
+                </bean>
 			</list>
 		</property>
 	</bean>
