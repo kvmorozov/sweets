@@ -61,17 +61,16 @@ public class PriceList implements InitializingBean {
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		pricesMap = new HashMap<>();
-        Workbook workbook = getWorkbook();
-		
+
 		if (prices != null)
 			for(PriceItem price : prices) {
-				price.setPrice1(ParserUtils.getDoubleResult(price.getCoord(price1Column).getDoubleValue(workbook)));
-				price.setPrice1(ParserUtils.getDoubleResult(price.getCoord(price2Column).getDoubleValue(workbook)));
-				price.setDesc((new ParserUtils(price.getCoord(descColumn).getStringValue(workbook))).getStringResult());
-				price.setName((new ParserUtils(price.getCoord(nameColumn).getStringValue(workbook))).getStringResult());
+				price.setPrice1(ParserUtils.getDoubleResult(price.getCoord(price1Column).getDoubleValue(priceListFile)));
+				price.setPrice1(ParserUtils.getDoubleResult(price.getCoord(price2Column).getDoubleValue(priceListFile)));
+				price.setDesc((new ParserUtils(price.getCoord(descColumn).getStringValue(priceListFile))).getStringResult());
+				price.setName((new ParserUtils(price.getCoord(nameColumn).getStringValue(priceListFile))).getStringResult());
 
 				if (densityColumn >= 0)
-					price.setDensity(ParserUtils.getDoubleResult(price.getCoord(densityColumn).getDoubleValue(workbook)));
+					price.setDensity(ParserUtils.getDoubleResult(price.getCoord(densityColumn).getDoubleValue(priceListFile)));
 				
 				pricesMap.put(price.getItem().getItemName(), price);
 			}
@@ -84,10 +83,10 @@ public class PriceList implements InitializingBean {
 			for(int row = firstRow; row < lastRow; row++) {
 				PriceItem price = (itemFactory == null ? itemFactory = new DefaultPriceItemFactory() : itemFactory).createItem(row);
 				
-				Double price1 = ParserUtils.getDoubleResult(price.getCoord(price1Column).getDoubleValue(workbook));
-				Double price2 = ParserUtils.getDoubleResult(price.getCoord(price2Column).getDoubleValue(workbook));
-				String desc = price.getCoord(descColumn).getStringValue(workbook);
-				String name = price.getCoord(nameColumn).getStringValue(workbook);
+				Double price1 = ParserUtils.getDoubleResult(price.getCoord(price1Column).getDoubleValue(priceListFile));
+				Double price2 = ParserUtils.getDoubleResult(price.getCoord(price2Column).getDoubleValue(priceListFile));
+				String desc = price.getCoord(descColumn).getStringValue(priceListFile);
+				String name = price.getCoord(nameColumn).getStringValue(priceListFile);
 				
 				price.setItem(new SweetItem(name));
 				

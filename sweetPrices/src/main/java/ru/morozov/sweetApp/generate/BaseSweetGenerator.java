@@ -23,6 +23,7 @@ import ru.morozov.sweetApp.config.SystemConfigs;
 import ru.morozov.sweetApp.config.prices.PriceItem;
 import ru.morozov.sweetApp.config.prices.PricesSet;
 import ru.morozov.sweetApp.config.templates.SweetTemplate;
+import ru.morozov.utils.components.xls.XlsFile;
 
 public class BaseSweetGenerator {
 	
@@ -37,10 +38,7 @@ public class BaseSweetGenerator {
 	private static final Double DEFAULT_AMOUNT = 10000d;
 	
 	public SystemConfigs getSystemConfig() {return systemConfig;}
-	public SweetTemplate getTemplate() {return template;}
-	public ParametersHolder getParametersHolder() {return parametersHolder;}
-	public List<Double> getTotals() {return totals;}
-	
+
 	public BaseSweetGenerator(SystemConfigs systemConfig, SweetTemplate template, ParametersHolder parametersHolder) {
 		this.systemConfig = systemConfig;
 		this.template = template;
@@ -65,7 +63,7 @@ public class BaseSweetGenerator {
 		PricesSet appPrices = SweetContext.getPricesSet();
 		
 		for(PropertyValueSet params : parametersHolder.getParameters()) {
-			Workbook generatedWorkbook = template.applyParams(params, amount);
+			XlsFile generatedTemplate = template.applyParams(params, amount);
 			
 			Double total = 0d;
 			
@@ -74,7 +72,7 @@ public class BaseSweetGenerator {
 
 				try {
 					if (price != null)
-						total += price.getTotal(amount, generatedWorkbook);
+						total += price.getTotal(amount, generatedTemplate);
 				}
 				catch(Exception ex) {
 					System.out.println("Ошибка вычисления!");
@@ -87,7 +85,7 @@ public class BaseSweetGenerator {
 				try {
 					Path newFilePath = Files.createFile(newPath);
 					FileOutputStream out = new FileOutputStream(newFilePath.toString());
-					generatedWorkbook.write(out);
+					generatedTemplate.getWorkbook().write(out);
 					out.close();
 				} catch (IOException e) {
 					e.printStackTrace();

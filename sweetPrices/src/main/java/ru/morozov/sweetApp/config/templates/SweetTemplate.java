@@ -36,19 +36,19 @@ public class SweetTemplate {
 	public CellCoord getAmount() {return amountCoord;}
 	public void setAmount(CellCoord amount) {this.amountCoord = amount;}
 	
-	public Workbook applyParams(PropertyValueSet values, Double amount) {
-		Workbook newWorkbook = templateFile.getWorkbook();
+	public XlsFile applyParams(PropertyValueSet values, Double amount) {
+        XlsFile newTemplate = templateFile;
 		
-		amountCoord.getCell(newWorkbook).setCellValue(amount);
+		amountCoord.getCell(newTemplate).setCellValue(amount);
 		
 		for(PropertyValue value : values.getValueSet())
-			value.applyParam(templateFile.getWorkbook());
+			value.applyParam(templateFile);
 		
-		if (newWorkbook instanceof HSSFWorkbook)
-			HSSFFormulaEvaluator.evaluateAllFormulaCells(newWorkbook);
+		if (templateFile.getWorkbook() instanceof HSSFWorkbook)
+			HSSFFormulaEvaluator.evaluateAllFormulaCells(templateFile.getWorkbook());
 		else
-			XSSFFormulaEvaluator.evaluateAllFormulaCells((XSSFWorkbook) newWorkbook);
+			XSSFFormulaEvaluator.evaluateAllFormulaCells((XSSFWorkbook) templateFile.getWorkbook());
 		
-		return newWorkbook;
+		return newTemplate;
 	}
 }

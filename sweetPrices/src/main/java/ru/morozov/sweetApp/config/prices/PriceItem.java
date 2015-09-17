@@ -1,14 +1,13 @@
 package ru.morozov.sweetApp.config.prices;
 
-import java.util.Map;
-
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Workbook;
-
 import ru.morozov.sweetApp.Utils.Constants.l12n;
 import ru.morozov.sweetApp.config.ListSweetProperty;
 import ru.morozov.sweetApp.config.SweetProperty;
 import ru.morozov.sweetApp.config.base.CellCoord;
+import ru.morozov.utils.components.xls.XlsFile;
+
+import java.util.Map;
 
 public class PriceItem {
 	
@@ -76,14 +75,14 @@ public class PriceItem {
 		return emptyPrice;
 	}
 	
-	public Double getAmount(Workbook workbook) {
-		Cell cell = getCoord().getCell(workbook);
+	public Double getAmount(XlsFile xlsFile) {
+		Cell cell = getCoord().getCell(xlsFile);
 		
 		return cell == null ? 0d : cell.getNumericCellValue();
 	}
 	
-	public Double getTotal(PriceItem amountItem, Workbook workbook) {
-		Double amount = amountItem.getAmount(workbook);
+	public Double getTotal(PriceItem amountItem, XlsFile xlsFile) {
+		Double amount = amountItem.getAmount(xlsFile);
 		
 		return getPrice() * amount;
 	}

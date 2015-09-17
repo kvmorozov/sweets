@@ -3,8 +3,8 @@ package ru.morozov.sweetApp.config;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Workbook;
 import ru.morozov.utils.ParserUtils;
+import ru.morozov.utils.components.xls.XlsFile;
 
 public class PropertyValue {
 
@@ -42,10 +42,10 @@ public class PropertyValue {
 		}
 	}
 
-	public void applyParam(Workbook workbook) {
+	public void applyParam(XlsFile xlsFile) {
 		if (getProperty().getCoord() == null)
 			return;
 
-		applyParam(getProperty().getCoord().getCell(workbook), value.getValue());
+		applyParam(getProperty().getCoord().getCell(xlsFile), value.getValue());
 	}
 }

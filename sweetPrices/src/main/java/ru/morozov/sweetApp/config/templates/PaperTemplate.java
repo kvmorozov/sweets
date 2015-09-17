@@ -1,10 +1,10 @@
 package ru.morozov.sweetApp.config.templates;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Workbook;
 import ru.morozov.sweetApp.config.PropertyValue;
 import ru.morozov.sweetApp.config.PropertyValueSet;
 import ru.morozov.sweetApp.config.templates.paper.PaperTitle;
+import ru.morozov.utils.components.xls.XlsFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,8 +17,8 @@ public class PaperTemplate extends SweetTemplate {
 	public void setTitles(List<PaperTitle> titles) {this.titles = titles;}
 	
 	@Override
-	public Workbook applyParams(PropertyValueSet values, Double amount) {
-		Workbook newWorkbook = super.applyParams(values, amount);
+	public XlsFile applyParams(PropertyValueSet values, Double amount) {
+        XlsFile newTemplate = super.applyParams(values, amount);
 		
 		List<Object> args = values.getValueSet().stream().map(PropertyValue::getValue).collect(Collectors.toList());
 
@@ -28,10 +28,10 @@ public class PaperTemplate extends SweetTemplate {
 			titleStr = titleStr.replaceAll(".0", "");
 			titleStr = titleStr.replaceAll(",0", "");
 			
-			Cell cell = title.getCell().getCell(newWorkbook);
+			Cell cell = title.getCell().getCell(newTemplate);
 			cell.setCellValue(titleStr);
 		}
 		
-		return newWorkbook;
+		return newTemplate;
 	}
 }

@@ -5,7 +5,34 @@
 
     <!-- Пакеты SOS SRM -->
 
+    <bean id="pksos_template" class="ru.morozov.utils.components.xls.XlsFile">
+        <property name="root" value="xls/templates/"/>
+        <property name="fileName" value="pakets.xls"/>
+    </bean>
+
     <bean id="pksos" class="ru.morozov.sweetApp.config.templates.PaperTemplate">
+        <property name="templateFile" ref="pksos_template"/>
+        <property name="properties" ref="pksos_props"/>
+    </bean>
+
+    <!-- Свойства -->
+
+    <bean id="pksos_prop_paper" class="ru.morozov.sweetApp.config.DropDownSweetProperty">
+        <property name="propertyName" value="Марка бумаги"/>
+        <property name="coord">
+            <bean class="ru.morozov.sweetApp.config.base.CellCoord">
+                <property name="col" value="1"/>
+                <property name="row" value="6"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="pksos_props" class="ru.morozov.sweetApp.config.SweetPropertySet">
+        <property name="properties">
+            <list>
+                <ref bean="pksos_prop_paper"/>
+            </list>
+        </property>
     </bean>
 
 </beans>

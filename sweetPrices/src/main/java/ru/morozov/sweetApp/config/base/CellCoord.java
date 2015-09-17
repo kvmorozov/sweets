@@ -1,13 +1,11 @@
 package ru.morozov.sweetApp.config.base;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Workbook;
-
-import ru.morozov.utils.ParserUtils;
+import ru.morozov.utils.components.xls.XlsFile;
 
 public class CellCoord {
 	
-	private int sheet = 0, col, row;
+	private int sheet = -1, col, row;
 	
 	public CellCoord() {}
 	
@@ -35,42 +33,9 @@ public class CellCoord {
 	public int getRow() {return row;}
 	public void setRow(int row) {this.row = row;}
 	
-	public Cell getCell(Workbook wb) {return wb.getSheetAt(getSheet()).getRow(getRow()).getCell(getCol());}
+	public Cell getCell(XlsFile xlsFile) {return xlsFile.getCell(this);}
 	
-	public Double getDoubleValue(Workbook wb) {
-		if (sheet < 0 || col < 0 || row < 0)
-			return null;
-		
-		Double result = 0d;
-		Cell cell = getCell(wb);
-		
-		switch (cell.getCellType()) {
-			case Cell.CELL_TYPE_NUMERIC:
-				return cell.getNumericCellValue();
-			case Cell.CELL_TYPE_STRING:
-				return ParserUtils.getDoubleResult(cell.getStringCellValue());
-			default:
-				break;
-		}
-		
-		return result;
-	}
+	public Double getDoubleValue(XlsFile xlsFile) {return xlsFile.getDoubleValue(this);}
 	
-	public String getStringValue(Workbook wb) {
-		if (sheet < 0 || col < 0 || row < 0)
-			return null;
-
-		Cell cell = getCell(wb);
-		
-		switch (cell.getCellType()) {
-			case Cell.CELL_TYPE_NUMERIC:
-				return String.valueOf(cell.getNumericCellValue());
-			case Cell.CELL_TYPE_STRING:
-				return cell.getStringCellValue();
-			default:
-				break;
-		}
-		
-		return "";
-	}
+	public String getStringValue(XlsFile xlsFile) {return xlsFile.getStringValue(this);}
 }

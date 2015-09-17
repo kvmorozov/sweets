@@ -5,7 +5,36 @@
 
     <!-- Пакеты с окном -->
 
+    <bean id="pkwnd_template" class="ru.morozov.utils.components.xls.XlsFile">
+        <property name="root" value="xls/templates/"/>
+        <property name="fileName" value="pakets.xls"/>
+        <property name="defaultSheet" value="1"/>
+    </bean>
+
     <bean id="pkwnd" class="ru.morozov.sweetApp.config.templates.PaperTemplate">
+        <property name="templateFile" ref="pkwnd_template"/>
+        <property name="properties" ref="pkwnd_props"/>
+    </bean>
+
+    <!-- Свойства -->
+
+    <bean id="pkwnd_prop_paper" class="ru.morozov.sweetApp.config.DropDownSweetProperty">
+        <property name="propertyName" value="Марка бумаги"/>
+        <property name="coord">
+            <bean class="ru.morozov.sweetApp.config.base.CellCoord">
+                <property name="col" value="1"/>
+                <property name="row" value="6"/>
+                <property name="sheet" value="1"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="pkwnd_props" class="ru.morozov.sweetApp.config.SweetPropertySet">
+        <property name="properties">
+            <list>
+                <ref bean="pkwnd_prop_paper"/>
+            </list>
+        </property>
     </bean>
 
 </beans>
