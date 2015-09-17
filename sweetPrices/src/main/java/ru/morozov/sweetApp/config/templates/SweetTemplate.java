@@ -5,20 +5,18 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFFormulaEvaluator;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.factory.InitializingBean;
 import ru.morozov.sweetApp.config.PropertyValue;
 import ru.morozov.sweetApp.config.PropertyValueSet;
 import ru.morozov.sweetApp.config.SweetPropertySet;
 import ru.morozov.sweetApp.config.base.CellCoord;
 import ru.morozov.sweetApp.config.prices.PriceItem;
+import ru.morozov.utils.components.xls.XlsFile;
 
 import java.util.List;
 
-public class SweetTemplate implements InitializingBean{
+public class SweetTemplate {
 	
-	private boolean isValidConfig = false;
-	private String templateFileName;
-	private Workbook workbook;
+	private XlsFile templateFile;
 	private SweetPropertySet properties;
 	private List<PriceItem> amounts;
 	private CellCoord amountCoord;
@@ -26,35 +24,25 @@ public class SweetTemplate implements InitializingBean{
 	public SweetPropertySet getProperties() {return properties;}
 	public void setProperties(SweetPropertySet properties) {this.properties = properties;}
 	
-	public String getTemplateFileName() {return templateFileName;}
-	public void setTemplateFileName(String templateFileName) {this.templateFileName = templateFileName;}
+	public XlsFile getTemplateFile() {return templateFile;}
+	public void setTemplateFile(XlsFile templateFile) {this.templateFile = templateFile;}
 	
 	public List<PriceItem> getAmounts() {return amounts;}
 	public void setAmounts(List<PriceItem> amounts) {this.amounts = amounts;}
 	
-	public boolean isValidConfig() {return isValidConfig;}
-	public Workbook getWorkbook() {return workbook;}
+	public boolean isValidConfig() {return templateFile.isValidConfig();}
+	public Workbook getWorkbook() {return templateFile.getWorkbook();}
 	
 	public CellCoord getAmount() {return amountCoord;}
 	public void setAmount(CellCoord amount) {this.amountCoord = amount;}
 	
-	@Override
-	public void afterPropertiesSet() throws Exception {
-		if (templateFileName == null || templateFileName.isEmpty())
-			return;
-		
-		workbook = new HSSFWorkbook(getClass().getClassLoader().getResourceAsStream("xls/templates/" + templateFileName));
-		
-		isValidConfig = true;
-	}
-	
 	public Workbook applyParams(PropertyValueSet values, Double amount) {
-		Workbook newWorkbook = workbook;
+		Workbook newWorkbook = templateFile.getWorkbook();
 		
 		amountCoord.getCell(newWorkbook).setCellValue(amount);
 		
 		for(PropertyValue value : values.getValueSet())
-			value.applyParam(workbook);
+			value.applyParam(templateFile.getWorkbook());
 		
 		if (newWorkbook instanceof HSSFWorkbook)
 			HSSFFormulaEvaluator.evaluateAllFormulaCells(newWorkbook);

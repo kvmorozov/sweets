@@ -4,9 +4,14 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Прокладка 5х слойная -->
+
+    <bean id="prokl5_template" class="ru.morozov.utils.components.xls.XlsFile">
+        <property name="root" value="xls/templates/"/>
+        <property name="fileName" value="prokl5.xls"/>
+    </bean>
 	
 	<bean id="prokl5" class="ru.morozov.sweetApp.config.templates.PaperTemplate">
-		<property name="templateFileName" value="prokl5.xls"/>
+		<property name="templateFile" ref="prokl5_template"/>
 		<property name="properties" ref="prokl5_props"/>
 		<property name="amount">
 			<bean class="ru.morozov.sweetApp.config.base.CellCoord">

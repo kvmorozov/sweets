@@ -4,9 +4,14 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Прокладка 3х слойная -->
+
+    <bean id="tart_template" class="ru.morozov.utils.components.xls.XlsFile">
+        <property name="root" value="xls/templates/"/>
+        <property name="fileName" value="tartalet.xls"/>
+    </bean>
 	
 	<bean id="tartalet" class="ru.morozov.sweetApp.config.templates.PaperTemplate">
-		<property name="templateFileName" value="tartalet.xls"/>
+		<property name="templateFile" ref="tart_template"/>
 		<property name="properties" ref="tartalet_props"/>
 		<property name="amount">
 			<bean class="ru.morozov.sweetApp.config.base.CellCoord">

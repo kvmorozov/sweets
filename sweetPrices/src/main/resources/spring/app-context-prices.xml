@@ -40,11 +40,33 @@
 	<!-- Фабрики -->
 	
 	<bean id="pifPaints" class="ru.morozov.sweetApp.config.prices.PaintPriceItemFactory"/>
-	
+
+    <!-- Файлы с ценами -->
+
+    <bean id="priceList_paper_xls" class="ru.morozov.utils.components.xls.XlsFile">
+        <property name="root" value="xls/prices/"/>
+        <property name="fileName" value="Наименование материала в 1с и тех карте + цены.xlsx"/>
+    </bean>
+
+    <bean id="priceList_glue_xls" class="ru.morozov.utils.components.xls.XlsFile">
+        <property name="root" value="xls/prices/"/>
+        <property name="fileName" value="Наименование клей + цены.xlsx"/>
+    </bean>
+
+    <bean id="priceList_other_xls" class="ru.morozov.utils.components.xls.XlsFile">
+        <property name="root" value="xls/prices/"/>
+        <property name="fileName" value="Наименование прочее + цены.xlsx"/>
+    </bean>
+
+    <bean id="priceList_paints_xls" class="ru.morozov.utils.components.xls.XlsFile">
+        <property name="root" value="xls/prices/"/>
+        <property name="fileName" value="Наименование краски + цены.xlsx"/>
+    </bean>
+
 	<!-- Цены -->
 	
 	<bean id="priceList_paper" class="ru.morozov.sweetApp.config.prices.PriceList">
-		<property name="priceListFileName" value="Наименование материала в 1с и тех карте + цены.xlsx"/>
+		<property name="priceListFile" ref="priceList_paper_xls"/>
 		<property name="descColumn" value="0"/>
 		<property name="nameColumn" value="3"/>
 		<property name="price1Column" value="6"/>
@@ -81,7 +103,7 @@
 	</bean>
 	
 	<bean id="priceList_glue" class="ru.morozov.sweetApp.config.prices.PriceList">
-		<property name="priceListFileName" value="Наименование клей + цены.xlsx"/>
+		<property name="priceListFile" ref="priceList_glue_xls"/>
 		<property name="descColumn" value="0"/>
 		<property name="nameColumn" value="0"/>
 		<property name="price1Column" value="3"/>
@@ -109,7 +131,7 @@
 	</bean>
 	
 	<bean id="priceList_other" class="ru.morozov.sweetApp.config.prices.PriceList">
-		<property name="priceListFileName" value="Наименование прочее + цены.xlsx"/>
+		<property name="priceListFile" ref="priceList_other_xls"/>
 		<property name="descColumn" value="0"/>
 		<property name="nameColumn" value="0"/>
 		<property name="price1Column" value="3"/>
@@ -145,7 +167,7 @@
 	</bean>
 	
 	<bean id="priceList_paints" class="ru.morozov.sweetApp.config.prices.PriceList">
-		<property name="priceListFileName" value="Наименование краски + цены.xlsx"/>
+		<property name="priceListFile" ref="priceList_paints_xls"/>
 		<property name="descColumn" value="0"/>
 		<property name="nameColumn" value="0"/>
 		<property name="price1Column" value="3"/>

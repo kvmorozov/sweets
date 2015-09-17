@@ -1,26 +1,19 @@
 package ru.morozov.sweetApp.config.prices;
 
-import java.io.IOException;
+import javafx.beans.property.SimpleObjectProperty;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.beans.factory.InitializingBean;
+import ru.morozov.utils.ParserUtils;
+import ru.morozov.utils.components.xls.XlsFile;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javafx.beans.property.SimpleObjectProperty;
-
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.poifs.filesystem.OfficeXmlFileException;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.beans.factory.InitializingBean;
-
-import ru.morozov.utils.ParserUtils;
-
 public class PriceList implements InitializingBean {
 	
-	private String priceListFileName;
-	private Workbook workbook;
-	private boolean isValidConfig = false;
+	private XlsFile priceListFile;
 	private List<PriceItem> prices;
 	private Map<String, PriceItem> pricesMap;
 	private int descColumn, nameColumn, price1Column, price2Column, firstRow, lastRow, densityColumn = -1;
@@ -29,11 +22,11 @@ public class PriceList implements InitializingBean {
 	
 	public SimpleObjectProperty<PriceItem> currentItem = new SimpleObjectProperty<>();
 	
-	public String getPriceListFileName() {return priceListFileName;}
-	public void setPriceListFileName(String priceListFileName) {this.priceListFileName = priceListFileName;}
+	public XlsFile getPriceListFile() {return priceListFile;}
+	public void setPriceListFile(XlsFile priceListFileName) {this.priceListFile = priceListFileName;}
 	
-	public boolean isValidConfig() {return isValidConfig;}
-	public Workbook getWorkbook() {return workbook;}
+	public boolean isValidConfig() {return priceListFile.isValidConfig();}
+	public Workbook getWorkbook() {return priceListFile.getWorkbook();}
 	
 	public List<PriceItem> getPrices() {return prices;}
 	public void setPrices(List<PriceItem> prices) {this.prices = prices;}
@@ -67,26 +60,8 @@ public class PriceList implements InitializingBean {
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		if (priceListFileName == null || priceListFileName.isEmpty())
-			return;
-		
-		try {
-			workbook = new HSSFWorkbook(getClass().getClassLoader().getResourceAsStream("xls/prices/" + priceListFileName));
-		} 
-		catch (OfficeXmlFileException ox) {
-			try {
-				workbook = new XSSFWorkbook (getClass().getClassLoader().getResourceAsStream("xls/prices/" + priceListFileName));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		pricesMap = new HashMap<>();
+        Workbook workbook = getWorkbook();
 		
 		if (prices != null)
 			for(PriceItem price : prices) {
@@ -128,8 +103,6 @@ public class PriceList implements InitializingBean {
 				pricesMap.put(price.getItem().getItemName(), price);
 			}
 		}
-		
-		isValidConfig = true;
 	}
 	
 	public Double getPrice(String itemName) {return pricesMap.containsKey(itemName) ? pricesMap.get(itemName).getPrice() : 0;}
