@@ -4,10 +4,25 @@ import javafx.scene.control.TextField;
 
 public class NumberTextField extends TextField {
 
+    private Integer minValue, maxValue, defaultValue;
+
+    public NumberTextField() {this(0, Integer.MAX_VALUE, 1);}
+
+    public NumberTextField(Integer minValue, Integer maxValue, Integer defaultValue) {
+        super();
+        this.minValue = minValue;
+        this.maxValue = maxValue;
+        this.defaultValue = defaultValue;
+
+        if (defaultValue != null)
+            setText(String.valueOf(defaultValue));
+    }
+
 	@Override
 	public void replaceText(int start, int end, String text) {
-		if (validate(text)) {
-			super.replaceText(start, end, text);
+        super.replaceText(start, end, text);
+		if (!validate(text)) {
+			undo();
 		}
 	}
 
@@ -18,7 +33,20 @@ public class NumberTextField extends TextField {
 		}
 	}
 
-	private boolean validate(String text) {return ("".equals(text) || text.matches("[0-9]"));}
+	private boolean validate(String text) {
+        if (!("".equals(text) || text.matches("[0-9]")))
+                return false;
+
+        String textValue = getText();
+
+        if (textValue == null || textValue.length() == 0)
+            return true;
+
+        int value = Integer.valueOf(textValue);
+
+        return ((minValue != null && value >= minValue) || minValue == null) &&
+               ((maxValue != null && value <= maxValue) || maxValue == null);
+    }
 	
 	public Double getDoubleValue() {return getText() == null || getText().isEmpty() ? 0 : Double.valueOf(getText());}
 }

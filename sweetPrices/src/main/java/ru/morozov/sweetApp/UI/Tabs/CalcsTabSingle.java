@@ -1,6 +1,10 @@
 package ru.morozov.sweetApp.UI.Tabs;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -15,6 +19,8 @@ import ru.morozov.sweetApp.Utils.Constants.l12n;
 import ru.morozov.sweetApp.config.*;
 import ru.morozov.sweetApp.config.base.IPriceProducer;
 import ru.morozov.sweetApp.config.prices.PriceItem;
+import ru.morozov.sweetApp.config.properties.ComplexSweetProperty;
+import ru.morozov.sweetApp.config.properties.SweetProperty;
 import ru.morozov.sweetApp.config.templates.SweetTemplate;
 import ru.morozov.sweetApp.generate.BaseSweetGenerator;
 import ru.morozov.utils.components.NumberTextField;
@@ -70,6 +76,17 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
                     if (itemsBox.getItems().size() > 0) {
                         itemsBox.setValue(itemsBox.getItems().get(0));
                         lswp.getCurrentItem().bind(itemsBox.valueProperty());
+
+                        lswp.getCurrentItem().addListener(observable -> {
+                            System.out.println("Invalidated");
+                        });
+
+                        lswp.getCurrentItem().addListener(new ChangeListener<PriceItem>() {
+                            @Override
+                            public void changed(ObservableValue<? extends PriceItem> observable, PriceItem oldValue, PriceItem newValue) {
+                                System.out.println("Changed");
+                            }
+                        });
                     }
 
                     gridProps.add(new Label(property.getPropertyName() + ":"), 0, rowIndex);
@@ -79,7 +96,7 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
 
                 }
                 else {
-                    NumberTextField valueInput = new NumberTextField();
+                    NumberTextField valueInput = new NumberTextField(property.getMinValue(), property.getMaxValue(), property.getDefaultValue());
                     valueFieldList.add(valueInput);
 
                     pHolder.getParameters().get(0).getValueStrProperty(property.getPropertyName()).bind(valueInput.textProperty());

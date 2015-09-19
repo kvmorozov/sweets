@@ -145,7 +145,7 @@
 
     <!-- Свойства -->
 	
-	<bean id="prok3_prop_length" class="ru.morozov.sweetApp.config.SweetProperty">
+	<bean id="prok3_prop_length" class="ru.morozov.sweetApp.config.properties.SweetProperty">
 		<property name="propertyName" value="Длина"/>
 		<property name="coord">
 			<bean class="ru.morozov.sweetApp.config.base.CellCoord">
@@ -154,7 +154,7 @@
 			</bean>
 		</property>
 	</bean>
-	<bean id="prok3_prop_width" class="ru.morozov.sweetApp.config.SweetProperty">
+	<bean id="prok3_prop_width" class="ru.morozov.sweetApp.config.properties.SweetProperty">
 		<property name="propertyName" value="Ширина"/>
 		<property name="coord">
 			<bean class="ru.morozov.sweetApp.config.base.CellCoord">
@@ -185,7 +185,7 @@
 			<list>
 				<ref bean="prok3_prop_length"/>
 				<ref bean="prok3_prop_width"/>
-				<bean class="ru.morozov.sweetApp.config.ListSweetProperty">
+				<bean class="ru.morozov.sweetApp.config.properties.ListSweetProperty">
 					<property name="propertyName" value="Накатка"/>
 					<property name="priceList" ref="priceList_paints"/>
 				</bean>

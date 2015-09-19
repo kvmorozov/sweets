@@ -2,6 +2,7 @@ package ru.morozov.sweetApp.config;
 
 import org.springframework.beans.factory.InitializingBean;
 import ru.morozov.sweetApp.config.base.IPriceProducer;
+import ru.morozov.sweetApp.config.properties.SweetProperty;
 import ru.morozov.utils.components.xls.XlsFile;
 
 import java.util.List;

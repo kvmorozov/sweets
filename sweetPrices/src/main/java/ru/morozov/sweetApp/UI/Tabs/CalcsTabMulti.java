@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import ru.morozov.sweetApp.SweetContext;
 import ru.morozov.sweetApp.Utils.Constants.l12n;
 import ru.morozov.sweetApp.config.*;
+import ru.morozov.sweetApp.config.properties.SweetProperty;
 import ru.morozov.sweetApp.config.templates.SweetTemplate;
 import ru.morozov.sweetApp.generate.BaseSweetGenerator;
 import ru.morozov.utils.components.NumberTextField;
@@ -50,7 +51,7 @@ public class CalcsTabMulti extends Tab implements ICalcsTab {
 						for(SweetProperty property : template.getProperties().getProperties()) {
 							TableColumn<PropertyValueSet, Double> column = new TableColumn<>(property.getPropertyName());
 							
-							column.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>(p.getValue().getValue(property.getPropertyName())));
+							column.setCellValueFactory(p -> new ReadOnlyObjectWrapper<>((Double)p.getValue().getValue(property.getPropertyName())));
 							
 							column.setCellFactory(col -> new TableCell<PropertyValueSet, Double>() {
 								@Override 

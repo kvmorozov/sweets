@@ -1,8 +1,8 @@
 package ru.morozov.sweetApp.config.templates.paper;
 
-import ru.morozov.sweetApp.config.CalculatedPropertyValue;
+import ru.morozov.sweetApp.config.values.CalculatedPropertyValue;
 import ru.morozov.sweetApp.config.PropertyValueSet;
-import ru.morozov.sweetApp.config.SweetProperty;
+import ru.morozov.sweetApp.config.properties.SweetProperty;
 import ru.morozov.utils.components.xls.XlsFile;
 
 public class StripesPropertyValue extends CalculatedPropertyValue {
@@ -18,7 +18,7 @@ public class StripesPropertyValue extends CalculatedPropertyValue {
 		Double resultStripes = 1d;
 		
 		for(SweetProperty dimension : stripesProperty.getDimensions()) {
-			Double dimensionValue = valueSet.getValue(dimension.getPropertyName());
+			Double dimensionValue = (Double)valueSet.getValue(dimension.getPropertyName());
 			Double stripes = Math.floor(stripesProperty.getRealWidth() / dimensionValue);
 			Double trunk = stripesProperty.getRealWidth() - stripes * dimensionValue;
 			

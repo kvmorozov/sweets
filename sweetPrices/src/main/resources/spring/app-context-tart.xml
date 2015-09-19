@@ -81,7 +81,7 @@
 	<bean id="tartalet_props" class="ru.morozov.sweetApp.config.SweetPropertySet">
 		<property name="properties">
 			<list>
-				<bean class="ru.morozov.sweetApp.config.SweetProperty">
+				<bean class="ru.morozov.sweetApp.config.properties.SweetProperty">
 					<property name="propertyName" value="Диаметр заготовки"/>
 					<property name="coord">
 						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
@@ -90,7 +90,7 @@
 						</bean>
 					</property>
 				</bean>
-				<bean class="ru.morozov.sweetApp.config.SweetProperty">
+				<bean class="ru.morozov.sweetApp.config.properties.SweetProperty">
 					<property name="propertyName" value="Диаметр донышка"/>
 					<property name="coord">
 						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
@@ -99,7 +99,7 @@
 						</bean>
 					</property>
 				</bean>
-				<bean class="ru.morozov.sweetApp.config.SweetProperty">
+				<bean class="ru.morozov.sweetApp.config.properties.SweetProperty">
 					<property name="propertyName" value="Высота стенки"/>
 					<property name="coord">
 						<bean class="ru.morozov.sweetApp.config.base.CellCoord">
@@ -108,7 +108,7 @@
 						</bean>
 					</property>
 				</bean>
-				<bean class="ru.morozov.sweetApp.config.SweetProperty">
+				<bean class="ru.morozov.sweetApp.config.properties.SweetProperty">
 					<property name="propertyName" value="Диаметр раскрыт."/>
 					<property name="coord">
 						<bean class="ru.morozov.sweetApp.config.base.CellCoord">

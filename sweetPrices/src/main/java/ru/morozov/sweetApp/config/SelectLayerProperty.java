@@ -1,7 +1,10 @@
 package ru.morozov.sweetApp.config;
 
 import ru.morozov.sweetApp.config.base.CellCoord;
-import ru.morozov.sweetApp.config.templates.paper.SelectLayerPropertyValue;
+import ru.morozov.sweetApp.config.properties.ListSweetProperty;
+import ru.morozov.sweetApp.config.properties.SweetProperty;
+import ru.morozov.sweetApp.config.values.SelectLayerPropertyValue;
+import ru.morozov.sweetApp.config.values.DoublePropertyValue;
 
 /**
  * Created by km on 04.08.2015.
@@ -14,7 +17,7 @@ public class SelectLayerProperty extends ListSweetProperty {
     public void setPaperCoord(CellCoord paperCoord) {this.paperCoord = paperCoord;}
 
     @Override
-    public PropertyValue createPropertyValue(SweetProperty property, PropertyValueSet valueSet) {
-        return new SelectLayerPropertyValue(0d, property, valueSet);
+    public DoublePropertyValue createPropertyValue(PropertyValueSet valueSet) {
+        return new SelectLayerPropertyValue(0d, this, valueSet);
     }
 }

@@ -18,6 +18,8 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import ru.morozov.sweetApp.config.properties.SweetProperty;
+import ru.morozov.sweetApp.config.values.DoublePropertyValue;
 import ru.morozov.utils.ParserUtils;
 
 public class ParametersHolder {
@@ -107,10 +109,10 @@ public class ParametersHolder {
 
 				switch (cell.getCellType()) {
 					case Cell.CELL_TYPE_NUMERIC:
-						paramsSet.add(new PropertyValue(cell.getNumericCellValue(), property));
+						paramsSet.add(new DoublePropertyValue(cell.getNumericCellValue(), property));
 						break;
 					case Cell.CELL_TYPE_STRING:
-						paramsSet.add(new PropertyValue(ParserUtils.getDoubleResult(cell.getStringCellValue()), property));
+						paramsSet.add(new DoublePropertyValue(ParserUtils.getDoubleResult(cell.getStringCellValue()), property));
 						break;
 					default:
 						break;

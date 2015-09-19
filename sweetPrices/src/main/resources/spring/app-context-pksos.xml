@@ -3,35 +3,132 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <import resource="app-context-pakets.xml"/>
+
     <!-- Пакеты SOS SRM -->
 
-    <bean id="pksos_template" class="ru.morozov.utils.components.xls.XlsFile">
-        <property name="root" value="xls/templates/"/>
-        <property name="fileName" value="pakets.xls"/>
-    </bean>
-
-    <bean id="pksos" class="ru.morozov.sweetApp.config.templates.PaperTemplate">
+    <bean id="pksos" class="ru.morozov.sweetApp.config.templates.SweetTemplate">
         <property name="templateFile" ref="pksos_template"/>
         <property name="properties" ref="pksos_props"/>
-    </bean>
-
-    <!-- Свойства -->
-
-    <bean id="pksos_prop_paper" class="ru.morozov.sweetApp.config.DropDownSweetProperty">
-        <property name="propertyName" value="Марка бумаги"/>
-        <property name="coord">
+        <property name="amount">
             <bean class="ru.morozov.sweetApp.config.base.CellCoord">
                 <property name="col" value="1"/>
-                <property name="row" value="6"/>
+                <property name="row" value="11"/>
             </bean>
         </property>
     </bean>
+
+    <!-- Свойства -->
 
     <bean id="pksos_props" class="ru.morozov.sweetApp.config.SweetPropertySet">
         <property name="propertiesHolder" ref="pksos_template"/>
         <property name="properties">
             <list>
-                <ref bean="pksos_prop_paper"/>
+                <bean class="ru.morozov.sweetApp.config.properties.DropDownSweetProperty">
+                    <property name="propertyName" value="Марка бумаги"/>
+                    <property name="coord">
+                        <bean class="ru.morozov.sweetApp.config.base.CellCoord">
+                            <property name="col" value="1"/>
+                            <property name="row" value="6"/>
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="ru.morozov.sweetApp.config.properties.DropDownSweetProperty">
+                    <property name="propertyName" value="Плотность бумаги, г/кв.м"/>
+                    <property name="coord">
+                        <bean class="ru.morozov.sweetApp.config.base.CellCoord">
+                            <property name="col" value="1"/>
+                            <property name="row" value="7"/>
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="ru.morozov.sweetApp.config.properties.SweetProperty">
+                    <property name="propertyName" value="Длина пакета, мм"/>
+                    <property name="coord">
+                        <bean class="ru.morozov.sweetApp.config.base.CellCoord">
+                            <property name="col" value="1"/>
+                            <property name="row" value="8"/>
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="ru.morozov.sweetApp.config.properties.SweetProperty">
+                    <property name="propertyName" value="Ширина пакета, мм"/>
+                    <property name="coord">
+                        <bean class="ru.morozov.sweetApp.config.base.CellCoord">
+                            <property name="col" value="1"/>
+                            <property name="row" value="9"/>
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="ru.morozov.sweetApp.config.properties.SweetProperty">
+                    <property name="propertyName" value="Высота пакета, мм"/>
+                    <property name="coord">
+                        <bean class="ru.morozov.sweetApp.config.base.CellCoord">
+                            <property name="col" value="1"/>
+                            <property name="row" value="10"/>
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="ru.morozov.sweetApp.config.properties.SweetProperty">
+                    <property name="propertyName" value="Количество красок"/>
+                    <property name="coord">
+                        <bean class="ru.morozov.sweetApp.config.base.CellCoord">
+                            <property name="col" value="1"/>
+                            <property name="row" value="11"/>
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="ru.morozov.sweetApp.config.properties.SweetProperty">
+                    <property name="propertyName" value="Запечатка, %"/>
+                    <property name="minValue" value="0"/>
+                    <property name="maxValue" value="100"/>
+                    <property name="defaultValue" value="100"/>
+                    <property name="coord">
+                        <bean class="ru.morozov.sweetApp.config.base.CellCoord">
+                            <property name="col" value="1"/>
+                            <property name="row" value="13"/>
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="ru.morozov.sweetApp.config.properties.ListSweetProperty">
+                    <property name="propertyName" value="Подворот"/>
+                    <property name="coord">
+                        <bean class="ru.morozov.sweetApp.config.base.CellCoord">
+                            <property name="col" value="1"/>
+                            <property name="row" value="14"/>
+                        </bean>
+                    </property>
+                    <property name="priceList" ref="pakets_podvorot"/>
+                </bean>
+                <bean class="ru.morozov.sweetApp.config.properties.ListSweetProperty">
+                    <property name="propertyName" value="Краска"/>
+                    <property name="coord">
+                        <bean class="ru.morozov.sweetApp.config.base.CellCoord">
+                            <property name="col" value="1"/>
+                            <property name="row" value="16"/>
+                        </bean>
+                    </property>
+                    <property name="priceList" ref="pakets_paints"/>
+                </bean>
+                <bean class="ru.morozov.sweetApp.config.properties.SweetProperty">
+                    <property name="propertyName" value="Количество пакетов в коробе"/>
+                    <property name="coord">
+                        <bean class="ru.morozov.sweetApp.config.base.CellCoord">
+                            <property name="col" value="1"/>
+                            <property name="row" value="17"/>
+                        </bean>
+                    </property>
+                </bean>
+                <bean class="ru.morozov.sweetApp.config.properties.ListSweetProperty">
+                    <property name="propertyName" value="Упаковка"/>
+                    <property name="coord">
+                        <bean class="ru.morozov.sweetApp.config.base.CellCoord">
+                            <property name="col" value="1"/>
+                            <property name="row" value="18"/>
+                        </bean>
+                    </property>
+                    <property name="priceList" ref="pakets_boxes"/>
+                </bean>
             </list>
         </property>
     </bean>

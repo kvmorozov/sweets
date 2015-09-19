@@ -1,10 +1,13 @@
-package ru.morozov.sweetApp.config;
+package ru.morozov.sweetApp.config.properties;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import ru.morozov.sweetApp.config.PropertyValueSet;
 import ru.morozov.sweetApp.config.base.IPriceProducer;
 import ru.morozov.sweetApp.config.prices.PriceItem;
+import ru.morozov.sweetApp.config.values.AbstractPropertyValue;
+import ru.morozov.sweetApp.config.values.DropDownPropertyValue;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,5 +40,10 @@ public class DropDownSweetProperty extends SweetProperty implements IPriceProduc
 
         itemList.removeAll();
         itemList.addAll(priceItems);
+    }
+
+    @Override
+    public AbstractPropertyValue createPropertyValue(PropertyValueSet valueSet) {
+        return new DropDownPropertyValue(currentItem, this);
     }
 }

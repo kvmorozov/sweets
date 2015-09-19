@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Файлы -->
+
+    <bean id="pksos_template" class="ru.morozov.utils.components.xls.XlsFile">
+        <property name="root" value="xls/templates/"/>
+        <property name="fileName" value="pakets.xls"/>
+    </bean>
+
+    <bean id="pkwnd_template" class="ru.morozov.utils.components.xls.XlsFile">
+        <property name="root" value="xls/templates/"/>
+        <property name="fileName" value="pakets.xls"/>
+        <property name="defaultSheet" value="1"/>
+    </bean>
+
+    <bean id="pakets_prices" class="ru.morozov.utils.components.xls.XlsFile">
+        <property name="root" value="xls/templates/"/>
+        <property name="fileName" value="pakets.xls"/>
+        <property name="defaultSheet" value="4"/>
+    </bean>
+
+    <!-- Списки -->
+
+    <bean id="pakets_podvorot" class="ru.morozov.sweetApp.config.prices.SelectList">
+        <property name="prices">
+            <list>
+                <bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+                    <property name="desc" value="SOS"/>
+                    <property name="price" value="0"/>
+                </bean>
+                <bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+                    <property name="desc" value="SRM"/>
+                    <property name="price" value="1"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Цены -->
+
+    <bean id="pakets_paints" class="ru.morozov.sweetApp.config.prices.PriceList">
+        <property name="priceListFile" ref="pakets_prices"/>
+        <property name="nameColumn" value="5"/>
+        <property name="price1Column" value="6"/>
+        <property name="firstRow" value="2"/>
+        <property name="lastRow" value="5"/>
+    </bean>
+
+    <bean id="pakets_boxes" class="ru.morozov.sweetApp.config.prices.PriceList">
+        <property name="priceListFile" ref="pakets_prices"/>
+        <property name="nameColumn" value="11"/>
+        <property name="price1Column" value="12"/>
+        <property name="firstRow" value="2"/>
+        <property name="lastRow" value="5"/>
+    </bean>
+
+</beans>

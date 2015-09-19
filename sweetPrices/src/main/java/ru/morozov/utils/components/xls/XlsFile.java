@@ -36,17 +36,13 @@ public class XlsFile implements InitializingBean {
     private List<? extends DataValidation> dvRecords;
     private EvaluationWorkbook evalWorkbook;
 
-    public String getFileName() {return fileName;}
     public void setFileName(String fileName) {this.fileName = fileName;}
-
-    public String getRoot() {return root;}
     public void setRoot(String root) {this.root = root;}
 
     public boolean isValidConfig() {return isValidConfig;}
 
     public Workbook getWorkbook() {return workbook;}
 
-    public int getDefaultSheet() {return defaultSheet;}
     public void setDefaultSheet(int defaultSheet) {this.defaultSheet = defaultSheet;}
 
     @Override
@@ -155,7 +151,7 @@ public class XlsFile implements InitializingBean {
                         String _arrName = _names[1];
                         int sheetIndex = evalWorkbook.getSheetIndex(_sheetName);
 
-                        EvaluationName nm = ((FormulaParsingWorkbook)evalWorkbook).getName(_arrName, sheetIndex);
+                        EvaluationName nm = evalWorkbook.getName(_arrName, sheetIndex);
                         if(nm == null || !nm.isRange()){
                             throw new RuntimeException("Specified name '" + _arrName + "' is not a range as expected.");
                         }

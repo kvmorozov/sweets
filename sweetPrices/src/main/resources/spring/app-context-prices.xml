@@ -104,7 +104,6 @@
 	
 	<bean id="priceList_glue" class="ru.morozov.sweetApp.config.prices.PriceList">
 		<property name="priceListFile" ref="priceList_glue_xls"/>
-		<property name="descColumn" value="0"/>
 		<property name="nameColumn" value="0"/>
 		<property name="price1Column" value="3"/>
 		<property name="price2Column" value="3"/>
@@ -132,7 +131,6 @@
 	
 	<bean id="priceList_other" class="ru.morozov.sweetApp.config.prices.PriceList">
 		<property name="priceListFile" ref="priceList_other_xls"/>
-		<property name="descColumn" value="0"/>
 		<property name="nameColumn" value="0"/>
 		<property name="price1Column" value="3"/>
 		<property name="price2Column" value="4"/>

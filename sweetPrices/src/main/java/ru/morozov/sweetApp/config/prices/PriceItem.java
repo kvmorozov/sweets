@@ -2,8 +2,8 @@ package ru.morozov.sweetApp.config.prices;
 
 import org.apache.poi.ss.usermodel.Cell;
 import ru.morozov.sweetApp.Utils.Constants.l12n;
-import ru.morozov.sweetApp.config.ListSweetProperty;
-import ru.morozov.sweetApp.config.SweetProperty;
+import ru.morozov.sweetApp.config.properties.ListSweetProperty;
+import ru.morozov.sweetApp.config.properties.SweetProperty;
 import ru.morozov.sweetApp.config.base.CellCoord;
 import ru.morozov.utils.components.xls.XlsFile;
 
@@ -35,12 +35,13 @@ public class PriceItem {
 	public SweetItem getItem() {return item;}
 	public void setItem(SweetItem item) {this.item = item;}
 	
-	public Double getPrice() {return price == null || price <= 0 ? Double.max(price1, price2) : price;}
+	public Double getPrice() {return price == null || price <= 0 ?
+            price1 != null && price2 != null ? Double.max(price1, price2) : price1 : price;}
 	public void setPrice(Double price) {this.price = price;}
 	
 	public Double getPrice1() {return price1;}
 	public void setPrice1(Double price1) {this.price1 = price1;}
-	
+
 	public Double getPrice2() {return price2;}
 	public void setPrice2(Double price2) {this.price2 = price2;}
 	
@@ -66,7 +67,7 @@ public class PriceItem {
 	public void setReferenceProperty(SweetProperty referenceProperty) {this.referenceProperty = referenceProperty;}
 
 	@Override
-	public String toString() {return desc;}
+	public String toString() {return desc == null ? name : desc;}
 	
 	public static PriceItem getEmptyPrice() {
 		PriceItem emptyPrice = new PriceItem();
