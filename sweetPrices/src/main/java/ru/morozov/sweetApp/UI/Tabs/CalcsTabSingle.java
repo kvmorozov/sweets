@@ -1,7 +1,6 @@
 package ru.morozov.sweetApp.UI.Tabs;
 
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -14,6 +13,7 @@ import javafx.util.converter.NumberStringConverter;
 import ru.morozov.sweetApp.SweetContext;
 import ru.morozov.sweetApp.Utils.Constants.l12n;
 import ru.morozov.sweetApp.config.*;
+import ru.morozov.sweetApp.config.base.IPriceProducer;
 import ru.morozov.sweetApp.config.prices.PriceItem;
 import ru.morozov.sweetApp.config.templates.SweetTemplate;
 import ru.morozov.sweetApp.generate.BaseSweetGenerator;
@@ -63,14 +63,16 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
             valueFieldList.clear();
 
             for(SweetProperty property : template.getProperties().getProperties()) {
-                if (property instanceof ListSweetProperty) {
-                    ListSweetProperty lswp = (ListSweetProperty) property;
+                if (property instanceof IPriceProducer) {
+                    IPriceProducer lswp = (IPriceProducer) property;
 
-                    ComboBox<PriceItem> itemsBox = new ComboBox<>(FXCollections.observableArrayList(lswp.getPriceList().getPrices()));
-                    itemsBox.setValue(itemsBox.getItems().get(0));
-                    lswp.getPriceList().currentItem.bind(itemsBox.valueProperty());
+                    ComboBox<PriceItem> itemsBox = new ComboBox<>(lswp.getItemList());
+                    if (itemsBox.getItems().size() > 0) {
+                        itemsBox.setValue(itemsBox.getItems().get(0));
+                        lswp.getCurrentItem().bind(itemsBox.valueProperty());
+                    }
 
-                    gridProps.add(new Label(lswp.getPropertyName() + ":"), 0, rowIndex);
+                    gridProps.add(new Label(property.getPropertyName() + ":"), 0, rowIndex);
                     gridProps.add(itemsBox, 1, rowIndex);
                 }
                 else if (property instanceof ComplexSweetProperty) {

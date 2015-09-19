@@ -20,6 +20,8 @@ public class PriceItem {
 	protected SweetProperty referenceProperty;
 	
 	public PriceItem() {}
+
+    public PriceItem(String desc) {this.desc = desc;}
 	
 	public PriceItem(int row) {
 		coord = new CellCoord(row);

@@ -30,6 +30,7 @@
     </bean>
 
     <bean id="pkwnd_props" class="ru.morozov.sweetApp.config.SweetPropertySet">
+        <property name="propertiesHolder" ref="pkwnd_template"/>
         <property name="properties">
             <list>
                 <ref bean="pkwnd_prop_paper"/>

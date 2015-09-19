@@ -28,6 +28,7 @@
     </bean>
 
     <bean id="pksos_props" class="ru.morozov.sweetApp.config.SweetPropertySet">
+        <property name="propertiesHolder" ref="pksos_template"/>
         <property name="properties">
             <list>
                 <ref bean="pksos_prop_paper"/>
