@@ -62,7 +62,7 @@ public class PropertyValueSet {
 			}
 		}
 		
-		return sb.toString().substring(0, 20);
+		return sb.toString().length() <= 20 ? sb.toString() : sb.toString().substring(0, 20);
 	}
 	
 	public StringProperty getTotalPropertyStr() {return totalPropertyStr;}
