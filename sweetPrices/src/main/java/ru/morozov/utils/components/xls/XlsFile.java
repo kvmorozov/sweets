@@ -5,9 +5,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.OfficeXmlFileException;
 import org.apache.poi.ss.formula.*;
 import org.apache.poi.ss.formula.eval.AreaEvalBase;
-import org.apache.poi.ss.formula.eval.StringEval;
 import org.apache.poi.ss.formula.eval.ValueEval;
-import org.apache.poi.ss.formula.functions.Indirect;
 import org.apache.poi.ss.formula.ptg.Area3DPtg;
 import org.apache.poi.ss.formula.ptg.Ptg;
 import org.apache.poi.ss.usermodel.Cell;
@@ -183,12 +181,6 @@ public class XlsFile implements InitializingBean {
 
                             return null;
                         }
-
-                        ValueEval result = Indirect.instance.evaluate(new StringEval[]{new StringEval("Служебный!Марка_бумаги")},
-                                            new OperationEvaluationContext(new WorkbookEvaluator(evalWorkbook, null, null), evalWorkbook,
-                                            defaultSheet, cell.getRowIndex(), cell.getColumnIndex(), null));
-
-                        return null;
                    }
                 }
 
