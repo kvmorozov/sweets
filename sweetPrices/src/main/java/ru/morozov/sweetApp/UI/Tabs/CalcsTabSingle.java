@@ -4,10 +4,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
@@ -135,7 +132,9 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
             gridProps.setUserData(pHolder);
         });
 
-		borderPane.setCenter(gridProps);
+        ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setContent(gridProps);
+		borderPane.setCenter(scrollPane);
        
         runButton.setDisable(true);
         

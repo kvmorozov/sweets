@@ -34,6 +34,17 @@ public class FilteredListProperty extends ListSweetProperty {
 
     @Override
     public void refresh() {
+        boolean conditionsChanged = false;
+        for (FilterCondition condition : conditions)
+            if (condition.getFilterProperty().getCurrentItem().get() != null &&
+                    !condition.getFilterProperty().getCurrentItem().get().getDesc().equals(condition.getOldValue())) {
+                conditionsChanged = true;
+                break;
+            }
+
+        if (!conditionsChanged)
+            return;
+
         PriceList _pList = (PriceList) getPriceList();
 
         ArrayList<PriceItem> _filterArray = new ArrayList<>();
@@ -57,6 +68,7 @@ public class FilteredListProperty extends ListSweetProperty {
                 else {
                     if (sb.length() > 0)
                         sb.append("x");
+                    condition.setOldValue(_cellValue);
                     sb.append(_cellValue);
                 }
             }
