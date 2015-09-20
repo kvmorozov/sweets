@@ -35,7 +35,7 @@ public class PriceItem {
 	public SweetItem getItem() {return item;}
 	public void setItem(SweetItem item) {this.item = item;}
 	
-	public Double getPrice() {return price == null || price <= 0 ?
+	public Double getPrice() {return price == null || price < 0 ?
             price1 != null && price2 != null ? Double.max(price1, price2) : price1 : price;}
 	public void setPrice(Double price) {this.price = price;}
 	

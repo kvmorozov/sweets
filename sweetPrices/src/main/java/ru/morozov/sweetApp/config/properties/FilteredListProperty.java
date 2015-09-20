@@ -45,7 +45,7 @@ public class FilteredListProperty extends ListSweetProperty {
 
             for (FilterCondition condition : conditions) {
                 CellCoord _itemCell = _pItem.getCoord();
-                if (_itemCell == null)
+                if (_itemCell == null || condition.getFilterProperty().getCurrentItem() == null)
                     continue;
 
                 _itemCell.setCol(condition.getColumn());

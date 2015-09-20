@@ -30,7 +30,7 @@ public class DropDownSweetProperty extends SweetProperty implements IPriceProduc
 
     @Override
     public void refresh() {
-        Collection<PriceItem> priceItems = new ArrayList<>();
+        ArrayList<PriceItem> priceItems = new ArrayList<>();
 
         List<String> cellConstraints = getHolder().getPropertiesHolder().getCellConstraints(
                 getHolder().getPropertiesHolder().getCell(getCoord()));
@@ -38,7 +38,10 @@ public class DropDownSweetProperty extends SweetProperty implements IPriceProduc
         if (cellConstraints != null && cellConstraints.size() > 0)
             priceItems.addAll(cellConstraints.stream().map(PriceItem::new).collect(Collectors.toList()));
 
-        itemList.removeAll();
+        if (priceItems.size() > 0)
+            currentItem = new SimpleObjectProperty(priceItems.get(0));
+
+        itemList.clear();
         itemList.addAll(priceItems);
     }
 

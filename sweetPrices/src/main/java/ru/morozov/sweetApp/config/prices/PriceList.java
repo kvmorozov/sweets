@@ -27,8 +27,6 @@ public class PriceList extends SelectList implements InitializingBean {
 	public void setNameColumn(int nameColumn) {this.nameColumn = nameColumn;}
 	public void setPrice1Column(int price1Column) {this.price1Column = price1Column;}
 	public void setPrice2Column(int price2Column) {this.price2Column = price2Column;}
-    public Integer getFirstRow() {return firstRow;}
-    public Integer getLastRow() {return lastRow;}
     public void setFirstRow(int firstRow) {this.firstRow = firstRow;}
 	public void setLastRow(int lastRow) {this.lastRow = lastRow;}
 	public void setItemProperties(Map<String, Object> itemProperties) {this.itemProperties = itemProperties;}
