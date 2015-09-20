@@ -1,13 +1,13 @@
 package ru.morozov.sweetApp.UI.Tabs;
 
-import java.util.prefs.Preferences;
-
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import ru.morozov.sweetApp.SweetContext;
 import ru.morozov.sweetApp.Utils.Constants.l12n;
+
+import java.util.prefs.Preferences;
 
 public class SettingsTab extends Tab {
 	

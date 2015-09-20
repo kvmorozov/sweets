@@ -1,10 +1,10 @@
 package ru.morozov.sweetApp.config.properties;
 
-import ru.morozov.sweetApp.config.values.AbstractPropertyValue;
-import ru.morozov.sweetApp.config.values.DoublePropertyValue;
 import ru.morozov.sweetApp.config.PropertyValueSet;
 import ru.morozov.sweetApp.config.SweetPropertySet;
 import ru.morozov.sweetApp.config.base.CellCoord;
+import ru.morozov.sweetApp.config.values.AbstractPropertyValue;
+import ru.morozov.sweetApp.config.values.DoublePropertyValue;
 
 public class SweetProperty {
 	

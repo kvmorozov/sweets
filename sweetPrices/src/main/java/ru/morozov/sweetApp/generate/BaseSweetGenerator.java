@@ -1,6 +1,18 @@
 package ru.morozov.sweetApp.generate;
 
-import java.awt.Desktop;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import ru.morozov.sweetApp.SweetContext;
+import ru.morozov.sweetApp.config.ParametersHolder;
+import ru.morozov.sweetApp.config.PropertyValueSet;
+import ru.morozov.sweetApp.config.SystemConfigs;
+import ru.morozov.sweetApp.config.prices.PriceItem;
+import ru.morozov.sweetApp.config.prices.PricesSet;
+import ru.morozov.sweetApp.config.templates.SweetTemplate;
+import ru.morozov.utils.components.xls.XlsFile;
+
+import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,19 +23,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import ru.morozov.sweetApp.SweetContext;
-import ru.morozov.sweetApp.config.ParametersHolder;
-import ru.morozov.sweetApp.config.PropertyValueSet;
-import ru.morozov.sweetApp.config.SystemConfigs;
-import ru.morozov.sweetApp.config.prices.PriceItem;
-import ru.morozov.sweetApp.config.prices.PricesSet;
-import ru.morozov.sweetApp.config.templates.SweetTemplate;
-import ru.morozov.utils.components.xls.XlsFile;
 
 public class BaseSweetGenerator {
 	

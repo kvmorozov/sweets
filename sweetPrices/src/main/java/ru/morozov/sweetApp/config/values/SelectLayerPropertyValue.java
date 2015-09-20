@@ -1,10 +1,9 @@
 package ru.morozov.sweetApp.config.values;
 
-import ru.morozov.sweetApp.config.values.CalculatedPropertyValue;
 import ru.morozov.sweetApp.config.PropertyValueSet;
 import ru.morozov.sweetApp.config.SelectLayerProperty;
-import ru.morozov.sweetApp.config.properties.SweetProperty;
 import ru.morozov.sweetApp.config.prices.PriceItem;
+import ru.morozov.sweetApp.config.properties.SweetProperty;
 import ru.morozov.utils.components.xls.XlsFile;
 
 /**

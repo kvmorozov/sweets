@@ -1,9 +1,9 @@
 package ru.morozov.sweetApp.Utils.Constants;
 
+import ru.morozov.utils.UTF8Control;
+
 import java.util.Locale;
 import java.util.ResourceBundle;
-
-import ru.morozov.utils.UTF8Control;
 
 public interface l12n {
 	

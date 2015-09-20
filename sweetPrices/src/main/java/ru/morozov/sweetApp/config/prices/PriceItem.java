@@ -2,9 +2,9 @@ package ru.morozov.sweetApp.config.prices;
 
 import org.apache.poi.ss.usermodel.Cell;
 import ru.morozov.sweetApp.Utils.Constants.l12n;
+import ru.morozov.sweetApp.config.base.CellCoord;
 import ru.morozov.sweetApp.config.properties.ListSweetProperty;
 import ru.morozov.sweetApp.config.properties.SweetProperty;
-import ru.morozov.sweetApp.config.base.CellCoord;
 import ru.morozov.utils.components.xls.XlsFile;
 
 import java.util.Map;

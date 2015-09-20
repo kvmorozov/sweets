@@ -1,11 +1,11 @@
 package ru.morozov.sweetApp.config.templates.paper;
 
-import java.util.List;
-
-import ru.morozov.sweetApp.config.properties.ComplexSweetProperty;
-import ru.morozov.sweetApp.config.values.DoublePropertyValue;
 import ru.morozov.sweetApp.config.PropertyValueSet;
+import ru.morozov.sweetApp.config.properties.ComplexSweetProperty;
 import ru.morozov.sweetApp.config.properties.SweetProperty;
+import ru.morozov.sweetApp.config.values.DoublePropertyValue;
+
+import java.util.List;
 
 public class StripesSweetProperty extends ComplexSweetProperty {
 	

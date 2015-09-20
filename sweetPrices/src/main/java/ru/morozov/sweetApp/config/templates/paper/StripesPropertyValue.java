@@ -1,8 +1,8 @@
 package ru.morozov.sweetApp.config.templates.paper;
 
-import ru.morozov.sweetApp.config.values.CalculatedPropertyValue;
 import ru.morozov.sweetApp.config.PropertyValueSet;
 import ru.morozov.sweetApp.config.properties.SweetProperty;
+import ru.morozov.sweetApp.config.values.CalculatedPropertyValue;
 import ru.morozov.utils.components.xls.XlsFile;
 
 public class StripesPropertyValue extends CalculatedPropertyValue {
