@@ -78,7 +78,7 @@
                         </bean>
                     </property>
                 </bean>
-                <bean class="ru.morozov.sweetApp.config.properties.SweetProperty">
+                <bean class="ru.morozov.sweetApp.config.properties.PercentProperty">
                     <property name="propertyName" value="Запечатка, %"/>
                     <property name="minValue" value="0"/>
                     <property name="maxValue" value="100"/>
