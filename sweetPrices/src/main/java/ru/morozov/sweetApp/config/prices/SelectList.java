@@ -1,7 +1,6 @@
 package ru.morozov.sweetApp.config.prices;
 
 import javafx.beans.property.SimpleObjectProperty;
-import org.springframework.beans.factory.InitializingBean;
 
 import java.util.List;
 

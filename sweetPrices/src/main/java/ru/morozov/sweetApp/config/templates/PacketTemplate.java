@@ -1,5 +1,5 @@
 package ru.morozov.sweetApp.config.templates;
 
-public class PacketTemplate extends SweetTemplate {
+class PacketTemplate extends SweetTemplate {
 
 }

@@ -12,6 +12,7 @@ import ru.morozov.sweetApp.config.values.DropDownPropertyValue;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by km on 17.09.2015.
@@ -35,8 +36,7 @@ public class DropDownSweetProperty extends SweetProperty implements IPriceProduc
                 getHolder().getPropertiesHolder().getCell(getCoord()));
 
         if (cellConstraints != null && cellConstraints.size() > 0)
-            for (String _stringItem : cellConstraints)
-                priceItems.add(new PriceItem(_stringItem));
+            priceItems.addAll(cellConstraints.stream().map(PriceItem::new).collect(Collectors.toList()));
 
         itemList.removeAll();
         itemList.addAll(priceItems);

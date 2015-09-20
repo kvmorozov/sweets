@@ -32,8 +32,7 @@ public class BaseSweetGenerator {
 	private SystemConfigs systemConfig;
 	private SweetTemplate template;
 	private ParametersHolder parametersHolder;
-	private List<Double> totals;
-	private Double amount;
+    private Double amount;
 	
 	private static final Double DEFAULT_AMOUNT = 10000d;
 	
@@ -58,8 +57,8 @@ public class BaseSweetGenerator {
 		Path outputPath = systemConfig.createSubdirectory(outputSubDirName);
 		
 		Workbook resultBook = parametersHolder.getWorkbook();
-		
-		totals = new ArrayList<>();
+
+        List<Double> totals = new ArrayList<>();
 		PricesSet appPrices = SweetContext.getPricesSet();
 		
 		for(PropertyValueSet params : parametersHolder.getParameters()) {

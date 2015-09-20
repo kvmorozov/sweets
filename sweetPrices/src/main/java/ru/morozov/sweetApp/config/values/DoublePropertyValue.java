@@ -5,7 +5,7 @@ import ru.morozov.sweetApp.config.properties.SweetProperty;
 
 public class DoublePropertyValue extends AbstractPropertyValue {
 
-	protected SimpleDoubleProperty value;
+	SimpleDoubleProperty value;
 
     public DoublePropertyValue(SweetProperty property) {
         this(0d, property);

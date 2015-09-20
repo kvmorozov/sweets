@@ -1,7 +1,6 @@
 package ru.morozov.sweetApp.config.values;
 
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import ru.morozov.sweetApp.config.prices.PriceItem;
 import ru.morozov.sweetApp.config.properties.SweetProperty;
 

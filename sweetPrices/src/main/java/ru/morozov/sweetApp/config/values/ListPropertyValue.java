@@ -1,7 +1,6 @@
 package ru.morozov.sweetApp.config.values;
 
 import ru.morozov.sweetApp.config.properties.ListSweetProperty;
-import ru.morozov.sweetApp.config.properties.SweetProperty;
 
 /**
  * Created by km on 19.09.2015.

@@ -2,9 +2,8 @@ package ru.morozov.sweetApp.config;
 
 import ru.morozov.sweetApp.config.base.CellCoord;
 import ru.morozov.sweetApp.config.properties.ListSweetProperty;
-import ru.morozov.sweetApp.config.properties.SweetProperty;
-import ru.morozov.sweetApp.config.values.SelectLayerPropertyValue;
 import ru.morozov.sweetApp.config.values.DoublePropertyValue;
+import ru.morozov.sweetApp.config.values.SelectLayerPropertyValue;
 
 /**
  * Created by km on 04.08.2015.

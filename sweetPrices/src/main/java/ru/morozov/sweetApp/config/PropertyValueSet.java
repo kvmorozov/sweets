@@ -53,13 +53,11 @@ public class PropertyValueSet {
 	public String getShortDesc() {
 		StringBuilder sb = new StringBuilder();
 
-		for (AbstractPropertyValue value : valueSet) {
-			if (value.getProperty().getCoord() != null && value.validate()) {
-				if (sb.length() > 0)
-					sb.append("x");
-				sb.append(value.asFormattedString());
-			}
-		}
+        valueSet.stream().filter(value -> value.getProperty().getCoord() != null && value.validate()).forEach(value -> {
+            if (sb.length() > 0)
+                sb.append("x");
+            sb.append(value.asFormattedString());
+        });
 		
 		return sb.toString().length() <= 20 ? sb.toString() : sb.toString().substring(0, 20);
 	}

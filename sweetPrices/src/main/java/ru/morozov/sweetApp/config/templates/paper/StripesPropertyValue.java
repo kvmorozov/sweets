@@ -7,7 +7,6 @@ import ru.morozov.utils.components.xls.XlsFile;
 
 public class StripesPropertyValue extends CalculatedPropertyValue {
 
-	public StripesPropertyValue(Double value, SweetProperty property) {super(value, property);}
 	public StripesPropertyValue(Double value, SweetProperty property, PropertyValueSet valueSet) {super(value, property, valueSet);}
 	
 	@Override

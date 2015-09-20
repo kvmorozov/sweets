@@ -4,7 +4,8 @@ import javafx.scene.control.TextField;
 
 public class NumberTextField extends TextField {
 
-    private Integer minValue, maxValue, defaultValue;
+    private Integer minValue;
+    private Integer maxValue;
 
     public NumberTextField() {this(0, Integer.MAX_VALUE, 1);}
 
@@ -12,7 +13,6 @@ public class NumberTextField extends TextField {
         super();
         this.minValue = minValue;
         this.maxValue = maxValue;
-        this.defaultValue = defaultValue;
 
         if (defaultValue != null)
             setText(String.valueOf(defaultValue));

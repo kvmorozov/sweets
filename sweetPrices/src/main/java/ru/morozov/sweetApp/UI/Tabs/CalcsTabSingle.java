@@ -81,11 +81,8 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
                             System.out.println("Invalidated");
                         });
 
-                        lswp.getCurrentItem().addListener(new ChangeListener<PriceItem>() {
-                            @Override
-                            public void changed(ObservableValue<? extends PriceItem> observable, PriceItem oldValue, PriceItem newValue) {
-                                System.out.println("Changed");
-                            }
+                        lswp.getCurrentItem().addListener((observable, oldValue1, newValue1) -> {
+                            System.out.println("Changed");
                         });
                     }
 
