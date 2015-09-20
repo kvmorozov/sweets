@@ -12,7 +12,7 @@ import java.util.Map;
 public class PriceItem {
 	
 	protected SweetItem item;
-	protected Double price, price1 = 0d, price2 = 0d, density;
+	protected Double price, price1 = -1d, price2 = -1d, density;
 	protected CellCoord coord, addInfoCoord;
 	protected String desc, name;
 	protected Map<String, Object> itemProperties;
@@ -67,7 +67,10 @@ public class PriceItem {
 	public void setReferenceProperty(SweetProperty referenceProperty) {this.referenceProperty = referenceProperty;}
 
 	@Override
-	public String toString() {return desc == null ? name : desc;}
+	public String toString() {
+        return (desc == null ? name : desc) +
+               (getPrice() != null && getPrice() >= 0 ? " - " + getPrice().toString() : "");
+    }
 	
 	public static PriceItem getEmptyPrice() {
 		PriceItem emptyPrice = new PriceItem();
