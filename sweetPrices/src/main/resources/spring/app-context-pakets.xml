@@ -57,4 +57,13 @@
         <property name="lastRow" value="5"/>
     </bean>
 
+    <bean id="pakets_papers" class="ru.morozov.sweetApp.config.prices.PriceList">
+        <property name="priceListFile" ref="pakets_prices"/>
+        <property name="nameColumn" value="1"/>
+        <property name="descColumn" value="2"/>
+        <property name="price1Column" value="4"/>
+        <property name="firstRow" value="2"/>
+        <property name="lastRow" value="92"/>
+    </bean>
+
 </beans>

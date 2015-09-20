@@ -43,6 +43,7 @@ public class XlsFile implements InitializingBean {
 
     public Workbook getWorkbook() {return workbook;}
 
+    public int getDefaultSheet() {return defaultSheet;}
     public void setDefaultSheet(int defaultSheet) {this.defaultSheet = defaultSheet;}
 
     @Override
@@ -118,7 +119,8 @@ public class XlsFile implements InitializingBean {
 
         switch (cell.getCellType()) {
             case Cell.CELL_TYPE_NUMERIC:
-                return String.valueOf(cell.getNumericCellValue());
+                Double _value = cell.getNumericCellValue();
+                return _value == _value.longValue() ? String.format("%d", _value.longValue()) : String.format("%s", _value);
             case Cell.CELL_TYPE_STRING:
                 return cell.getStringCellValue();
             default:

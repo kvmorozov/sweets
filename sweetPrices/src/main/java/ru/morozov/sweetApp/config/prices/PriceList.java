@@ -1,6 +1,7 @@
 package ru.morozov.sweetApp.config.prices;
 
 import org.springframework.beans.factory.InitializingBean;
+import ru.morozov.sweetApp.config.base.CellCoord;
 import ru.morozov.utils.ParserUtils;
 import ru.morozov.utils.components.xls.XlsFile;
 
@@ -16,8 +17,9 @@ public class PriceList extends SelectList implements InitializingBean {
 	private Integer descColumn, nameColumn, price1Column, price2Column, firstRow, lastRow, densityColumn = -1;
 	private Map<String, Object> itemProperties;
 	private PriceItemFactory itemFactory;
-	
-	public void setPriceListFile(XlsFile priceListFileName) {this.priceListFile = priceListFileName;}
+
+    public XlsFile getPriceListFile() {return priceListFile;}
+    public void setPriceListFile(XlsFile priceListFileName) {this.priceListFile = priceListFileName;}
 	
 	public boolean isValidConfig() {return priceListFile.isValidConfig();}
 
@@ -25,7 +27,9 @@ public class PriceList extends SelectList implements InitializingBean {
 	public void setNameColumn(int nameColumn) {this.nameColumn = nameColumn;}
 	public void setPrice1Column(int price1Column) {this.price1Column = price1Column;}
 	public void setPrice2Column(int price2Column) {this.price2Column = price2Column;}
-	public void setFirstRow(int firstRow) {this.firstRow = firstRow;}
+    public Integer getFirstRow() {return firstRow;}
+    public Integer getLastRow() {return lastRow;}
+    public void setFirstRow(int firstRow) {this.firstRow = firstRow;}
 	public void setLastRow(int lastRow) {this.lastRow = lastRow;}
 	public void setItemProperties(Map<String, Object> itemProperties) {this.itemProperties = itemProperties;}
 	public void setItemFactory(PriceItemFactory itemFactory) {this.itemFactory = itemFactory;}
@@ -71,6 +75,7 @@ public class PriceList extends SelectList implements InitializingBean {
 				price.setPrice2(price2);
 				price.setDesc(desc);
 				price.setName(name);
+                price.setCoord(new CellCoord(priceListFile.getDefaultSheet(), price1Column, row));
 				
 				if (itemProperties != null && !itemProperties.isEmpty())
 					price.setItemProperties(itemProperties);

@@ -1,6 +1,7 @@
 package ru.morozov.sweetApp.UI.Tabs;
 
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -20,6 +21,7 @@ import ru.morozov.sweetApp.config.SystemConfigs;
 import ru.morozov.sweetApp.config.base.IPriceProducer;
 import ru.morozov.sweetApp.config.prices.PriceItem;
 import ru.morozov.sweetApp.config.properties.ComplexSweetProperty;
+import ru.morozov.sweetApp.config.properties.FilteredListProperty;
 import ru.morozov.sweetApp.config.properties.SweetProperty;
 import ru.morozov.sweetApp.config.templates.SweetTemplate;
 import ru.morozov.sweetApp.generate.BaseSweetGenerator;
@@ -74,8 +76,9 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
 
                     ComboBox<PriceItem> itemsBox = new ComboBox<>(lswp.getItemList());
                     if (itemsBox.getItems().size() > 0) {
+                        itemsBox.itemsProperty().bind(new SimpleObjectProperty<>(lswp.getItemList()));
                         itemsBox.setValue(itemsBox.getItems().get(0));
-                        lswp.getCurrentItem().bind(itemsBox.valueProperty());
+                        lswp.getCurrentItem().bindBidirectional(itemsBox.valueProperty());
 
                         lswp.getCurrentItem().addListener(observable -> {
                             System.out.println("Invalidated");
@@ -83,6 +86,10 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
 
                         lswp.getCurrentItem().addListener((observable, oldValue1, newValue1) -> {
                             System.out.println("Changed");
+                            for (SweetProperty _property : template.getProperties().getProperties()) {
+                                if (_property != property && _property instanceof FilteredListProperty)
+                                    ((FilteredListProperty) _property).refresh();
+                            }
                         });
                     }
 

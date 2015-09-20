@@ -20,26 +20,52 @@
 
     <!-- Свойства -->
 
+    <bean id="pksos_paper_kind" class="ru.morozov.sweetApp.config.properties.DropDownSweetProperty">
+        <property name="propertyName" value="Марка бумаги"/>
+        <property name="coord">
+            <bean class="ru.morozov.sweetApp.config.base.CellCoord">
+                <property name="col" value="1"/>
+                <property name="row" value="6"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="pksos_paper_density" class="ru.morozov.sweetApp.config.properties.DropDownSweetProperty">
+        <property name="propertyName" value="Плотность бумаги, г/кв.м"/>
+        <property name="coord">
+            <bean class="ru.morozov.sweetApp.config.base.CellCoord">
+                <property name="col" value="1"/>
+                <property name="row" value="7"/>
+            </bean>
+        </property>
+    </bean>
+
     <bean id="pksos_props" class="ru.morozov.sweetApp.config.SweetPropertySet">
         <property name="propertiesHolder" ref="pksos_template"/>
         <property name="properties">
             <list>
-                <bean class="ru.morozov.sweetApp.config.properties.DropDownSweetProperty">
-                    <property name="propertyName" value="Марка бумаги"/>
+                <ref bean="pksos_paper_kind" />
+                <ref bean="pksos_paper_density" />
+                <bean class="ru.morozov.sweetApp.config.properties.FilteredListProperty">
+                    <property name="propertyName" value="Формат бумаги"/>
                     <property name="coord">
                         <bean class="ru.morozov.sweetApp.config.base.CellCoord">
                             <property name="col" value="1"/>
-                            <property name="row" value="6"/>
+                            <property name="row" value="15"/>
                         </bean>
                     </property>
-                </bean>
-                <bean class="ru.morozov.sweetApp.config.properties.DropDownSweetProperty">
-                    <property name="propertyName" value="Плотность бумаги, г/кв.м"/>
-                    <property name="coord">
-                        <bean class="ru.morozov.sweetApp.config.base.CellCoord">
-                            <property name="col" value="1"/>
-                            <property name="row" value="7"/>
-                        </bean>
+                    <property name="priceList" ref="pakets_papers"/>
+                    <property name="conditions">
+                        <list>
+                            <bean class="ru.morozov.sweetApp.config.base.FilterCondition">
+                                <property name="column" value="1"/>
+                                <property name="filterProperty" ref="pksos_paper_kind"/>
+                            </bean>
+                            <bean class="ru.morozov.sweetApp.config.base.FilterCondition">
+                                <property name="column" value="3"/>
+                                <property name="filterProperty" ref="pksos_paper_density"/>
+                            </bean>
+                        </list>
                     </property>
                 </bean>
                 <bean class="ru.morozov.sweetApp.config.properties.SweetProperty">
