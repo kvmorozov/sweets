@@ -66,18 +66,19 @@ public class BaseSweetGenerator {
 			XlsFile generatedTemplate = template.applyParams(params, amount);
 			
 			Double total = 0d;
-			
-			for(PriceItem amount : template.getAmounts()) {
-				PriceItem price = amount.getPrice(appPrices);
 
-				try {
-					if (price != null)
-						total += price.getTotal(amount, generatedTemplate);
-				}
-				catch(Exception ex) {
-					System.out.println("Ошибка вычисления!");
-				}
-			}
+            if (template.getAmounts() != null)
+                for(PriceItem amount : template.getAmounts()) {
+                    PriceItem price = amount.getPrice(appPrices);
+
+                    try {
+                        if (price != null)
+                            total += price.getTotal(amount, generatedTemplate);
+                    }
+                    catch(Exception ex) {
+                        System.out.println("Ошибка вычисления!");
+                    }
+                }
 			
 			if (outputPath != null) {
 				Path newPath = Paths.get(outputPath.toString(), params.getShortDesc() + ".xls");

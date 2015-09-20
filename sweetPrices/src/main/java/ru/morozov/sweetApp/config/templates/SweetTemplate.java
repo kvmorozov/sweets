@@ -38,17 +38,17 @@ public class SweetTemplate {
 	
 	public XlsFile applyParams(PropertyValueSet values, Double amount) {
         XlsFile newTemplate = templateFile;
-		
+
 		amountCoord.getCell(newTemplate).setCellValue(amount);
-		
+
 		for(AbstractPropertyValue value : values.getValueSet())
 			value.applyParam(templateFile);
-		
+
 		if (templateFile.getWorkbook() instanceof HSSFWorkbook)
 			HSSFFormulaEvaluator.evaluateAllFormulaCells(templateFile.getWorkbook());
 		else
 			XSSFFormulaEvaluator.evaluateAllFormulaCells((XSSFWorkbook) templateFile.getWorkbook());
-		
+
 		return newTemplate;
 	}
 }

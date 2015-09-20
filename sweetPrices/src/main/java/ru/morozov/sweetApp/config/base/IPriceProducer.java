@@ -9,7 +9,7 @@ import ru.morozov.sweetApp.config.prices.PriceItem;
  */
 public interface IPriceProducer {
 
-    public ObservableList<PriceItem> getItemList();
-    public SimpleObjectProperty<PriceItem> getCurrentItem();
-    public void refresh();
+    ObservableList<PriceItem> getItemList();
+    SimpleObjectProperty<PriceItem> getCurrentItem();
+    void refresh();
 }

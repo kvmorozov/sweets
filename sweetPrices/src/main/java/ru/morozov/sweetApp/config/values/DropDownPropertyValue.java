@@ -21,7 +21,9 @@ public class DropDownPropertyValue extends AbstractPropertyValue {
     public Object getValue() {return pItem.get().toString();}
 
     @Override
-    public boolean validate() {return pItem.get().getName().length() > 0;}
+    public boolean validate() {
+        return pItem != null &&  pItem.get() != null && pItem.get().getName() != null && pItem.get().getName().length() > 0;
+    }
 
     @Override
     public String asFormattedString() {return pItem.get().getName();}

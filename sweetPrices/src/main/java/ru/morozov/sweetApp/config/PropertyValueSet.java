@@ -2,7 +2,6 @@ package ru.morozov.sweetApp.config;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import ru.morozov.sweetApp.SweetContext;
 import ru.morozov.sweetApp.config.properties.SweetProperty;
 import ru.morozov.sweetApp.config.values.AbstractPropertyValue;
 
@@ -29,7 +28,7 @@ public class PropertyValueSet {
 		this.total = total;
 		
 		Double cost = total / amount;
-		Double costWithAdd = cost * (1 + ((SweetContext.getSystemConfigs().extraChargeProperty.get() + 0d) / 100));
+		Double costWithAdd = cost * (1 + ((SystemConfigs.extraChargeProperty.get() + 0d) / 100));
 		
 		totalPropertyStr.setValue(String.format("₽%,.2f", total));
 		costPropertyStr.setValue(String.format("₽%,.2f", cost));

@@ -1,7 +1,5 @@
 package ru.morozov.sweetApp.UI.Tabs;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -16,7 +14,9 @@ import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
 import ru.morozov.sweetApp.SweetContext;
 import ru.morozov.sweetApp.Utils.Constants.l12n;
-import ru.morozov.sweetApp.config.*;
+import ru.morozov.sweetApp.config.ParametersHolder;
+import ru.morozov.sweetApp.config.SweetProduct;
+import ru.morozov.sweetApp.config.SystemConfigs;
 import ru.morozov.sweetApp.config.base.IPriceProducer;
 import ru.morozov.sweetApp.config.prices.PriceItem;
 import ru.morozov.sweetApp.config.properties.ComplexSweetProperty;
@@ -156,7 +156,7 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
 
         Label extraCharheLabel = new Label(l12n.bundle.getString(l12n.EXTRA_CHARHE_KEY));
         final NumberTextField extraChargeInput = new NumberTextField();
-        extraChargeInput.textProperty().bindBidirectional(SweetContext.getSystemConfigs().extraChargeProperty, new NumberStringConverter());
+        extraChargeInput.textProperty().bindBidirectional(SystemConfigs.extraChargeProperty, new NumberStringConverter());
         
         runBox.getChildren().addAll(amountLabel, amountInput, extraCharheLabel, extraChargeInput, runButton);
         runBox.setSpacing(10);
@@ -173,7 +173,7 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
         resultBox3.setSpacing(10);
         Label withExtraChargeLabel = new Label();
         withExtraChargeLabel.textProperty().bind(Bindings.format(l12n.bundle.getString(l12n.COST_KEY_ADD),
-                SweetContext.getSystemConfigs().extraChargeProperty).concat("% :"));
+                SystemConfigs.extraChargeProperty).concat("% :"));
         resultBox3.getChildren().addAll(withExtraChargeLabel, costLabelWithAdd);
         
         bottomBox.getChildren().addAll(runBox, resultBox1, resultBox2, resultBox3);
