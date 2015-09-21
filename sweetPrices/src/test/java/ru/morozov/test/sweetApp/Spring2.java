@@ -15,7 +15,7 @@ import ru.morozov.sweetApp.config.templates.SweetTemplate;
 
 public class Spring2 {
 	
-	private static final int REAL_SWEET_MAP_SIZE = 3;
+	private static final int REAL_SWEET_MAP_SIZE = 5;
 	private static final int REAL_DEMO_PARAMS_ROWS_COUNT = 8;
 	private static final int REAL_DEMO_PARAMS_COUNT = 2;
 	
