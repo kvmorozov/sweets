@@ -7,13 +7,19 @@
 
     <!-- Пакеты SOS SRM -->
 
-    <bean id="pksos" class="ru.morozov.sweetApp.config.templates.SweetTemplate">
+    <bean id="pksos" class="ru.morozov.sweetApp.config.templates.LookupTemplate">
         <property name="templateFile" ref="pksos_template"/>
         <property name="properties" ref="pksos_props"/>
         <property name="amount">
             <bean class="ru.morozov.sweetApp.config.base.CellCoord">
                 <property name="col" value="1"/>
                 <property name="row" value="11"/>
+            </bean>
+        </property>
+        <property name="totalCell">
+            <bean class="ru.morozov.sweetApp.config.base.CellCoord">
+                <property name="col" value="1"/>
+                <property name="row" value="54"/>
             </bean>
         </property>
     </bean>
@@ -100,7 +106,7 @@
                     <property name="coord">
                         <bean class="ru.morozov.sweetApp.config.base.CellCoord">
                             <property name="col" value="1"/>
-                            <property name="row" value="11"/>
+                            <property name="row" value="12"/>
                         </bean>
                     </property>
                 </bean>

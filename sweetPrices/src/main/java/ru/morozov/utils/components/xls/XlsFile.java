@@ -97,7 +97,10 @@ public class XlsFile implements InitializingBean {
         Double result = 0d;
         Cell cell = getCell(cellCoord);
 
-        switch (cell.getCellType()) {
+        int cellType = cell.getCellType() == Cell.CELL_TYPE_FORMULA ?
+                cell.getCachedFormulaResultType() : cell.getCellType();
+
+        switch (cellType) {
             case Cell.CELL_TYPE_NUMERIC:
                 return cell.getNumericCellValue();
             case Cell.CELL_TYPE_STRING:

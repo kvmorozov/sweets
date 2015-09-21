@@ -19,7 +19,7 @@ import ru.morozov.sweetApp.config.properties.ComplexSweetProperty;
 import ru.morozov.sweetApp.config.properties.FilteredListProperty;
 import ru.morozov.sweetApp.config.properties.SweetProperty;
 import ru.morozov.sweetApp.config.templates.SweetTemplate;
-import ru.morozov.sweetApp.generate.BaseSweetGenerator;
+import ru.morozov.sweetApp.generate.IGenerator;
 import ru.morozov.utils.components.NumberTextField;
 
 import java.util.ArrayList;
@@ -75,12 +75,9 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
                         itemsBox.setValue(itemsBox.getItems().get(0));
                         lswp.getCurrentItem().bindBidirectional(itemsBox.valueProperty());
 
-                        lswp.getCurrentItem().addListener(observable -> {
-                            System.out.println("Invalidated");
-                        });
+                        lswp.getCurrentItem().addListener(observable -> {});
 
                         lswp.getCurrentItem().addListener((observable, oldValue1, newValue1) -> {
-                            System.out.println("Changed");
                             for (SweetProperty _property : template.getProperties().getProperties()) {
                                 if (_property != property && _property instanceof FilteredListProperty)
                                     ((FilteredListProperty) _property).refresh();
@@ -148,10 +145,10 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
         
         runButton.setOnAction((e) -> {
         	SweetContext.getSystemConfigs().setSystemProperty(SystemConfigs.PROPERTY_LAST_AMOUNT, amountInput.getText());
-        	BaseSweetGenerator generator = new BaseSweetGenerator(SweetContext.getSystemConfigs(), productsBox.getValue().getTemplate(),
-        			(ParametersHolder)gridProps.getUserData(), amountInput.getDoubleValue());
+        	IGenerator generator = productsBox.getValue().getTemplate().getGenerator(SweetContext.getSystemConfigs(),
+                    (ParametersHolder)gridProps.getUserData(), amountInput.getDoubleValue());
         	if (generator.generate()) {
-        		
+
         	}
         });
 

@@ -5,11 +5,15 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFFormulaEvaluator;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import ru.morozov.sweetApp.config.ParametersHolder;
 import ru.morozov.sweetApp.config.PropertyValueSet;
 import ru.morozov.sweetApp.config.SweetPropertySet;
+import ru.morozov.sweetApp.config.SystemConfigs;
 import ru.morozov.sweetApp.config.base.CellCoord;
 import ru.morozov.sweetApp.config.prices.PriceItem;
 import ru.morozov.sweetApp.config.values.AbstractPropertyValue;
+import ru.morozov.sweetApp.generate.BaseSweetGenerator;
+import ru.morozov.sweetApp.generate.IGenerator;
 import ru.morozov.utils.components.xls.XlsFile;
 
 import java.util.List;
@@ -45,10 +49,14 @@ public class SweetTemplate {
 			value.applyParam(templateFile);
 
 		if (templateFile.getWorkbook() instanceof HSSFWorkbook)
-			HSSFFormulaEvaluator.evaluateAllFormulaCells(templateFile.getWorkbook());
+			HSSFFormulaEvaluator.evaluateAllFormulaCells(newTemplate.getWorkbook());
 		else
-			XSSFFormulaEvaluator.evaluateAllFormulaCells((XSSFWorkbook) templateFile.getWorkbook());
+			XSSFFormulaEvaluator.evaluateAllFormulaCells((XSSFWorkbook) newTemplate.getWorkbook());
 
 		return newTemplate;
 	}
+
+    public IGenerator getGenerator(SystemConfigs systemConfig, ParametersHolder parametersHolder, Double amount) {
+        return new BaseSweetGenerator(systemConfig, this, parametersHolder, amount);
+    }
 }

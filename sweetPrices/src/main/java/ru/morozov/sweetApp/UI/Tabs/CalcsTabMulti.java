@@ -17,7 +17,7 @@ import ru.morozov.sweetApp.config.SweetProduct;
 import ru.morozov.sweetApp.config.SystemConfigs;
 import ru.morozov.sweetApp.config.properties.SweetProperty;
 import ru.morozov.sweetApp.config.templates.SweetTemplate;
-import ru.morozov.sweetApp.generate.BaseSweetGenerator;
+import ru.morozov.sweetApp.generate.IGenerator;
 import ru.morozov.utils.components.NumberTextField;
 
 import java.io.File;
@@ -127,8 +127,8 @@ public class CalcsTabMulti extends Tab implements ICalcsTab {
         
         runButton.setOnAction((e) -> {
         	SweetContext.getSystemConfigs().setSystemProperty(SystemConfigs.PROPERTY_LAST_AMOUNT, amountInput.getText());
-        	BaseSweetGenerator generator = new BaseSweetGenerator(SweetContext.getSystemConfigs(), productsBox.getValue().getTemplate(),
-        			(ParametersHolder)table.getUserData(), amountInput.getDoubleValue());
+            IGenerator generator = productsBox.getValue().getTemplate().getGenerator(SweetContext.getSystemConfigs(),
+                    (ParametersHolder)table.getUserData(), amountInput.getDoubleValue());
         	if (generator.generate())
         		table.getColumns().get(table.getColumns().size() - 1).setVisible(true);
         });
