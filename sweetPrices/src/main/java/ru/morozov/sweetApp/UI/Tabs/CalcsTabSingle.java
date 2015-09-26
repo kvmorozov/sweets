@@ -131,6 +131,8 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
 
         ScrollPane scrollPane = new ScrollPane();
         scrollPane.setContent(gridProps);
+        scrollPane.setFitToHeight(true);
+        scrollPane.setFitToWidth(true);
 		borderPane.setCenter(scrollPane);
        
         runButton.setDisable(true);

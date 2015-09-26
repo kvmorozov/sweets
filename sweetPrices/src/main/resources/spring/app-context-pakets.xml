@@ -39,6 +39,21 @@
         </property>
     </bean>
 
+    <bean id="pakets_flex" class="ru.morozov.sweetApp.config.prices.SelectList">
+        <property name="prices">
+            <list>
+                <bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+                    <property name="desc" value="Есть"/>
+                    <property name="price" value="0"/>
+                </bean>
+                <bean class="ru.morozov.sweetApp.config.prices.PriceItem">
+                    <property name="desc" value="Надо делать"/>
+                    <property name="price" value="1"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
     <!-- Цены -->
 
     <bean id="pakets_paints" class="ru.morozov.sweetApp.config.prices.PriceList">
