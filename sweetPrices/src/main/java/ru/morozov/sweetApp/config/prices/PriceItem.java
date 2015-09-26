@@ -39,10 +39,7 @@ public class PriceItem {
             price1 != null && price2 != null ? Double.max(price1, price2) : price1 : price;}
 	public void setPrice(Double price) {this.price = price;}
 	
-	public Double getPrice1() {return price1;}
 	public void setPrice1(Double price1) {this.price1 = price1;}
-
-	public Double getPrice2() {return price2;}
 	public void setPrice2(Double price2) {this.price2 = price2;}
 	
 	public String getDesc() {return desc;}
@@ -51,19 +48,16 @@ public class PriceItem {
 	public String getName() {return name;}
 	public void setName(String name) {this.name = name;}
 	
-	public Map<String, Object> getItemProperties() {return itemProperties;}
 	public void setItemProperties(Map<String, Object> itemProperties) {this.itemProperties = itemProperties;}
 	
 	public PriceList getItemProvider() {return itemProvider;}
 	public void setItemProvider(PriceList itemProvider) {this.itemProvider = itemProvider;}
 	
-	public CellCoord getAddInfoCoord() {return addInfoCoord;}
 	public void setAddInfoCoord(CellCoord addInfoCoord) {this.addInfoCoord = addInfoCoord;}
 
 	public Double getDensity() {return density;}
 	public void setDensity(Double density) {this.density = density;}
 
-	public SweetProperty getReferenceProperty() {return referenceProperty;}
 	public void setReferenceProperty(SweetProperty referenceProperty) {this.referenceProperty = referenceProperty;}
 
 	@Override

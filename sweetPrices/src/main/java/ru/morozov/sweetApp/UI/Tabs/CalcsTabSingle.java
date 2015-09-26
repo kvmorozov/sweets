@@ -78,10 +78,9 @@ public class CalcsTabSingle extends Tab implements ICalcsTab {
                         lswp.getCurrentItem().addListener(observable -> {});
 
                         lswp.getCurrentItem().addListener((observable, oldValue1, newValue1) -> {
-                            for (SweetProperty _property : template.getProperties().getProperties()) {
-                                if (_property != property && _property instanceof FilteredListProperty)
-                                    ((FilteredListProperty) _property).refresh();
-                            }
+                            template.getProperties().getProperties().stream().
+                                    filter(_property -> _property != property && _property instanceof FilteredListProperty).
+                                        forEach(_property -> ((FilteredListProperty) _property).refresh());
                         });
                     }
 

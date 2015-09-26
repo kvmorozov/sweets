@@ -7,10 +7,6 @@ public class DoublePropertyValue extends AbstractPropertyValue {
 
 	SimpleDoubleProperty value;
 
-    public DoublePropertyValue(SweetProperty property) {
-        this(0d, property);
-    }
-
 	public DoublePropertyValue(Double value, SweetProperty property) {
 		this.value = new SimpleDoubleProperty(value);
 		this.property = property;

@@ -9,9 +9,6 @@ import ru.morozov.sweetApp.config.prices.PricesSet;
 import ru.morozov.sweetApp.config.templates.SweetTemplate;
 import ru.morozov.utils.components.xls.XlsFile;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class BaseSweetGenerator extends AbstractGenerator {
 	
 	public BaseSweetGenerator(SystemConfigs systemConfig, SweetTemplate template, ParametersHolder parametersHolder) {
@@ -30,7 +27,6 @@ public class BaseSweetGenerator extends AbstractGenerator {
 
     @Override
 	public boolean generate() {
-        List<Double> totals = new ArrayList<>();
 		PricesSet appPrices = SweetContext.getPricesSet();
 		
 		for(PropertyValueSet params : parametersHolder.getParameters()) {
@@ -55,7 +51,6 @@ public class BaseSweetGenerator extends AbstractGenerator {
                 return false;
 			
 			params.setTotal(total, amount);
-			totals.add(total);
 		}
 		
 		parametersHolder.invalidate();

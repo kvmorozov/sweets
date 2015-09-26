@@ -11,7 +11,6 @@ import ru.morozov.utils.components.xls.XlsFile;
  */
 public class SelectLayerPropertyValue extends CalculatedPropertyValue {
 
-    public SelectLayerPropertyValue(Double value, SweetProperty property) {super(value, property);}
     public SelectLayerPropertyValue(Double value, SweetProperty property, PropertyValueSet valueSet) {super(value, property, valueSet);}
 
     @Override

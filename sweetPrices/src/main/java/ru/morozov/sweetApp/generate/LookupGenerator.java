@@ -6,9 +6,6 @@ import ru.morozov.sweetApp.config.SystemConfigs;
 import ru.morozov.sweetApp.config.templates.LookupTemplate;
 import ru.morozov.utils.components.xls.XlsFile;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by km on 21.09.2015.
  */
@@ -23,8 +20,6 @@ public class LookupGenerator extends AbstractGenerator {
 
     @Override
     public boolean generate() {
-        List<Double> totals = new ArrayList<>();
-
         for(PropertyValueSet params : parametersHolder.getParameters()) {
             XlsFile generatedTemplate = template.applyParams(params, amount);
 
@@ -34,7 +29,6 @@ public class LookupGenerator extends AbstractGenerator {
             Double total = generatedTemplate.getDoubleValue(((LookupTemplate)template).getTotalCell());
 
             params.setTotal(total, amount);
-            totals.add(total);
         }
 
         parametersHolder.invalidate();

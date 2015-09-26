@@ -145,5 +145,4 @@ public class ParametersHolder {
 	}
 
 	public boolean isParamsValid() {return isParamsValid;}
-	public Workbook getWorkbook() {return workbook;}
 }

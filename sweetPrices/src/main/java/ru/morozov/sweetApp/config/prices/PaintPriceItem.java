@@ -15,8 +15,8 @@ public class PaintPriceItem extends PriceItem {
 	@Override
 	public Double getTotal(PriceItem amountItem, XlsFile xlsFile) {
 		Double paintDesity = 0d, paperDensity = 0d, paperOriginalWidth = 0d, paperRealWidth = 0d;
-		Double paperWeight = 0d, paintPrice = 0d;
-		
+		Double paperWeight, paintPrice;
+
 		if (amountItem.addInfoCoord != null)
 			paperDensity = amountItem.addInfoCoord.getDoubleValue(xlsFile);
 		
