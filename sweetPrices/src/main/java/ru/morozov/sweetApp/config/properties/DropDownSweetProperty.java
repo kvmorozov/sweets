@@ -38,7 +38,7 @@ public class DropDownSweetProperty extends SweetProperty implements IPriceProduc
             priceItems.addAll(cellConstraints.stream().map(PriceItem::new).collect(Collectors.toList()));
 
         if (priceItems.size() > 0)
-            currentItem = new SimpleObjectProperty(priceItems.get(0));
+            currentItem = new SimpleObjectProperty<>(priceItems.get(0));
 
         itemList.clear();
         itemList.addAll(priceItems);

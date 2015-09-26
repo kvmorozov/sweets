@@ -22,7 +22,7 @@ public class FilteredListProperty extends ListSweetProperty {
     private List<FilterCondition> conditions;
     private ObservableList<PriceItem> filteredList = FXCollections.observableArrayList();
     private PriceItem _emptyItem = PriceItem.getEmptyPrice();
-    private SimpleObjectProperty<PriceItem> currentItem = new SimpleObjectProperty(_emptyItem);
+    private SimpleObjectProperty<PriceItem> currentItem = new SimpleObjectProperty<>(_emptyItem);
 
     public void setConditions(List<FilterCondition> conditions) {this.conditions = conditions;}
 
